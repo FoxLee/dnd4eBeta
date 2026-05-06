@@ -217,10 +217,10 @@
 <div class="form-group roll-variants">
 	<label>{{localize 'DND4EUI.RollVariants'}} <i data-tooltip="{{localize 'DND4EUI.RollVariantsTip'}}" class="fa-solid fa-circle-question"></i></label>
 	<label class="checkbox small">
-		<input class="checkbox" type="checkbox" name="system.attack.canCharge" data-dtype="Boolean" {{checked system.attack.canCharge}} {{#if system.attack.isCharge}}disabled{{/if}} {{#if system.attack.isBasic}}checked="true" disabled data-tooltip="{{localize 'DND4EUI.DeterminedBySetting'}} {{localize 'DND4E.CommonAttackBasic'}}"{{/if}} /> <span{{#if system.attack.isBasic}} data-tooltip="{{localize 'DND4EUI.DeterminedBySetting'}} {{localize 'DND4E.CommonAttackBasic'}}"{{/if}}>{{localize 'DND4E.CommonAttackCharge'}}</span>
+		<input class="checkbox" type="checkbox" name="system.attack.canCharge" data-dtype="Boolean" {{checked system.attack.canCharge}} {{#if system.attack.isCharge}}disabled data-tooltip="{{localize 'DND4EUI.DeterminedBySetting'}}"{{/if}} /> <span>{{localize 'DND4E.CommonAttackCharge'}}</span>
 	</label>
 	<label class="checkbox small">
-		<input class="checkbox" type="checkbox" name="system.attack.canOpp" data-dtype="Boolean" {{checked system.attack.canOpp}} {{#if system.attack.isOpp}}disabled{{/if}} {{#if system.attack.isBasic}}checked="true" disabled data-tooltip="{{localize 'DND4EUI.DeterminedBySetting'}} {{localize 'DND4E.CommonAttackBasic'}}"{{/if}} /> <span{{#if system.attack.isBasic}} data-tooltip="{{localize 'DND4EUI.DeterminedBySetting'}} {{localize 'DND4E.CommonAttackBasic'}}"{{/if}}>{{localize 'DND4E.CommonAttackOpportunity'}}</span>
+		<input class="checkbox" type="checkbox" name="system.attack.canOpp" data-dtype="Boolean" {{checked system.attack.canOpp}} {{#if system.attack.isOpp}}disabled data-tooltip="{{localize 'DND4EUI.DeterminedBySetting'}}"{{/if}} /> <span>{{localize 'DND4E.CommonAttackOpportunity'}}</span>
 	</label>
 </div>
 
