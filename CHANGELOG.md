@@ -1,5 +1,11 @@
 # Changelog
 
+## Version 0.7.13
+- Fixed a bug where damage resistance worked incorrectly agianst ongoing damage (SagaTympana)
+- Fixed a bug where some roll expressions failed to display in chat cards (SagaTympana)
+- Fixed some broken labels and missing definitions (SagaTympana & Fox)
+- In powers, made the charge/opportunity attack roll options fully independent of the "basic attack" setting, for the sake of RBAs (Fox)
+
 ## Version 0.7.12
 - Fixed an oversight where walk trait(s) were omitted from speed display for NPCs (Fox)
 - Fixed a bug where brutal value was ignored (SagaTympana)
