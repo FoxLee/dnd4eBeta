@@ -497,6 +497,7 @@ DND4E.companionType = {
 	"companion": {label: "DND4E.Role.Companion"},
 	"summon": {label: "DND4E.Role.Summon"},
 	"familiar": {label: "DND4E.Role.Familiar"},
+	"spirit": {label: "DND4E.Role.Spirit"},
 	"beast": {label: "DND4E.Role.Beast"},
 	"animal": {label: "DND4E.Role.Animal"},
 	"elemental": {label: "DND4E.Role.Elemental"},
