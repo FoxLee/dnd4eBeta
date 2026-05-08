@@ -69,7 +69,7 @@ export class Actor4e extends Actor {
 		if ( newSize && (options.forceSizeUpdate === true || (newSize !== foundry.utils.getProperty(this, "system.details.size")) )) {
 			let size = CONFIG.DND4E.tokenSizes[newSize];
 			if ( this.isToken ) this.token.update({height: size, width: size});
-			else if ( !data["prototypeToken.width"] && !hasProperty(data, "prototypeToken.width") ) {
+			else if ( !data["prototypeToken.width"] && !foundry.utils.hasProperty(data, "prototypeToken.width") ) {
 				data["prototypeToken.height"] = size;
 				data["prototypeToken.width"] = size;
 			}
