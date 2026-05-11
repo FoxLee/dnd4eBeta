@@ -69,7 +69,7 @@ export class Actor4e extends Actor {
 		if ( newSize && (options.forceSizeUpdate === true || (newSize !== foundry.utils.getProperty(this, "system.details.size")) )) {
 			let size = CONFIG.DND4E.tokenSizes[newSize];
 			if ( this.isToken ) this.token.update({height: size, width: size});
-			else if ( !data["prototypeToken.width"] && !hasProperty(data, "prototypeToken.width") ) {
+			else if ( !data["prototypeToken.width"] && !foundry.utils.hasProperty(data, "prototypeToken.width") ) {
 				data["prototypeToken.height"] = size;
 				data["prototypeToken.width"] = size;
 			}
@@ -2421,14 +2421,14 @@ export class Actor4e extends Actor {
 
 	async calcDamage(damage, multiplier=1, surges=0){
 	//This now calls calcDamageInner() to get the value, so we can do the damage calculation without also applying the damage, if needs be.
-		const totalDamage = await this.calcDamageInner(damage, multiplier,surges);
+		const totalDamage = await this.calcDamageInner(damage, multiplier, surges);
 		this.applyDamage(totalDamage, multiplier, surges);
 	}
 	
 	async calcDamageInner(damage, multiplier=1, surges=0){
 	//Provides the actual damage value to calcDamage(), but does not itself apply damage. Call this directly if you need to get the correct value without dealing the damage.
 		if(game.settings.get("dnd4e", "damageCalcRules") === "errata"){
-			return this.calcDamageErrata(damage, multiplier,surges);
+			return this.calcDamageErrata(damage, multiplier, surges);
 		}
 		else {
 			return this.calcDamagePHB(damage, multiplier, surges);
@@ -2439,14 +2439,14 @@ export class Actor4e extends Actor {
 		let totalDamage = 0;
 		const actorRes = this.system.resistances;
 		const isDamageImmune = actorRes['damage'].immune;
-		const resAll = isOngoing ? Helper.sumExtremes([resAll,actorRes['ongoing'].value] || 0) : actorRes['damage'].value;
+		const resAll = isOngoing ? Helper.sumExtremes([actorRes['damage'].value, actorRes['ongoing'].value] || 0) : actorRes['damage'].value;
 		if (isOngoing) typesSet.delete("ongoing");
 
 		let isImmuneAll = true; //starts as true, but as soon as one false it can not be changed back to true
 		let lowestRes = Infinity; // will attempt to replace this with the lowest resistance / highest vulnerability
 
 		for (let dt of typesSet) {
-			const currentRes = Helper.sumExtremes([resAll,actorRes[dt]?.value || 0]);
+			const currentRes = Helper.sumExtremes([resAll, actorRes[dt]?.value || 0]);
 			if(currentRes !== 0){ //if has resistances or vulnerability
 				isImmuneAll = false;
 				Helper.debugLog(`Modifier found: ${dt} ${actorRes[dt].value}`);
