@@ -947,7 +947,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 			const shortType = item.system.weaponType.substring(0, 3) || "";
 			
 			if (item.system.enhance != 0) {				
-				props.push(`<li class="enhancement">${game.i18n.localize("DND4E.Enhancement")}\n +${item.system.enhance} ${game.i18n.localize("DND4E.RollsAtkDmg")}</li>`);
+				props.push(`<li class="enhancement">${game.i18n.localize("DND4E.Enhancement")}\n +${item.system.enhance}&nbsp;${game.i18n.localize("DND4E.RollsAtkDmg")}</li>`);
 			}
 
 			props.push(...Object.entries(item.system.properties)

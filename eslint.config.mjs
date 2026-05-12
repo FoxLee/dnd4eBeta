@@ -75,7 +75,6 @@ export default defineConfig([
 		},
 
 		rules: {
-			"no-irregular-whitespace": ["error", { skipTemplates: true }],
 			// "no-undef": "off",
 			"no-unused-vars": 0,
 			// "sort-imports": ["warn"],

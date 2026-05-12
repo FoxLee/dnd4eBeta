@@ -622,9 +622,9 @@ export default class Item4e extends Item {
 					let enhString = `${game.i18n.localize("DND4E.Enhancement")} +${system.armour.enhance}`;
 					//The strings below begin with a non-breaking space character. Don't delete it unless you want to break the text wrapping!
 					if (system.armour.type === "armour") {
-						enhString += ` ${game.i18n.localize("DND4E.DefAC")}`;
+						enhString += `&nbsp;${game.i18n.localize("DND4E.DefAC")}`;
 					} else {
-						enhString += ` ${game.i18n.localize("DND4E.DefFort")}/${game.i18n.localize("DND4E.DefRef")}/${game.i18n.localize("DND4E.DefWil")}`;
+						enhString += `&nbsp;${game.i18n.localize("DND4E.DefFort")}/${game.i18n.localize("DND4E.DefRef")}/${game.i18n.localize("DND4E.DefWil")}`;
 					}
 					labels.enh = enhString;
 				}
