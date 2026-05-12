@@ -35,17 +35,32 @@ export default defineConfig([
         CONFIG: "readonly",
         CONST: "readonly",
         // Global classes
+        ActiveEffect: "readonly",
+        Actor: "readonly",
+        ChatMessage: "readonly",
+        Combat: "readonly",
+        Combatant: "readonly",
         Color: "readonly",
+        Dialog: "readonly",
+        Folder: "readonly",
         Handlebars: "readonly",
         Hooks: "readonly",
+        Item: "readonly",
+        Macro: "readonly",
+        PlaceableObject: "readonly",
         PIXI: "readonly",
         ProseMirror: "readonly",
+        RegionBehavior: "readonly",
         Roll: "readonly",
+        Token: "readonly",
+        TokenDocument: "readonly",
+        WallDocument: "readonly",
         // global namespaces
         canvas: "readonly",
-        ds: "readonly",
+        DND4E: "readonly",
         foundry: "readonly",
         game: "readonly",
+        jQuery: "readonly",
         ui: "readonly",
         // global functions
         fromUuid: "readonly",
@@ -63,9 +78,9 @@ export default defineConfig([
     rules: {
       // "no-undef": "off",
       "no-unused-vars": 0,
-      "sort-imports": ["warn"],
+      // "sort-imports": ["warn"],
 
-      "@stylistic/indent": ["error", 2, {
+      "@stylistic/indent": ["error", "tab", {
         SwitchCase: 1,
       }],
 
@@ -114,18 +129,18 @@ export default defineConfig([
         ]],
       }],
 
-      "@jsdoc/require-jsdoc": ["warn", {
+      /*"@jsdoc/require-jsdoc": ["warn", {
         require: { ClassExpression: true, FunctionDeclaration: true, MethodDefinition: true },
         enableFixer: false,
         checkSetters: "no-getter",
         checkConstructors: false,
-      }],
-      "@jsdoc/require-description": ["warn", { checkConstructors: false, contexts: ["FunctionDeclaration", "ClassDeclaration"] }],
-      "@jsdoc/require-description-complete-sentence": "warn",
+      }],*/
+      //"@jsdoc/require-description": ["warn", { checkConstructors: false, contexts: ["FunctionDeclaration", "ClassDeclaration"] }],
+      //"@jsdoc/require-description-complete-sentence": "warn",
     },
   }, {
     files: ["**/*.hbs", "**/*.html"],
-    extends: compat.extends("plugin:@html-eslint/recommended"),
+    //extends: compat.extends("plugin:@html-eslint/recommended"),
 
     languageOptions: {
       parser: parser,

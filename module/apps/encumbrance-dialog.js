@@ -1,24 +1,24 @@
 import { AttributeBonusDialog } from "./attribute-bonuses.js";
-import DocumentSheet4e from "./DocumentSheet4e.js"
+import DocumentSheet4e from "./DocumentSheet4e.js";
 
 export class EncumbranceDialog extends DocumentSheet4e {
 
 	static DEFAULT_OPTIONS = {
 		id: "encumbrance-dialog",
-		classes: ["dnd4e","encumbrance-dialog","standard-form","default"],
+		classes: ["dnd4e", "encumbrance-dialog", "standard-form", "default"],
 		form: {
-			closeOnSubmit: false
+			closeOnSubmit: false,
 		},
 		position: {
 			width: 420,
-			height: "auto"
+			height: "auto",
 		},
 		window: {
 			contentClasses: ["standard-form"],
-			resizable: true
+			resizable: true,
 		},
-		tag: "form"
-	}
+		tag: "form",
+	};
 
 	get title() {
 		return `${this.document.name} - ${game.i18n.localize("DND4E.Encumbrance")}`;
@@ -26,28 +26,28 @@ export class EncumbranceDialog extends DocumentSheet4e {
 
 	static PARTS = {
 		EncumbranceDialog: {
-			template: "systems/dnd4e/templates/apps/encumbrance-dialog.hbs"
+			template: "systems/dnd4e/templates/apps/encumbrance-dialog.hbs",
 		},
 		footer: {
 			template: "templates/generic/form-footer.hbs",
-		}
-	}
+		},
+	};
 
 	/** @override */
 	async _prepareContext(options) {
 		const context = await super._prepareContext(options);
-        foundry.utils.mergeObject(context, {
+		foundry.utils.mergeObject(context, {
 			system: this.document.system,
 			buttons: [
-				{ type: "submit", icon: "fa-solid fa-save", label: "DND4E.Save" }
-			]
+				{ type: "submit", icon: "fa-solid fa-save", label: "DND4E.Save" },
+			],
 		});
-        return context;
+		return context;
 	}
 
 	async _updateObject(event, formData) {
 		const updateData = {};
-		for(let system in formData) { updateData[`${system}`] = formData[`${system}`];}
+		for (let system in formData) { updateData[`${system}`] = formData[`${system}`];}
 		this.document.update(updateData);
 	}
 }

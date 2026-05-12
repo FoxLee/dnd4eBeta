@@ -30,7 +30,7 @@
         <div class="type damage-type">
           <multi-select name="system.dots.{{i}}.types" class="inline">
             {{selectOptions ../dotDamageTypes selected=dot.types}}			
-			<option value="healing" {{#if (contains "healing" dot.types)}}selected{{/if}}>[{{localize "EFFECT.statusRegen"}}]</option>
+            <option value="healing" {{#if (contains "healing" dot.types)}}selected{{/if}}>[{{localize "EFFECT.statusRegen"}}]</option>
           </multi-select>
         </div>
         <div class="effect-controls">
