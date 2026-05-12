@@ -714,7 +714,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 
 	_compareValues(key, order = "asc") {
 		return function innerSort(a, b) {
-			if (("key" in a) && ("key" in b)) {	
+			if ((key in a) && (key in b)) {	
 				let varA;
 				let varB;
 				if (DND4E.sortValues[key]) {
@@ -737,7 +737,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 					comparison = a.name.toUpperCase().localeCompare(b.name.toUpperCase());
 				}
 				return (order === "desc") ? (comparison * -1) : comparison;
-			} else if (("key" in a.system) && ("key" in b.system)) {
+			} else if ((key in a.system) && (key in b.system)) {
 				let varA;
 				let varB;
 				if (DND4E.sortValues[key]) {

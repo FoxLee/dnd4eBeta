@@ -95,10 +95,6 @@
       </button>
       {{/if}} --}}
 
-      {{#if isVersatile}}
-      <button data-action="versatile">{{ localize "DND4E.Versatile" }}</button>
-      {{/if}}
-
       {{#if hasSave}}
       <button data-action="save" data-ability="{{data.save.ability}}" disabled>
         {{ localize "DND4E.SavingThrow" }} {{labels.save}}

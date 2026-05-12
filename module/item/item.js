@@ -439,7 +439,6 @@ export default class Item4e extends Item {
 	get hasDamage() {
 		if (!this.type === "power") return false; //curently only powers will deal damage or make attacks
 		return this.system.hit?.isDamage;
-		return !!this.system.hit?.formula || !!(this.system.damage && this.system.damage.parts.length);
 	}
 
 	/* -------------------------------------------- */
@@ -463,17 +462,6 @@ export default class Item4e extends Item {
 	get hasEffect() {
 		if (!this.type === "power") return false; //curently only powers have effects
 		return !!this.system.effect?.detail;
-	}
-	
-	/* -------------------------------------------- */
-
-	/**
-	 * Does the Item implement a versatile damage roll as part of its usage
-	 * @type {boolean}
-	 */
-	get isVersatile() {
-		return false;
-		return !!(this.hasDamage && this.system.damage.versatile);
 	}
 
 	/* -------------------------------------------- */
@@ -1089,7 +1077,6 @@ export default class Item4e extends Item {
 			hasHealing: this.hasHealing,
 			hasEffect: this.hasEffect,
 			cardData: cardData,
-			isVersatile: this.isVersatile,
 			hasSave: this.hasSave,
 			hasAreaTarget: this.hasAreaTarget,
 			isRoll: true,
@@ -1222,7 +1209,6 @@ export default class Item4e extends Item {
 			hasHealing: this.hasHealing,
 			hasEffect: this.hasEffect,
 			cardData: cardData,
-			isVersatile: this.isVersatile,
 			hasSave: this.hasSave,
 			hasAreaTarget: this.hasAreaTarget,
 			isRoll: false,
