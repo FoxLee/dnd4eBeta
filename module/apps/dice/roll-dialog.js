@@ -87,14 +87,14 @@ export default class RollDialog extends foundry.applications.api.HandlebarsAppli
 
 	static #onMinus(event, target) {
 		const input = this.element.querySelector("#d20");
-		const currentValue = Number(input.value) ?? 0;
+		const currentValue = Number(input.value) || 0;
 		if (event.ctrlKey) input.value = currentValue - 2;
 		else input.value = currentValue - 1;
 	}
 
 	static #onPlus(event, target) {
 		const input = this.element.querySelector("#d20");
-		const currentValue = Number(input.value) ?? 0;
+		const currentValue = Number(input.value) || 0;
 		if (event.ctrlKey) input.value = currentValue + 2;
 		else input.value = currentValue + 1;
 	}

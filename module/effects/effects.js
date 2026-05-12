@@ -69,7 +69,7 @@ export default class ActiveEffect4e extends ActiveEffect {
 
 	// Work in progress, evaluate from other actors given ID?
 	
-	otherActorLink(actor, change) {
+	/*otherActorLink(actor, change) {
 		//Should only be based on terms not the start, cut up the string nad check by terms instead of this garbage
 		if (!change.value.startsWith("@actor.")) return;
 
@@ -82,7 +82,7 @@ export default class ActiveEffect4e extends ActiveEffect {
 		change.value.replace(`@actor.${match[1]}@`, "@");
 		actor = targetActor;
 		
-	}
+	}*/
 	/* --------------------------------------------- */
 
 	/**

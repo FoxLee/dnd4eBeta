@@ -135,7 +135,7 @@ export class Helper {
 	}
 
 	static get variableRegex() {
-		return new RegExp(/@([a-z.0-9_\-]+)/gi);
+		return new RegExp(/@([a-z.0-9_-]+)/gi);
 	}
 
 	static async applyEffects(arrayOfParts, rollData, actorData, powerData, weaponData = null, effectType, extraDamage = []) {
@@ -612,7 +612,7 @@ export class Helper {
 
 	static evaluate(s) {
 		let total = 0;
-		s = s.match(/[+\-]*(\.\d+|\d+(\.\d+)?)/g) || [];
+		s = s.match(/[+-]*(\.\d+|\d+(\.\d+)?)/g) || [];
 
 		while (s.length) {
 			total += parseFloat(s.shift());
@@ -1288,7 +1288,7 @@ export class Helper {
 	static getToken(tokenRef) {
 		if (!tokenRef)
 			return undefined;
-		if (tokenRef instanceof Token)
+		if (tokenRef instanceof foundry.canvas.placeables.Token)
 			return tokenRef;
 		if (tokenRef instanceof TokenDocument)
 			return tokenRef.object ?? undefined;
@@ -1296,7 +1296,7 @@ export class Helper {
 		if (typeof tokenRef === "string") {
 			entity = fromUuidSync(tokenRef);
 		}
-		if (entity instanceof Token)
+		if (entity instanceof foundry.canvas.placeables.Token)
 			return entity;
 		if (entity instanceof TokenDocument)
 			return entity.object ?? undefined;
@@ -1314,15 +1314,15 @@ export class Helper {
 	static getPlaceable(tokenRef) {
 		if (!tokenRef)
 			return undefined;
-		if (tokenRef instanceof PlaceableObject)
+		if (tokenRef instanceof foundry.canvas.placeables.PlaceableObject)
 			return tokenRef;
 		let entity = tokenRef;
 		if (typeof tokenRef === "string") {
 			entity = fromUuidSync(tokenRef);
 		}
-		if (entity instanceof PlaceableObject)
+		if (entity instanceof foundry.canvas.placeables.PlaceableObject)
 			return entity;
-		if (entity.object instanceof PlaceableObject)
+		if (entity.object instanceof foundry.canvas.placeables.PlaceableObject)
 			return entity.object;
 		if (entity instanceof Actor)
 			return this.tokenForActor(entity);
@@ -1480,6 +1480,17 @@ export class Helper {
 		return true;
 	}
 
+	static mapTokenString(disposition /*string | number*/) {
+		if (typeof disposition === "number") return disposition;
+		if (disposition.toLocaleLowerCase().trim() === _loc("TOKEN.DISPOSITION.FRIENDLY")?.toLocaleLowerCase()) return 1;
+		else if (disposition.toLocaleLowerCase().trim() === _loc("TOKEN.DISPOSITION.HOSTILE")?.toLocaleLowerCase()) return -1;
+		else if (disposition.toLocaleLowerCase().trim() === _loc("TOKEN.DISPOSITION.NEUTRAL")?.toLocaleLowerCase()) return 0;
+		else if (disposition.toLocaleLowerCase().trim() === _loc("TOKEN.DISPOSITION.SECRET")?.toLocaleLowerCase()) return -2;
+		else if (disposition.toLocaleLowerCase().trim() === _loc("all")?.toLocaleLowerCase()) return null;
+		const validStrings = ["TOKEN.DISPOSITION.FRIENDLY", "TOKEN.DISPOSITION.HOSTILE", "TOKEN.DISPOSITION.NEUTRAL", "TOKEN.DISPOSITION.SECRET", "all"].map(s => _loc(s));
+		throw new Error(`findNearby ${disposition} is invalid. Disposition must be one of "${validStrings}"`);
+	}
+
 	static findNearby(disposition, token /*Token | uuuidString */, distance, options = { maxSize: undefined, includeToken: false, relative: true }) {
 		token = this.getToken(token);
 		if (!token)
@@ -1487,7 +1498,7 @@ export class Helper {
 		if (!canvas || !canvas.scene)
 			return [];
 		try {
-			if (!(token instanceof Token)) {
+			if (!(token instanceof foundry.canvas.placeables.Token)) {
 				throw new Error("find nearby token is not of type token or the token uuid is invalid");
 			}
 			let relative = options.relative ?? true;
@@ -1496,7 +1507,7 @@ export class Helper {
 				if (disposition.some(s => s === "all"))
 					disposition = [-1, 0, 1];
 				else
-					disposition = disposition.map(s => mapTokenString(s) ?? 0);
+					disposition = disposition.map(s => this.mapTokenString(s) ?? 0);
 				targetDisposition = disposition.map(i => (typeof i === "number") && [-1, 0, 1].includes(i) && relative ? token.document.disposition * i : i);
 			}
 			else if ((typeof disposition === "number") && [-1, 0, 1].includes(disposition)) {
@@ -1846,11 +1857,7 @@ function groupedSelectOptions(choices, options) {
 export function registerHandlebarsHelpers() {
 	Handlebars.registerHelper({
 		getProperty: foundry.utils.getProperty,
-		"DND4E-concealSection": concealSection,
-		"DND4E-dataset": dataset,
 		"DND4E-groupedSelectOptions": groupedSelectOptions,
-		"DND4E-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
-		"DND4E-itemContext": itemContext,
 		"DND4E-numberFormat": (context, options) => formatNumber(context, options.hash),
 		"DND4E-textFormat": formatText,
 	});

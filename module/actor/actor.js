@@ -212,9 +212,6 @@ export class Actor4e extends Actor {
 		let effects = Array.from(this.allApplicableEffects());
 		if (effects.length) {
 			const debug = game.settings.get("dnd4e", "debugEffectBonus") ? "D&D4e |" : "";
-			if (debug) {
-				console.log(`${debug} Substituting '${formula}', end of processing produced '${newFormula}' which still contains an @variable.	Searching active effects for a suitable variable`);
-			}
 			const resultObject = {};
 			const enabledEffects = effects.filter((effect) => effect?.disabled === false);
 			enabledEffects.forEach((effect) => {
@@ -245,7 +242,7 @@ export class Actor4e extends Actor {
 			});
 
 			if (debug) {
-				console.log(`${debug} Discovered custom variable values in effects to substitute into formula (${newFormula}): ${JSON.stringify(resultObject)}`);
+				console.log(`${debug} Discovered custom variable values in effects to add to rollData: ${JSON.stringify(resultObject)}`);
 			}
 			for (const [key, value] of Object.entries(resultObject)) {
 				data[key.slice(1)] = value;
@@ -2433,7 +2430,7 @@ export class Actor4e extends Actor {
 		let totalDamage = 0;
 		const actorRes = this.system.resistances;
 		const isDamageImmune = actorRes["damage"].immune;
-		const resAll = isOngoing ? Helper.sumExtremes([actorRes["damage"].value, actorRes["ongoing"].value] || 0) : actorRes["damage"].value;
+		const resAll = isOngoing ? Helper.sumExtremes([actorRes["damage"].value, actorRes["ongoing"].value]) : actorRes["damage"].value;
 		if (isOngoing) typesSet.delete("ongoing");
 
 		let isImmuneAll = true; //starts as true, but as soon as one false it can not be changed back to true

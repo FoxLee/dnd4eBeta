@@ -396,12 +396,15 @@ export default class Item4e extends Item {
 							case "other":
 								return false;
 						}
+						break;
 					default:
 						return true; // Arbitrary default, but true just felt like the better user experience.
 				}
+				break;
 			default:
 				return false;
 		}
+		return false;
 	}
 
 	/* -------------------------------------------- */

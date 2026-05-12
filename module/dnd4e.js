@@ -327,7 +327,7 @@ Hooks.on("renderChatMessageHTML", (message, html, data) => {
 		if ((message.flags.core?.initiativeRoll === true) || (message.flags?.dnd4e?.roll?.type == "init")) {
 			if (html) {
 				const insertPart = Helper.initTooltip(message.content);
-				html.innerHTML = html.innerHTML.replace(/(<h4 class=\"dice-total\">)[0-9|.]+(<\/h4>)/g, `$1${insertPart}$2`);
+				html.innerHTML = html.innerHTML.replace(/(<h4 class="dice-total">)[0-9|.]+(<\/h4>)/g, `$1${insertPart}$2`);
 			}
 		}
 	} catch(e) {

@@ -286,17 +286,17 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 			return super._onChangeForm(formConfig, event);
 		}
 		
-		if (!/^[\-=+ 0-9]+$/.test(value)) {
+		if (!/^[-=+ 0-9]+$/.test(value)) {
 			input.value = foundry.utils.getProperty(this.actor, input.name);
 			return super._onChangeForm(formConfig, event);
 		}
 
 		if (["+"].includes(value[0])) {
 			let delta = parseFloat(value.replace(/[^0-9]/g, ""));
-			input.value = foundry.utils.getProperty(this.actor, input.name) + delta ?? foundry.utils.getProperty(this.actor, input.name);
+			input.value = foundry.utils.getProperty(this.actor, input.name) + delta || foundry.utils.getProperty(this.actor, input.name);
 		} else if (["-"].includes(value[0])) {
 			let delta = parseFloat(-value.replace(/[^0-9]/g, ""));
-			input.value = foundry.utils.getProperty(this.actor, input.name) + delta ?? foundry.utils.getProperty(this.actor, input.name);
+			input.value = foundry.utils.getProperty(this.actor, input.name) + delta || foundry.utils.getProperty(this.actor, input.name);
 		} else if (value[0] === "=") {
 			input.value = value.replace(/[^\-0-9]/g, "");
 		} else {
@@ -556,7 +556,6 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		// Partition items by category
 		let [items, pow, feats, rits] = data.items.reduce((arr, item) => {
 			// Item details
-			item.img ||= DEFAULT_TOKEN;
 			item.isStack = Number.isNumeric(item.system.quantity) && (item.system.quantity !== 1);
 
 			//Causing error in v10, only getter no setter now.
