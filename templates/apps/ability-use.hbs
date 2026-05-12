@@ -7,14 +7,17 @@
 
   {{#if hasLimitedUses}}
   <div class="form-group">
-    <label class="checkbox"><input type="checkbox" name="consumeUse" checked/>{{ localize "DND4E.AbilityUseConsume" }}</label>
+    <label class="checkbox">
+      <input type="checkbox" name="consumeUse" checked>
+      {{ localize "DND4E.AbilityUseConsume" }}
+    </label>
   </div>
   {{/if}}
 
   {{#if hasPlaceableTemplate}}
   <div class="form-group">
     <label class="checkbox">
-      <input type="checkbox" name="placeTemplate" checked/>
+      <input type="checkbox" name="placeTemplate" checked>
       {{ localize "DND4E.PlaceTemplate" }}
     </label>
   </div>

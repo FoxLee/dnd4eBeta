@@ -4,37 +4,37 @@
     <header class="sheet-header">
       <ul class="summary flexrow">
         <li class="summary-name">
-          <input name="name" type="text" value="{{actor.name}}" data-tooltip="{{localize 'DND4E.NamePC'}}" placeholder="{{localize 'DND4E.NamePC'}}" onClick="this.select();"/>
+          <input name="name" type="text" value="{{actor.name}}" data-tooltip="{{localize 'DND4E.NamePC'}}" placeholder="{{localize 'DND4E.NamePC'}}" onClick="this.select();">
         </li>
         <li class="summary-race placeholder" data-placeholder="{{localize 'DND4E.Race'}}">
-          <input type="text" name="system.details.race" value="{{system.details.race}}" data-tooltip="{{localize 'DND4E.Race'}}" placeholder="{{localize 'DND4E.Race'}}" onClick="this.select();"/>
+          <input type="text" name="system.details.race" value="{{system.details.race}}" data-tooltip="{{localize 'DND4E.Race'}}" placeholder="{{localize 'DND4E.Race'}}" onClick="this.select();">
         </li>
         <li class="summary-class placeholder" data-placeholder="{{localize 'DND4E.Class'}}">
-          <input type="text" name="system.details.class" value="{{system.details.class}}" data-tooltip="{{localize 'DND4E.ClassName'}}"placeholder="{{localize 'DND4E.ClassName'}}" onClick="this.select();"/>
+          <input type="text" name="system.details.class" value="{{system.details.class}}" data-tooltip="{{localize 'DND4E.ClassName'}}"placeholder="{{localize 'DND4E.ClassName'}}" onClick="this.select();">
         </li>
         <li class="summary-level">
           <label>{{localize 'DND4E.Level'}}</label>
-          <input type="text" name="system.details.level" value="{{system.details.level}}" data-tooltip="{{localize 'DND4E.Level'}}" data-dtype="Number" onClick="this.select();"/>
+          <input type="text" name="system.details.level" value="{{system.details.level}}" data-tooltip="{{localize 'DND4E.Level'}}" data-dtype="Number" onClick="this.select();">
         </li>
       </ul>
 
       <ul class="summary flexrow">
         <li class="summary-path placeholder" data-placeholder="{{localize 'DND4E.Tier.ParagonPath'}}">
-          <input type="text" name="system.details.paragon" value="{{system.details.paragon}}" data-tooltip="{{localize 'DND4E.Tier.ParagonPath'}}"placeholder="{{localize 'DND4E.Tier.ParagonPath'}}" onClick="this.select();"/>
+          <input type="text" name="system.details.paragon" value="{{system.details.paragon}}" data-tooltip="{{localize 'DND4E.Tier.ParagonPath'}}"placeholder="{{localize 'DND4E.Tier.ParagonPath'}}" onClick="this.select();">
         </li>
         <li class="summary-path placeholder" data-placeholder="{{localize 'DND4E.Tier.EpicDestiny'}}">
-          <input type="text" name="system.details.epic" value="{{system.details.epic}}" data-tooltip="{{localize 'DND4E.Tier.EpicDestiny'}}"placeholder="{{localize 'DND4E.Tier.EpicDestiny'}}" onClick="this.select();"/>
+          <input type="text" name="system.details.epic" value="{{system.details.epic}}" data-tooltip="{{localize 'DND4E.Tier.EpicDestiny'}}"placeholder="{{localize 'DND4E.Tier.EpicDestiny'}}" onClick="this.select();">
         </li>
         <li class="summary-exp">
           <label>{{localize 'DND4E.Exp'}}</label>
-          <input type="text" name="system.details.exp" value="{{system.details.exp}}" data-tooltip="{{localize 'DND4E.Exp'}}" data-dtype="Number" onClick="this.select();"/>
+          <input type="text" name="system.details.exp" value="{{system.details.exp}}" data-tooltip="{{localize 'DND4E.Exp'}}" data-dtype="Number" onClick="this.select();">
         </li>
       </ul>
     </header>
 		
     <section class="header-2 flexrow">
       <div class="image-frame">
-        <img class="profile-img" src="{{actor.img}}" data-action="editImage" data-edit="img" data-tooltip="{{actor.name}}" width="100" height="100" />
+        <img class="profile-img" src="{{actor.img}}" alt="{{actor.name}}" data-action="editImage" data-edit="img" data-tooltip="{{actor.name}}" width="100" height="100">
         <a class="hover-icon actor-art" data-tooltip="{{localize 'DND4EUI.ShowImage'}}" data-action="displayActorArt"><i class="fas fa-image fa-fw"></i></a>
       </div>
       {{!-- Attributes --}}
@@ -49,14 +49,14 @@
             <input {{#if system.details.isBloodied}}class="bloodied" {{/if}}type="text" name="system.attributes.hp.value" value="{{system.attributes.hp.value}}" data-tooltip="{{localize 'DND4E.HPCurrent'}}" placeholder="Current" data-dtype="Number" onClick="this.select();"/>
             <span class="sep">/</span>
             {{#if system.attributes.hp.autototal}}
-            <input type="text" disabled name="system.attributes.hp.max" value="{{system.attributes.hp.max}}" data-tooltip="DND4E.HPTotalAuto" placeholder="Total" data-dtype="Number" onClick="this.select();"/>
+            <input type="text" disabled name="system.attributes.hp.max" value="{{system.attributes.hp.max}}" data-tooltip="DND4E.HPTotalAuto" placeholder="Total" data-dtype="Number" onClick="this.select();">
             {{else}}
-            <input type="text" name="system.attributes.hp.max" value="{{system.attributes.hp.max}}" data-tooltip="DND4E.HPTotal" placeholder="Total" data-dtype="Number" onClick="this.select();"/>
+            <input type="text" name="system.attributes.hp.max" value="{{system.attributes.hp.max}}" data-tooltip="DND4E.HPTotal" placeholder="Total" data-dtype="Number" onClick="this.select();">
             {{/if}}
           </div>
           <footer class="attribute-footer attribute-footer--temp-hp flexrow">
             <span class="attribute-subname">{{localize 'DND4E.TempHP'}}</span>
-            <input type="text" name="system.attributes.temphp.value" value="{{system.attributes.temphp.value}}" data-tooltip="DND4E.TempHPTip" placeholder=0 data-dtype="Number" onClick="this.select();"/>
+            <input type="text" name="system.attributes.temphp.value" value="{{system.attributes.temphp.value}}" data-tooltip="DND4E.TempHPTip" placeholder="0" data-dtype="Number" onClick="this.select();">
           </footer>
         </div>
 
@@ -82,16 +82,16 @@
               <div class="attribute-display surge-bonus rollable" data-action="surgeBonus" data-tooltip="{{localize 'DND4E.SurgeValue'}}">{{localize 'DND4E.Value'}}</div>
             </div>
             <div class="attribute-sub attribute-input">
-              <input type="text" name="system.details.surges.value" value="{{system.details.surges.value}}" data-tooltip="{{localize 'DND4E.SurgeCur'}}" placeholder="Current" data-dtype="Number" onClick="this.select();"/>
+              <input type="text" name="system.details.surges.value" value="{{system.details.surges.value}}" data-tooltip="{{localize 'DND4E.SurgeCur'}}" placeholder="Current" data-dtype="Number" onClick="this.select();">
               <div class="attribute-display environmental-loss-bonus rollable" data-action="surgeEnv" data-tooltip="{{localize 'DND4E.SurgeCur'}}">{{localize 'DND4E.Uses'}}</div>
             </div>
             <span class="sep">/</span>
             <div class="attribute-sub attribute-input">
-              <input type="text" name="system.details.surges.max" value="{{system.details.surges.max}}" data-tooltip="{{localize 'DND4E.SurgeDay'}}" placeholder="Total" data-dtype="Number" onClick="this.select();"/>
+              <input type="text" name="system.details.surges.max" value="{{system.details.surges.max}}" data-tooltip="{{localize 'DND4E.SurgeDay'}}" placeholder="Total" data-dtype="Number" onClick="this.select();">
               <div class="attribute-display" data-tooltip="{{localize 'DND4E.SurgeDay'}}">{{localize 'DND4E.Day'}}</div>
             </div>
             <div class="attribute-sub">
-              <input type="checkbox" name="system.details.secondwind" data-dtype="Boolean" {{checked system.details.secondwind}} data-tooltip="{{localize 'DND4E.SecondWindUsed'}}"/>
+              <input type="checkbox" name="system.details.secondwind" data-dtype="Boolean" {{checked system.details.secondwind}} data-tooltip="{{localize 'DND4E.SecondWindUsed'}}">
               <div class="attribute-display-check secondwind-bonus rollable" data-action="secondWindBonus" data-tooltip="{{localize 'DND4E.SecondWindBonus'}}">{{localize 'DND4E.SW'}}</div>
             </div>
           </div>
@@ -108,11 +108,11 @@
           <h4 class="attribute-name">{{localize 'DND4E.ActionPoints'}}</h4>
           <div class="attribute-value flexrow">
             <div class="attribute-sub">
-              <input type="text" name="system.actionpoints.value" value="{{system.actionpoints.value}}" data-tooltip="{{localize 'DND4E.ActionPointsRemain'}}" data-dtype="Number" onClick="this.select();" placeholder="0"/>
+              <input type="text" name="system.actionpoints.value" value="{{system.actionpoints.value}}" data-tooltip="{{localize 'DND4E.ActionPointsRemain'}}" data-dtype="Number" onClick="this.select();" placeholder="0">
               <div class="attribute-display" data-tooltip="{{localize 'DND4E.ActionPointsRemain'}}">{{localize 'DND4E.Remaining'}}</div>
             </div>
             <div class="attribute-sub">
-              <input type="checkbox" name="system.actionpoints.encounteruse" data-dtype="Boolean" {{checked system.actionpoints.encounteruse}} data-tooltip="{{localize 'DND4E.ActionPointUsed'}}"/>
+              <input type="checkbox" name="system.actionpoints.encounteruse" data-dtype="Boolean" {{checked system.actionpoints.encounteruse}} data-tooltip="{{localize 'DND4E.ActionPointUsed'}}">
               <div class="attribute-display-check" data-tooltip="{{localize 'DND4E.ActionPointUsed'}}">{{localize 'DND4E.Used'}}</div>
             </div>
           </div>
@@ -145,7 +145,7 @@
         {{#if system.halfLevelOptions}}
         {{#each system.abilities as | ability a|}}
         <div class="ability--score flexrow" data-ability="{{a}}">
-          <input class="ability-score" name="system.abilities.{{a}}.value" type="text" data-dtype="Number" value="{{ability.value}}" onfocus="this.select()" placeholder="10"/>
+          <input class="ability-score" name="system.abilities.{{a}}.value" type="text" data-dtype="Number" value="{{ability.value}}" onfocus="this.select()" placeholder="10">
           <label class="ability-name rollable" data-action="rollAbilityCheck" data-tooltip="{{ability.label }}">{{ability.label}}</label>
           <label class="attribute-display ability-mod-half" data-tooltip="{{ability.label}}">{{numberFormat ability.mod decimals=0 sign=true}}</label>
         </div>
@@ -153,7 +153,7 @@
         {{else}}
         {{#each system.abilities as | ability a|}}
         <div class="ability--score flexrow" data-ability="{{a}}">
-          <input class="ability-score" name="system.abilities.{{a}}.value" type="text" data-dtype="Number" value="{{ability.value}}" onfocus="this.select()" placeholder="10"/>
+          <input class="ability-score" name="system.abilities.{{a}}.value" type="text" data-dtype="Number" value="{{ability.value}}" onfocus="this.select()" placeholder="10">
           <label class="ability-name rollable" data-action="rollAbilityCheck" data-tooltip="{{ability.label }}">{{ability.label}}</label>
           <label class="attribute-display ability-mod" data-tooltip="{{ability.label}}">{{numberFormat ability.mod decimals=0 sign=true}}</label>
           <label class="attribute-display ability-mod-half rollable" data-tooltip="{{ability.label }}">{{numberFormat ability.check.total decimals=0 sign=true}}</label>
@@ -181,13 +181,13 @@
       <section class="section section--utilities flexrow">
         <section class="section section--saves flexcol">
           <div class="saving-throw">
-            <img class="roll-save rollable" src="icons/svg/d20-grey.svg" width="20" height="20" data-action="savingThrow" data-tooltip="{{localize 'DND4E.SavingThrow'}}"/>
+            <img class="roll-save rollable" src="icons/svg/d20-grey.svg" alt="{{localize 'DND4E.SavingThrow'}}" width="20" height="20" data-action="savingThrow" data-tooltip="{{localize 'DND4E.SavingThrow'}}">
             <label class="roll-save-bonus rollable" data-action="savingThrowBonus" data-tooltip="{{localize 'DND4E.SavingThrowBonus'}}">{{localize 'DND4E.ActionSave'}}</label>
           </div>
           <div class="death-saves">
-            <img class="death-save rollable" src="icons/svg/d20-grey.svg" width="20" height="20" data-action="deathSave" data-tooltip="{{localize 'DND4E.DeathSavingThrow'}}"/>
-            <label class="death-save-bonus rollable" data-action="deathSaveBonus" data-tooltip="{{localize 'DND4E.DeathSavingThrowBonus'}}" >{{localize 'DND4E.Death'}}</label>
-            <input class="death-saves-failed" type="text" name="system.details.deathsavefail" value="{{system.details.deathsavefail}}" data-tooltip="{{localize 'DND4E.DeathSaveFails'}}" placeholder="0" data-dtype="Number" onClick="this.select();"/>
+            <img class="death-save rollable" src="icons/svg/d20-grey.svg" alt="{{localize 'DND4E.DeathSavingThrow'}}" width="20" height="20" data-action="deathSave" data-tooltip="{{localize 'DND4E.DeathSavingThrow'}}">
+            <label class="death-save-bonus rollable" data-action="deathSaveBonus" data-tooltip="{{localize 'DND4E.DeathSavingThrowBonus'}}">{{localize 'DND4E.Death'}}</label>
+            <input class="death-saves-failed" type="text" name="system.details.deathsavefail" value="{{system.details.deathsavefail}}" data-tooltip="{{localize 'DND4E.DeathSaveFails'}}" placeholder="0" data-dtype="Number" onClick="this.select();">
           </div>
         </section>
         <section class="section section--passives flexcol">

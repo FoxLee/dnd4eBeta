@@ -5,19 +5,21 @@
     <div class="attributes resource-tracker">
       <h4 class="resource-name">
         <input name="system.resources.{{res.name}}.label" type="text" value="{{res.label}}"
-          placeholder="{{res.placeholder}}" />
+          placeholder="{{res.placeholder}}">
       </h4>
       <div class="resource-value attribute-value flexrow">
-        <input name="system.resources.{{res.name}}.value" type="text" value="{{res.value}}" placeholder="0" />
+        <input name="system.resources.{{res.name}}.value" type="text" value="{{res.value}}" placeholder="0">
         <span class="sep">/</span>
-        <input name="system.resources.{{res.name}}.max" type="text" value="{{res.max}}" placeholder="0" />
+        <input name="system.resources.{{res.name}}.max" type="text" value="{{res.max}}" placeholder="0">
       </div>
       <footer class="resource-footer flexrow">
         <label class="recharge checkbox">
-          {{ localize 'DND4E.AbbreviationSR' }} <input name="system.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}} />
+          {{ localize 'DND4E.AbbreviationSR' }} 
+          <input name="system.resources.{{res.name}}.sr" type="checkbox" {{checked res.sr}}>
         </label>
         <label class="recharge checkbox">
-          {{ localize 'DND4E.AbbreviationLR' }} <input name="system.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}} />
+          {{ localize 'DND4E.AbbreviationLR' }} 
+          <input name="system.resources.{{res.name}}.lr" type="checkbox" {{checked res.lr}}>
         </label>
       </footer>
     </div>
@@ -31,23 +33,23 @@
       <div class="flexcol details-fluff">
         <div class="detail gender">
           <label for="gender">{{localize 'DND4E.Gender'}}:</label>
-          <input id="gender" type="text" name="system.details.gender" value="{{system.details.gender}}" data-tooltip="{{localize 'DND4E.Gender'}}" placeholder="{{localize 'DND4E.Gender'}}" onClick="this.select();"/>
+          <input id="gender" type="text" name="system.details.gender" value="{{system.details.gender}}" data-tooltip="{{localize 'DND4E.Gender'}}" placeholder="{{localize 'DND4E.Gender'}}" onClick="this.select();">
         </div>
         <div class="detail age">
           <label for="age">{{localize 'DND4E.Age'}}:</label>
-          <input id="age" type="text" name="system.details.age" value="{{system.details.age}}" data-tooltip="{{localize 'DND4E.Age'}}" placeholder="{{localize 'DND4E.Age'}}" onClick="this.select();"/>
+          <input id="age" type="text" name="system.details.age" value="{{system.details.age}}" data-tooltip="{{localize 'DND4E.Age'}}" placeholder="{{localize 'DND4E.Age'}}" onClick="this.select();">
         </div>
         <div class="detail alignment">
           <label for="alignment">{{localize 'DND4E.Alignment'}}:</label>
-          <input id="alignment" type="text" name="system.details.alignment" value="{{system.details.alignment}}" data-tooltip="{{localize 'DND4E.Alignment'}}" placeholder="{{localize 'DND4E.Alignment'}}" onClick="this.select();"/>
+          <input id="alignment" type="text" name="system.details.alignment" value="{{system.details.alignment}}" data-tooltip="{{localize 'DND4E.Alignment'}}" placeholder="{{localize 'DND4E.Alignment'}}" onClick="this.select();">
         </div>
         <div class="detail height">
           <label for="height">{{localize 'DND4E.Height'}}:</label>
-          <input id="height" type="text" name="system.details.height" value="{{system.details.height}}" data-tooltip="{{localize 'DND4E.Height'}}" placeholder="{{localize 'DND4E.Height'}}" onClick="this.select();"/>
+          <input id="height" type="text" name="system.details.height" value="{{system.details.height}}" data-tooltip="{{localize 'DND4E.Height'}}" placeholder="{{localize 'DND4E.Height'}}" onClick="this.select();">
         </div>
         <div class="detail weight">
           <label for="weight">{{localize 'DND4E.Weight'}}:</label>
-          <input id="weight" type="text" name="system.details.weight" value="{{system.details.weight}}" data-tooltip="{{localize 'DND4E.Weight'}}" placeholder="{{localize 'DND4E.Weight'}}" onClick="this.select();"/>
+          <input id="weight" type="text" name="system.details.weight" value="{{system.details.weight}}" data-tooltip="{{localize 'DND4E.Weight'}}" placeholder="{{localize 'DND4E.Weight'}}" onClick="this.select();">
         </div>
       </div>
     
@@ -72,7 +74,7 @@
         </div>
         <div class="detail subtypes">
           <label for="subtypes">{{localize 'DND4E.ThingSubtypes' thing=(localize 'DND4E.Creature')}}:</label>
-          <input id="other" type="text" name="system.details.other" value="{{system.details.other}}" data-tooltip="{{localize 'DND4E.ThingSubtypes' thing=(localize 'DND4E.Creature')}}" placeholder="{{localize 'DND4E.ThingSubtypes' thing=(localize 'DND4E.Creature')}}" onClick="this.select();"/>
+          <input id="other" type="text" name="system.details.other" value="{{system.details.other}}" data-tooltip="{{localize 'DND4E.ThingSubtypes' thing=(localize 'DND4E.Creature')}}" placeholder="{{localize 'DND4E.ThingSubtypes' thing=(localize 'DND4E.Creature')}}" onClick="this.select();">
         </div>
       </div>
 		

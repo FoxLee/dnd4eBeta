@@ -25,7 +25,7 @@
 {{#if isArmourBaseTypeCustom}}
 <div class="form-group">
   <label>{{ localize "DND4E.ArmourBaseCustom" }}:</label>
-  <input type="text" name="system.armourBaseTypeCustom" value="{{system.armourBaseTypeCustom}}" data-tooltip="{{ localize "DND4E.ArmourBaseCustom" }}" placeholder="{{ localize "DND4E.ArmourBaseCustom" }}" data-dtype="String" onClick="this.select();"/>
+  <input type="text" name="system.armourBaseTypeCustom" value="{{system.armourBaseTypeCustom}}" data-tooltip="{{ localize 'DND4E.ArmourBaseCustom' }}" placeholder="{{ localize 'DND4E.ArmourBaseCustom' }}" data-dtype="String" onClick="this.select();">
 </div>
 {{/if}}
 {{/if}}
@@ -41,7 +41,7 @@
 {{#if isShieldBaseTypeCustom}}
 <div class="form-group">
   <label>{{ localize "DND4E.ShieldBaseCustom" }}:</label>
-  <input type="text" name="system.shieldBaseTypeCustom" value="{{system.shieldBaseTypeCustom}}" data-tooltip="{{ localize "DND4E.ShieldBaseCustom" }}" placeholder="{{ localize "DND4E.ShieldBaseCustom" }}" data-dtype="String" onClick="this.select();"/>
+  <input type="text" name="system.shieldBaseTypeCustom" value="{{system.shieldBaseTypeCustom}}" data-tooltip="{{ localize 'DND4E.ShieldBaseCustom' }}" placeholder="{{ localize 'DND4E.ShieldBaseCustom' }}" data-dtype="String" onClick="this.select();">
 </div>
 {{/if}}
 {{/if}}
@@ -56,13 +56,16 @@
     </select>
   </div>
   <label class="checkbox">
-    <input type="checkbox" name="system.equipped" {{checked system.equipped}}/> {{ localize "DND4E.Equipped" }}
+    <input type="checkbox" name="system.equipped" {{checked system.equipped}}>
+    {{ localize "DND4E.Equipped" }}
   </label>
   <label class="checkbox">
-    <input type="checkbox" name="system.identified" {{checked system.identified}}/> {{ localize "DND4E.Identified" }}
+    <input type="checkbox" name="system.identified" {{checked system.identified}}>
+    {{ localize "DND4E.Identified" }}
   </label>
   <label class="checkbox">
-    <input type="checkbox" name="system.attuned" {{checked system.attuned}}/> {{ localize "DND4E.Attuned" }}
+    <input type="checkbox" name="system.attuned" {{checked system.attuned}}>
+    {{ localize "DND4E.Attuned" }}
   </label>
 </div>
 
@@ -72,19 +75,19 @@
 <div class="form-group">
   <label class="inline before">{{ localize "DND4E.DefAC" }}</label>
   <div class="form-fields">
-    <input type="text" name="system.armour.ac" value="{{system.armour.ac}}" data-dtype="Number"/>
+    <input type="text" name="system.armour.ac" value="{{system.armour.ac}}" data-dtype="Number">
   </div>
   <label class="inline before">{{ localize "DND4E.DefFort" }}</label>
   <div class="form-fields">
-    <input type="text" name="system.armour.fort" value="{{system.armour.fort}}" data-dtype="Number"/>
+    <input type="text" name="system.armour.fort" value="{{system.armour.fort}}" data-dtype="Number">
   </div>
   <label class="inline before">{{ localize "DND4E.DefRef" }}</label>
   <div class="form-fields">
-    <input type="text" name="system.armour.ref" value="{{system.armour.ref}}" data-dtype="Number"/>
+    <input type="text" name="system.armour.ref" value="{{system.armour.ref}}" data-dtype="Number">
   </div>
   <label class="inline before">{{ localize "DND4E.DefWil" }}</label>
   <div class="form-fields">
-    <input type="text" name="system.armour.wil" value="{{system.armour.wil}}" data-dtype="Number"/>
+    <input type="text" name="system.armour.wil" value="{{system.armour.wil}}" data-dtype="Number">
   </div>
 </div>
 
@@ -92,15 +95,15 @@
   <div class="form-group right">
     <label>{{ localize "DND4E.ArmourSkillPenalty" }}</label>
     <div class="form-fields">
-      <input type="checkbox" name="system.armour.skillCheck" data-dtype="Boolean" {{checked system.armour.skillCheck}}/>
-      <input type="text" name="system.armour.skillCheckValue" value="{{system.armour.skillCheckValue}}" data-dtype="Number"/>
+      <input type="checkbox" name="system.armour.skillCheck" data-dtype="Boolean" {{checked system.armour.skillCheck}}>
+      <input type="text" name="system.armour.skillCheckValue" value="{{system.armour.skillCheckValue}}" data-dtype="Number">
     </div>
   </div>
   <div class="form-group right">
     <label>{{ localize "DND4E.SpeedPenalty" }}</label>
     <div class="form-fields">
-      <input type="checkbox" name="system.armour.movePen" data-dtype="Boolean" {{checked system.armour.movePen}}/>
-      <input type="text" name="system.armour.movePenValue" value="{{system.armour.movePenValue}}" data-dtype="Number"/>
+      <input type="checkbox" name="system.armour.movePen" data-dtype="Boolean" {{checked system.armour.movePen}}>
+      <input type="text" name="system.armour.movePenValue" value="{{system.armour.movePenValue}}" data-dtype="Number">
     </div>
   </div>
 </div>
@@ -115,7 +118,7 @@
   <ol class="damage-parts form-group">
     {{#each system.armour.damageRes.parts as |part i| }}
     <li class="damage-part flexrow" data-damage-part="{{i}}">
-      <input type="number" name="system.armour.damageRes.parts.{{i}}.0" value="{{lookup this '0'}}" placeholder="5" />
+      <input type="number" name="system.armour.damageRes.parts.{{i}}.0" value="{{lookup this '0'}}" placeholder="5">
       <select name="system.armour.damageRes.parts.{{i}}.1">
         <option value=""{{#if (eq (lookup part "1") "none")}}selected{{/if}}>{{ localize "DND4E.None" }}</option>
         {{selectOptions ../config.damageTypes selected=(lookup part "1") localize="true"}}
@@ -137,7 +140,7 @@
     {{else}} {{ localize "DND4E.DefFort"}}/{{ localize "DND4E.DefRef"}}/{{ localize "DND4E.DefWil"}}
     {{/if}}</label> 
   <div class="form-fields">
-    <input type="text" name="system.armour.enhance" value="{{system.armour.enhance}}" data-dtype="Number"/>
+    <input type="text" name="system.armour.enhance" value="{{system.armour.enhance}}" data-dtype="Number">
   </div>
 </div>
 {{/if}}
@@ -147,9 +150,9 @@
 <div class="form-group uses-per">
   <label>{{ localize "DND4E.LimitedUses"}}</label>
   <div class="form-fields">
-    <input type="text" name="system.uses.value" value="{{system.uses.value}}" data-dtype="Number"/>
+    <input type="text" name="system.uses.value" value="{{system.uses.value}}" data-dtype="Number">
     <span class="sep">{{ localize "DND4E.of" }}</span>
-    <input type="text" name="system.uses.max" value="{{system.uses.max}}"/>
+    <input type="text" name="system.uses.max" value="{{system.uses.max}}">
     <span class="sep">{{ localize "DND4E.per" }}</span>
     <select name="system.uses.per">
       {{selectOptions config.limitedUsePeriods selected=system.uses.per labelAttr="label"}}
@@ -165,6 +168,6 @@
     <select class="consume-target" name="system.consume.target">
       {{selectOptions abilityConsumptionTargets selected=system.consume.target}}
     </select>
-    <input type="text" name="system.consume.amount" value="{{system.consume.amount}}" data-dtype="Number"/>
+    <input type="text" name="system.consume.amount" value="{{system.consume.amount}}" data-dtype="Number">
   </div>
 </div>

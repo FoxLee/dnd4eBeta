@@ -7,7 +7,7 @@
     </multi-select>
     <div class="form-group long">
       <label>{{ localize 'DND4E.Custom' }}</label>
-      <input type="text" name="system.keywordsCustom" value="{{document.system.keywordsCustom}}" placeholder="{{ localize 'DND4EUI.StringEnterValues'}}" data-tooltip="{{ localize 'DND4EUI.StringEnterValues'}}" />
+      <input type="text" name="system.keywordsCustom" value="{{document.system.keywordsCustom}}" placeholder="{{ localize 'DND4EUI.StringEnterValues'}}" data-tooltip="{{ localize 'DND4EUI.StringEnterValues'}}">
     </div>
   </fieldset>
   
@@ -25,7 +25,7 @@
       {{#each document.system.dots as |dot i|}}
       <li class="effect-dot flexrow" data-index="{{i}}">
         <div class="amount">
-          <input type="text" name="system.dots.{{i}}.amount" value="{{dot.amount}}"/>
+          <input type="text" name="system.dots.{{i}}.amount" value="{{dot.amount}}">
         </div>
         <div class="type damage-type">
           <multi-select name="system.dots.{{i}}.types" class="inline">

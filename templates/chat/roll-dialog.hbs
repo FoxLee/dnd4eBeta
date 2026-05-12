@@ -2,11 +2,11 @@
 
   <div class="form-group">
     <label class="label">{{ localize "DND4E.Formula" }}</label>
-    <input type="text" name="formula" value="{{formula}}" disabled/>
+    <input type="text" name="formula" value="{{formula}}" disabled>
   </div>
   <div class="form-group">
     <label class="label">{{ localize "DND4E.RollSituationalBonus" }}</label>
-    <input type="text" name="bonus" value="" placeholder="{{ localize 'DND4E.RollExample' }}"/>
+    <input type="text" name="bonus" value="" placeholder="{{ localize 'DND4E.RollExample' }}">
   </div>
 
   {{#if isD20Roll}}	
@@ -16,7 +16,7 @@
       <button type="button" class="button hollow circle" data-quantity="minus" data-field="quantity" data-action="minus">
         <i class="fa fa-minus" aria-hidden="true"></i>
       </button>
-      <input class="dice-count" id="d20" type="text" name="d20" value="1" onClick="this.select();"/>
+      <input class="dice-count" id="d20" type="text" name="d20" value="1" onClick="this.select();">
       <button type="button" class="button hollow circle" data-quantity="plus" data-field="quantity" data-action="plus">
         <i class="fa fa-plus" aria-hidden="true"></i>
       </button>
@@ -60,7 +60,9 @@
         </div>
       </div>
 			
-      {{#if t.immune}}<!--<div class="immunity">Target is immune to attacks against this defence.</div>-->{{/if}}
+      {{#if t.immune}}
+      <!--<div class="immunity">Target is immune to attacks against this defence.</div>-->
+      {{/if}}
 				
       <fieldset class="form-group stacked">
         <legend>{{localize 'DND4EUI.ConditionalAtkMods'}}</legend>
@@ -146,7 +148,7 @@
   </div>
   <div class="form-group">
     <label>{{localize 'DND4EUI.ChatFlavor'}}</label>
-    <input type="text" name="flavor" value="{{newFlavor}}" placeholder="{{flavor}}" data-tooltip="{{localize 'DND4EUI.ChatFlavor'}}" />
+    <input type="text" name="flavor" value="{{newFlavor}}" placeholder="{{flavor}}" data-tooltip="{{localize 'DND4EUI.ChatFlavor'}}">
   </div>
 	
 </div>

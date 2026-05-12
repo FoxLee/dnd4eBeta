@@ -6,6 +6,7 @@
   <div class="global-mods">
     <ul class="item-list modifier-list flexrow">
       <div class="global-mods-column">
+        <!-- eslint-disable-next-line @html-eslint/require-li-container -->
         <li class="flexrow global-mod" data-modifiers="attack">
           <span class="modifiers-total" data-tooltip="{{localize 'DND4E.ModifierAttack'}} <br />{{#if system.modifiers.attack.warn}}({{localize 'DND4E.ModifierAttackNote'}}){{/if}}">
             <span class="label">{{localize 'DND4E.Attack'}}:</span> 
@@ -17,6 +18,7 @@
             <span class="value">{{numberFormat system.modifiers.attack.bonusValue sign=true}}</span>
           </a>
         </li>
+        <!-- eslint-disable-next-line @html-eslint/require-li-container -->
         <li class="flexrow global-mod" data-modifiers="damage">
           <span class="modifiers-total" data-tooltip="{{localize 'DND4E.ModifierDamage'}}">
             <span class="label">{{localize 'DND4E.Damage'}}:</span> 
@@ -27,6 +29,7 @@
             <span class="value">{{numberFormat system.modifiers.damage.bonusValue sign=true}}</span>
           </a>
         </li>
+        <!-- eslint-disable-next-line @html-eslint/require-li-container -->
         <li class="flexrow global-mod" data-modifiers="defences">
           <span class="modifiers-total" data-tooltip="{{localize 'DND4E.ModifierDefences'}}">
             <span class="label">{{localize 'DND4E.Defences'}}:</span>
@@ -39,6 +42,7 @@
         </li>
       </div>
       <div class="global-mods-column">
+        <!-- eslint-disable-next-line @html-eslint/require-li-container -->
         <li class="flexrow global-mod" data-modifiers="skills">
           <span class="modifiers-total" data-tooltip="{{localize 'DND4E.ModifierSkills'}}">
             <span class="label">{{localize 'DND4E.Skills'}}:</span>
@@ -49,6 +53,7 @@
             <span class="value">{{numberFormat system.modifiers.skills.bonusValue sign=true}}</span>
           </a>
         </li> 
+        <!-- eslint-disable-next-line @html-eslint/require-li-container -->
         <li class="flexrow global-mod" data-modifiers="abilities">
           <span class="modifiers-total" data-tooltip="{{localize 'DND4E.ModifierAbilities'}}">
             <span class="label">{{localize 'DND4E.AbilityChecks'}}:</span>
@@ -69,7 +74,9 @@
 {{/if}}
 
 <div class="active-effects">
-  {{#if system.resistances}}<h4 class="group-header">{{localize 'DND4E.Effects'}}</h4>{{/if}}
+  {{#if system.resistances}}
+  <h4 class="group-header">{{localize 'DND4E.Effects'}}</h4>
+  {{/if}}
   <ol class="item-list effects-list">
     {{#each effects as |section sid|}}
     <li class="items-header flexrow" data-effect-type="{{section.type}}">
@@ -90,7 +97,7 @@
       <li class="item effect flexrow" data-effect-id="{{effect.id}}"{{#if effect.source}} data-parent-id="{{effect.source.id}}"{{/if}} data-tooltip="{{effect.tooltip}}">
 	  
         <div class="item-name effect-name flexrow">
-          <img class="item-image" src="{{effect.img}}" />
+          <img class="item-image" src="{{effect.img}}" alt="{{effect.name}}">
           <h4>{{effect.name}}{{#if effect.keywords.string}} [{{effect.keywords.string}}]{{/if}}</h4>
         </div>
 		
@@ -151,7 +158,7 @@
         <span class="value">{{res.resBonusValue}}</span>
       </a>
       <label class="res-immune checkbox">
-        <input type="checkbox" name="system.resistances.{{r}}.immune" data-dtype="Boolean" {{checked res.immune}} data-tooltip="{{localize 'DND4E.Immunity'}}" /> 
+        <input type="checkbox" name="system.resistances.{{r}}.immune" data-dtype="Boolean" {{checked res.immune}} data-tooltip="{{localize 'DND4E.Immunity'}}"> 
         <span class="label">{{localize 'DND4E.Immunity'}}</span>
       </label>
     </li>

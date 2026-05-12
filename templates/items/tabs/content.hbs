@@ -6,7 +6,7 @@
     </h3>
     {{#each system.currency as |v k|}}
     <label class="denomination {{k}}" data-tooltip="{{ localize (lookup ../config.currencies k )}}">{{k}}</label>
-    <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number" data-tooltip="{{ localize (lookup ../config.currencies k )}}"/>
+    <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number" data-tooltip="{{ localize (lookup ../config.currencies k )}}">
     {{/each}}
   </ol>
 
@@ -14,7 +14,7 @@
     <h3 data-tooltip="{{localize 'DND4E.RitualComp'}}">{{localize 'DND4E.RitualComp'}}</h3>
     {{#each system.ritualcomp as |v k|}}
     <label class="denomination {{k}}" data-tooltip="{{ localize (lookup ../config.ritualcomponents k )}}">{{k}}</label>
-    <input type="text" name="system.ritualcomp.{{k}}" value="{{v}}" data-dtype="Number" data-tooltip="{{ localize (lookup ../config.ritualcomponents k )}}"/>
+    <input type="text" name="system.ritualcomp.{{k}}" value="{{v}}" data-dtype="Number" data-tooltip="{{ localize (lookup ../config.ritualcomponents k )}}">
     {{/each}}
   </ol>
   <ol class="item-list inventory-list">
@@ -32,7 +32,9 @@
         {{#if section.editableName}}
         <input type="text" value="{{item.name}}">
         {{else}}
-        <div class="item-image" data-action="itemRoll"><img src="{{item.img}}" width="30" height="30"/></div>
+        <div class="item-image" data-action="itemRoll">
+          <img src="{{item.img}}" alt="{{item.name}}" width="30" height="30">
+        </div>
         <h4>
           {{#if item.system.level}}[{{item.system.level}}]{{/if}}{{item.name~}}
           {{~#if item.isStack}} ({{item.system.quantity}}){{/if}}
@@ -50,7 +52,7 @@
       </div>
 
       <div class="item-detail item-quantity">
-        <input type="text" value="{{item.system.quantity}}" placeholder="0"/>
+        <input type="text" value="{{item.system.quantity}}" placeholder="0">
       </div>
         
       <div class="item-controls flexrow">

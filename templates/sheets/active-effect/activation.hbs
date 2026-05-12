@@ -19,7 +19,7 @@
       </select>
       {{#if (eq document.system.durationType "saveEnd")}}
       <label>{{localize 'DND4E.AbbreviationDC'}}</label>
-      <input type="text" class="number saveDC" name="system.saveDC" value="{{ifThen document.system.saveDC document.system.saveDC '10'}}" placeholder="10" data-dtype="number"/>
+      <input type="text" class="number saveDC" name="system.saveDC" value="{{ifThen document.system.saveDC document.system.saveDC '10'}}" placeholder="10" data-dtype="number">
       {{/if}}
     </div>
   </div>
@@ -87,7 +87,7 @@
   <div class="form-group">
     <label>{{localize 'DND4E.EffectWhenEquipped'}}?</label>
     <div class="form-fields">
-      <input type="checkbox" name="system.equippedRec" data-dtype="Boolean" {{checked document.system.equippedRec}}/>
+      <input type="checkbox" name="system.equippedRec" data-dtype="Boolean" {{checked document.system.equippedRec}}>
     </div>
   </div>
   {{formGroup fields.transfer value=source.transfer rootId=rootId}}
@@ -95,7 +95,7 @@
   <div class="form-group">
     <label>{{localize 'DND4E.SourceActorData'}}?</label>
     <div class="form-fields">
-      <input type="checkbox" name="system.useSourceActorData" data-dtype="Boolean" {{checked document.system.useSourceActorData}}/>
+      <input type="checkbox" name="system.useSourceActorData" data-dtype="Boolean" {{checked document.system.useSourceActorData}}>
     </div>
     <p class="hint">{{localize 'DND4E.SourceActorDataHint'}}</p>
   </div>

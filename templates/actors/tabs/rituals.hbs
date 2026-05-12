@@ -4,14 +4,15 @@
     <h3 data-tooltip="{{localize 'DND4E.RitualComp'}}">{{localize 'DND4E.RitualComp'}}</h3>
     {{#each system.ritualcomp as |v k|}}
     <label class="denomination {{k}}" data-tooltip="{{ localize (lookup ../config.ritualComponents k )}}">{{k}}</label>
-    <input type="text" name="system.ritualcomp.{{k}}" value="{{v}}" data-dtype="Number" data-tooltip="{{ localize (lookup ../config.ritualComponents k )}}"/>
+    <input type="text" name="system.ritualcomp.{{k}}" value="{{v}}" data-dtype="Number" data-tooltip="{{ localize (lookup ../config.ritualComponents k )}}">
     {{/each}}
   </ol>
 
   <ol class="item-list inventory-list">
     <header class="ritual-filters flexrow">
       <div class="sorting sort-rituals">
-        <label for="system.ritualSortTypes">{{localize 'DND4EUI.SortBy'}}</label><br />
+        <label for="system.ritualSortTypes">{{localize 'DND4EUI.SortBy'}}</label>
+        <br>
         <select name="system.ritualSortTypes">
           {{selectOptions config.ritualSortTypes selected=system.ritualSortTypes labelAttr="label"}}
         </select>
@@ -19,7 +20,7 @@
 
       <div class="filter-search-rituals">
         <label for="ritual-filter-search">{{localize 'DND4E.Filter'}}</label>
-        <input type="text" class="search" name="ritual-filter-search" placeholder="{{localize 'DND4EUI.SearchFor' term=(localize 'DND4E.Ritual')}}..." id="filterInput-ritual" />
+        <input type="text" class="search" name="ritual-filter-search" placeholder="{{localize 'DND4EUI.SearchFor' term=(localize 'DND4E.Ritual')}}..." id="filterInput-ritual">
       </div>
     </header>
 
@@ -46,7 +47,9 @@
       {{#each section.items as |item iid|}}
       <li class="item flexrow{{#if isUnavailable}} unavailable{{/if}} collapsible{{#if collapsed}} collapsed{{/if}}" data-item-id="{{item._id}}">
         <div class="item-name flexrow rollable" data-action="itemSummary">
-          <div class="item-image item-roll" data-action="itemRoll"><img src="{{item.img}}" width="30" height="30"/></div>
+          <div class="item-image item-roll" data-action="itemRoll">
+            <img src="{{item.img}}" alt="{{item.name}}" width="30" height="30">
+          </div>
           <h4 class="item-title">{{#if item.system.level}}[{{item.system.level}}]{{/if}}{{item.name}}</h4>
         </div>
     

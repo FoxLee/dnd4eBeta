@@ -7,7 +7,7 @@
       </h3>
       {{#each system.currency as |v k|}}
       <label class="denomination {{k}}" data-tooltip="{{ localize (lookup ../config.currencies k )}}">{{k}}</label>
-      <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number" data-tooltip="{{ localize (lookup ../config.currencies k )}}"/>
+      <input type="text" name="system.currency.{{k}}" value="{{v}}" data-dtype="Number" data-tooltip="{{ localize (lookup ../config.currencies k )}}">
       {{/each}}
     </ol>
 	
@@ -15,7 +15,7 @@
     <div class="flexrow daily-item-power-use">
       <div class="daily-item-power-use-counter">
         <span>{{localize 'DND4E.ItemUseDaily'}}:</span> 
-        <input type="text" name="system.magicItemUse.dailyuse" value="{{system.magicItemUse.dailyuse}}" data-tooltip="{{localize 'DND4E.ItemUseDailyRem'}}" placeholder="0" data-dtype="Number" onClick="this.select();"/>    
+        <input type="text" name="system.magicItemUse.dailyuse" value="{{system.magicItemUse.dailyuse}}" data-tooltip="{{localize 'DND4E.ItemUseDailyRem'}}" placeholder="0" data-dtype="Number" onClick="this.select();">    
         <span data-tooltip="{{localize 'DND4E.ItemUseDaily'}}">/ {{system.magicItemUse.perDay}}</span>
       </div>
       <div class="daily-item-power-use-check flexrow">
@@ -60,7 +60,9 @@
           {{#if section.editableName}}
           <input type="text" value="{{item.name}}">
           {{else}}
-          <div class="item-image item-roll" data-action="itemRoll"><img src="{{item.img}}" width="30" height="30"/></div>
+          <div class="item-image item-roll" data-action="itemRoll">
+            <img src="{{item.img}}" alt="{{item.name}}" width="30" height="30">
+          </div>
           <h4 class="item-title">
             {{#if item.system.level}}[{{item.system.level}}]{{/if}}{{item.name~}}
             
@@ -93,7 +95,8 @@
 
         <div class="item-detail item-uses">
           {{#if item.hasUses }}
-          <input type="text" value="{{item.system.uses.value}}" placeholder="0"/>/ {{item.system.preparedMaxUses}}
+          <input type="text" value="{{item.system.uses.value}}" placeholder="0">
+          / {{item.system.preparedMaxUses}}
           {{/if}}
         </div>
 

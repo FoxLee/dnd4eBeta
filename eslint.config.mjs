@@ -147,6 +147,7 @@ export default defineConfig([
 		},
 
 		rules: {
+			...htmlEslint.configs["recommended-legacy"].rules,
 			"@html-eslint/attrs-newline": ["off", {
 				closeStyle: "sameline",
 				ifAttrsMoreThan: 9,

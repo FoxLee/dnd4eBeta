@@ -9,7 +9,7 @@
     {{#each system.abilities as |ability a|}}
     <div class="ability">
       <span>{{ability.label}}</span>
-      <input class="stat-chat" name="system.abilities.{{a}}.chat" type="text" value="{{ability.chat}}" onClick="this.select();"/>
+      <input class="stat-chat" name="system.abilities.{{a}}.chat" type="text" value="{{ability.chat}}" onClick="this.select();">
     </div>
     {{/each}}
   </fieldset>
@@ -20,7 +20,7 @@
     {{#each system.skills as |skills s|}}
     <div class="skill">
       <span>{{skills.label}}</span>
-      <input class="stat-chat" name="system.skills.{{s}}.chat" type="text" value="{{skills.chat}}" onClick="this.select();"/>
+      <input class="stat-chat" name="system.skills.{{s}}.chat" type="text" value="{{skills.chat}}" onClick="this.select();">
     </div>
     {{/each}}
   </fieldset>
@@ -31,7 +31,7 @@
     {{#each system.defences as |defences d|}}
     <div class="defence">
       <span>{{defences.label}}</span>
-      <input class="stat-chat" name="system.defences.{{d}}.chat" type="text" value="{{defences.chat}}" onClick="this.select();"/>
+      <input class="stat-chat" name="system.defences.{{d}}.chat" type="text" value="{{defences.chat}}" onClick="this.select();">
     </div>
     {{/each}}
   </fieldset>

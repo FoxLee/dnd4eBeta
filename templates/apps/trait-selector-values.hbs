@@ -7,7 +7,7 @@
       <li>
         <label class="checkbox">
           <input type="checkbox" name="{{key}}" data-dtype="Boolean" {{checked choice.chosen}}>
-          <input class="checkbox-rider" type="text" name="{{key}}" value="{{choice.value}}" data-tooltip="{{localize 'DND4E.SpecialSensesRange'}}" />
+          <input class="checkbox-rider" type="text" name="{{key}}" value="{{choice.value}}" data-tooltip="{{localize 'DND4E.SpecialSensesRange'}}">
           {{choice.label}}
         </label>
       </li>
@@ -18,7 +18,7 @@
   {{#if allowCustom}}
   <div class="form-group vertical">
     <label>{{ localize "DND4E.TraitSelectorSpecial" }}</label>
-    <input type="text" name="custom" value="{{custom}}" data-dtype="String"/>
+    <input type="text" name="custom" value="{{custom}}" data-dtype="String">
   </div>
   {{/if}}
 	
