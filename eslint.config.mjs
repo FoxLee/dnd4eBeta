@@ -129,6 +129,7 @@ export default defineConfig([
         ]],
       }],
 
+      // TODO: actually fill in all the missing documentation QQ
       /*"@jsdoc/require-jsdoc": ["warn", {
         require: { ClassExpression: true, FunctionDeclaration: true, MethodDefinition: true },
         enableFixer: false,
