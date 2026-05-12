@@ -1,101 +1,157 @@
+import { defineConfig, globalIgnores } from "eslint/config";
+import { FlatCompat } from "@eslint/eslintrc";
+import { fileURLToPath } from "node:url";
 import globals from "globals";
-import pluginJs from "@eslint/js";
+import htmlEslint from "@html-eslint/eslint-plugin";
+import js from "@eslint/js";
+import jsdoc from "eslint-plugin-jsdoc";
+import parser from "@html-eslint/parser";
+import path from "node:path";
 import stylistic from "@stylistic/eslint-plugin";
+import tseslint from "typescript-eslint";
 
-export default [
-	// Tell eslint to ignore files that I don't mind being formatted slightly differently
-	{ ignores: [ `scripts/`, `foundry/*` ] },
-	{
-		languageOptions: {
-			globals: globals.browser,
-		},
-	},
-	pluginJs.configs.recommended,
-	// MARK: Foundry Globals
-	{
-		languageOptions: {
-			globals: {
-				CONFIG: `writable`,
-				CONST: `readonly`,
-				game: `readonly`,
-				Handlebars: `readonly`,
-				Hooks: `readonly`,
-				ui: `readonly`,
-				foundry: `readonly`,
-				Actor: `readonly`,
-				Item: `readonly`,
-				ChatMessage: `readonly`,
-				ActiveEffect: `readonly`,
-				fromUuid: `readonly`,
-				fromUuidSync: `readonly`,
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+  recommendedConfig: js.configs.recommended,
+  allConfig: js.configs.all,
+});
 
-				// v14 Additions:
-				_loc: `readonly`,
-				_del: `readonly`,
-				_replace: `readonly`,
-			},
-		},
-	},
-	// MARK: Project Specific
-	{
-		plugins: {
-			"@stylistic": stylistic,
-		},
-		languageOptions: {
-			globals: {
-				taf: `readonly`,
-			},
-		},
-		rules: {
-			"curly": `error`,
-			"func-names": [`warn`, `as-needed`],
-			"grouped-accessor-pairs": `error`,
-			"no-alert": `error`,
-			"no-empty": [`error`, { allowEmptyCatch: true }],
-			"no-implied-eval": `error`,
-			"no-invalid-this": `error`,
-			"no-lonely-if": `error`,
-			"no-unneeded-ternary": `error`,
-			"no-nested-ternary": `error`,
-			"no-var": `error`,
-			"no-unused-vars": [
-				`error`,
-				{
-					"vars": `local`,
-					"args": `after-used`,
-					"varsIgnorePattern": `^_`,
-					"argsIgnorePattern": `^_`,
-				},
-			],
-			"sort-imports": [`warn`, { "ignoreCase": true, "allowSeparatedGroups": true }],
-			"@stylistic/semi": [`warn`, `always`, { "omitLastInOneLineBlock": true }],
-			"@stylistic/no-trailing-spaces": `warn`,
-			"@stylistic/space-before-blocks": [`warn`, `always`],
-			"@stylistic/space-infix-ops": `warn`,
-			"@stylistic/eol-last": `warn`,
-			"@stylistic/operator-linebreak": [`warn`, `before`],
-			"@stylistic/indent": [
-				`warn`,
-				`tab`,
-				{
-					SwitchCase: 1,
-					ignoredNodes: [
-						`.superClass CallExpression`,
-					],
-				},
-			],
-			"@stylistic/brace-style": [`off`],
-			"@stylistic/quotes": [`warn`, `backtick`, { "avoidEscape": true }],
-			"@stylistic/comma-dangle": [`warn`, { arrays: `always-multiline`, objects: `always-multiline`, imports: `always-multiline`, exports: `always-multiline`, functions: `always-multiline` }],
-			"@stylistic/comma-style": [`warn`, `last`],
-			"@stylistic/dot-location": [`error`, `property`],
-			"@stylistic/no-confusing-arrow": `error`,
-			"@stylistic/no-whitespace-before-property": `error`,
-			"@stylistic/nonblock-statement-body-position": [
-				`error`,
-				`beside`,
-				{ "overrides": { "while": `below` } },
-			],
-		},
-	},
-];
+export default defineConfig([
+  globalIgnores(["foundry/**/*"]),
+  {
+    extends: compat.extends("eslint:recommended"),
+
+    plugins: {
+      "@html-eslint": htmlEslint,
+      "@stylistic": stylistic,
+      "@jsdoc": jsdoc,
+    },
+
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        CONFIG: "readonly",
+        CONST: "readonly",
+        // Global classes
+        Color: "readonly",
+        Handlebars: "readonly",
+        Hooks: "readonly",
+        PIXI: "readonly",
+        ProseMirror: "readonly",
+        Roll: "readonly",
+        // global namespaces
+        canvas: "readonly",
+        ds: "readonly",
+        foundry: "readonly",
+        game: "readonly",
+        ui: "readonly",
+        // global functions
+        fromUuid: "readonly",
+        fromUuidSync: "readonly",
+        getDocumentClass: "readonly",
+        _del: "readonly",
+        _replace: "readonly",
+        _loc: "readonly",
+      },
+
+      ecmaVersion: "latest",
+      sourceType: "module",
+    },
+
+    rules: {
+      // "no-undef": "off",
+      "no-unused-vars": 0,
+      "sort-imports": ["warn"],
+
+      "@stylistic/indent": ["error", 2, {
+        SwitchCase: 1,
+      }],
+
+      "@stylistic/quotes": ["error", "double"],
+      "@stylistic/semi": ["error", "always"],
+      "@stylistic/quote-props": ["error", "as-needed"],
+      "@stylistic/array-bracket-newline": ["error", "consistent"],
+      "@stylistic/key-spacing": "error",
+      "@stylistic/comma-dangle": ["error", "always-multiline"],
+      "@stylistic/space-in-parens": ["error", "never"],
+      "@stylistic/space-infix-ops": 2,
+      "@stylistic/keyword-spacing": 2,
+      "@stylistic/semi-spacing": 2,
+      "@stylistic/no-multi-spaces": 2,
+      "@stylistic/no-extra-semi": 2,
+      "@stylistic/no-whitespace-before-property": 2,
+      "@stylistic/space-unary-ops": 2,
+
+      "@stylistic/no-multiple-empty-lines": ["error", {
+        max: 1,
+        maxEOF: 0,
+      }],
+
+      "@stylistic/object-curly-spacing": ["error", "always"],
+      "@stylistic/comma-spacing": ["error"],
+      "@stylistic/space-before-blocks": 2,
+      "@stylistic/arrow-spacing": 2,
+      "@stylistic/eol-last": ["error", "always"],
+
+      "@stylistic/no-mixed-operators": ["error", {
+        allowSamePrecedence: true,
+
+        groups: [[
+          "==",
+          "!=",
+          "===",
+          "!==",
+          ">",
+          ">=",
+          "<",
+          "<=",
+          "&&",
+          "||",
+          "in",
+          "instanceof",
+        ]],
+      }],
+
+      "@jsdoc/require-jsdoc": ["warn", {
+        require: { ClassExpression: true, FunctionDeclaration: true, MethodDefinition: true },
+        enableFixer: false,
+        checkSetters: "no-getter",
+        checkConstructors: false,
+      }],
+      "@jsdoc/require-description": ["warn", { checkConstructors: false, contexts: ["FunctionDeclaration", "ClassDeclaration"] }],
+      "@jsdoc/require-description-complete-sentence": "warn",
+    },
+  }, {
+    files: ["**/*.hbs", "**/*.html"],
+    extends: compat.extends("plugin:@html-eslint/recommended"),
+
+    languageOptions: {
+      parser: parser,
+    },
+
+    rules: {
+      "@html-eslint/attrs-newline": ["off", {
+        closeStyle: "sameline",
+        ifAttrsMoreThan: 9,
+      }],
+
+      "@html-eslint/indent": ["error", 2],
+    },
+  },
+  {
+    files: ["**/*.ts"],
+    extends: [js.configs.recommended, tseslint.configs.recommended],
+
+    plugins: {
+      "@stylistic": stylistic,
+    },
+
+    rules: {
+      "@stylistic/space-in-parens": ["error", "never"],
+      "@stylistic/key-spacing": "error",
+      "@stylistic/type-generic-spacing": "error",
+    },
+  },
+]);
