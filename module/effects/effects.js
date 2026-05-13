@@ -45,8 +45,8 @@ export default class ActiveEffect4e extends ActiveEffect {
 		let html = "<div class=\"effect-tooltip\">";
 		html += `<div><label class="name">${this.name}</label> `;
 		if (this?.keywords?.string) html += `[${this.keywords.string}]</div>`;
-		if (this._source.name) html += `<div><label class="source">${game.i18n.localize("DND4E.Source")}: ${this._source.name}</label></div>`;
-		if (this.duration.label) html += `<div><label class="duration">${game.i18n.localize("DND4E.Duration")}: ${this.duration.label}</label></div>`;
+		if (this._source.name) html += `<div><label class="source">${_loc("DND4E.Source")}: ${this._source.name}</label></div>`;
+		if (this.duration.label) html += `<div><label class="duration">${_loc("DND4E.Duration")}: ${this.duration.label}</label></div>`;
 		if (this.description) html += `<div class="description">${this.description}</div>`;
 		html += "</div>";
 		return html;
@@ -161,7 +161,7 @@ export default class ActiveEffect4e extends ActiveEffect {
 		}
 
 		if (data.statuses?.length && data.description) {
-			updates.description = game.i18n.localize(data.description);
+			updates.description = _loc(data.description);
 		}
 
 		if (Object.keys(updates).length) {
@@ -202,7 +202,7 @@ export default class ActiveEffect4e extends ActiveEffect {
 		switch (target.dataset.activity) {
 			case "create":
 				return owner.createEmbeddedDocuments("ActiveEffect", [{
-					name: isActor ? game.i18n.localize("DND4E.EffectNew") : owner.name,
+					name: isActor ? _loc("DND4E.EffectNew") : owner.name,
 					img: isActor ? "icons/svg/aura.svg" : owner.img,
 					origin: owner.uuid,
 					system: { durationType: li.dataset.effectType === "temporary" ? "endOfUserTurn" : undefined },
@@ -272,10 +272,10 @@ export default class ActiveEffect4e extends ActiveEffect {
 	_getDurationLabel(rounds, turns) {
 		const durationType = this.system.durationType;
 		if (durationType) {
-			if (durationType === "endOfTargetTurn") return game.i18n.localize("DND4E.DurationEndOfTargetTurnSimp");
-			else if (durationType === "startOfTargetTurn") return game.i18n.localize("DND4E.DurationStartOfTargetTurnSimp");
+			if (durationType === "endOfTargetTurn") return _loc("DND4E.DurationEndOfTargetTurnSimp");
+			else if (durationType === "startOfTargetTurn") return _loc("DND4E.DurationStartOfTargetTurnSimp");
 
-			return game.i18n.localize(CONFIG.DND4E.durationType[durationType].label);
+			return _loc(CONFIG.DND4E.durationType[durationType].label);
 		}
 
 		return super._getDurationLabel(rounds, turns);
@@ -297,24 +297,24 @@ export default class ActiveEffect4e extends ActiveEffect {
 		const categories = {
 			temporary: {
 				type: "temporary",
-				label: game.i18n.localize("DND4E.EffectTemporary"),
+				label: _loc("DND4E.EffectTemporary"),
 				effects: [],
 			},
 			passive: {
 				type: "passive",
-				label: game.i18n.localize("DND4E.EffectPassive"),
+				label: _loc("DND4E.EffectPassive"),
 				effects: [],
 			},
 			inactive: {
 				type: "inactive",
-				label: game.i18n.localize("DND4E.EffectInactive"),
+				label: _loc("DND4E.EffectInactive"),
 				effects: [],
 			},
 			suppressed: {
 				type: "suppressed",
-				label: game.i18n.localize("DND4E.EffectUnavailable"),
+				label: _loc("DND4E.EffectUnavailable"),
 				effects: [],
-				info: [game.i18n.localize("DND4E.EffectUnavailableInfo")],
+				info: [_loc("DND4E.EffectUnavailableInfo")],
 			},
 		};
 

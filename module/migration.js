@@ -4,7 +4,7 @@
  */
 export const migrateWorld = async function() {
 	const version = game.system.version;
-	ui.notifications.info(game.i18n.format("MIGRATION.4eBegin", { version }), { permanent: true });
+	ui.notifications.info(_loc("MIGRATION.4eBegin", { version }), { permanent: true });
 
 	const migrationData = await getMigrationData();
 
@@ -78,7 +78,7 @@ export const migrateWorld = async function() {
 
 	// Set the migration as complete
 	game.settings.set("dnd4e", "systemMigrationVersion", game.system.version);
-	ui.notifications.info(game.i18n.format("MIGRATION.4eComplete", { version }), { permanent: true });
+	ui.notifications.info(_loc("MIGRATION.4eComplete", { version }), { permanent: true });
 
 };
 

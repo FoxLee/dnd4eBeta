@@ -202,17 +202,17 @@ Hooks.once("init", async function() {
 	foundry.documents.collections.Actors.unregisterSheet("core", foundry.appv1.sheets.ActorSheet);
 	foundry.documents.collections.Actors.registerSheet("dnd4e", ActorSheet4e, {
 		types: ["Player Character"],
-		label: game.i18n.localize("SHEET.Character.Basic"),
+		label: _loc("SHEET.Character.Basic"),
 		makeDefault: true,
 	});
 	foundry.documents.collections.Actors.registerSheet("dnd4e", ActorSheet4eNPC, {
 		types: ["NPC"],
-		label: game.i18n.localize("SHEET.NPC"),
+		label: _loc("SHEET.NPC"),
 		makeDefault: true,
 	});
 	foundry.documents.collections.Actors.registerSheet("dnd4e", ActorSheet4eHazard, {
 		types: ["Hazard"],
-		label: game.i18n.localize("SHEET.Hazard"),
+		label: _loc("SHEET.Hazard"),
 		makeDefault: true,
 	});
 
@@ -228,14 +228,14 @@ Hooks.once("init", async function() {
 	foundry.documents.collections.Items.unregisterSheet("core", foundry.appv1.sheets.ItemSheet);
 	foundry.documents.collections.Items.registerSheet("dnd4e", ItemSheet4e, {
 		makeDefault: true,
-		label: game.i18n.localize("SHEET.Item"),
+		label: _loc("SHEET.Item"),
 		types: ["weapon", "equipment", "consumable", "tool", "loot", "ritual", "power", "feature", "backpack"],
 
 	});
 	
 	// Items.registerSheet("dnd4e", ContainerItemSheet,{
 	// 	makeDefault: true,
-	// 	label: "Container Sheet",//game.i18n.localize("SHEET.Item"),
+	// 	label: "Container Sheet",//_loc("SHEET.Item"),
 	// 	types: ["backpack"]
 	// });
 
@@ -299,7 +299,7 @@ Hooks.once("ready", function() {
 	const cmv = game.system.flags.compatibleMigrationVersion || "0.2.85";
 	// Perform the migration
 	if (cv && foundry.utils.isNewerVersion(cmv, cv)) {
-		ui.notifications.error(game.i18n.localize("MIGRATION.4eVersionTooOldWarning"), { permanent: true });
+		ui.notifications.error(_loc("MIGRATION.4eVersionTooOldWarning"), { permanent: true });
 	}
 
 	migrations.migrateWorld();

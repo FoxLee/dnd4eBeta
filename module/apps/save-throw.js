@@ -30,7 +30,7 @@ export class SaveThrowDialog extends DocumentSheet4e {
 	};
 
 	get title() {
-		return `${this.document.name} - ${game.i18n.format("DND4E.SavingThrow")}`;
+		return `${this.document.name} - ${_loc("DND4E.SavingThrow")}`;
 	}
 
 	static PARTS = {
@@ -56,7 +56,7 @@ export class SaveThrowDialog extends DocumentSheet4e {
 			});
 		}
 		if (savableEffects.length) {
-			savableEffects = [{ name: game.i18n.format("DND4E.None"), id: "" }].concat(savableEffects);
+			savableEffects = [{ name: _loc("DND4E.None"), id: "" }].concat(savableEffects);
 		}
 		
 		let saveEffect = ((actor && saveOptions.effectSave) ? actor.effects.get(saveOptions.effectId) : null);

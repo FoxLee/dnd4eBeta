@@ -30,7 +30,7 @@ export default class RollDialog extends foundry.applications.api.HandlebarsAppli
 
 	currentTab = 0;
 	multiTargetToggle = 1;
-	multiTargetToggleString = game.i18n.localize("DND4E.RollMultiSharedChange");
+	multiTargetToggleString = _loc("DND4E.RollMultiSharedChange");
 	multiTargetToggleIcon = "<i class=\"fa-solid fa-users-rays\"></i>";
 
 	constructor({ dialogData, rollConfig, callbackFn, buttons, resolve, ...args }) {
@@ -117,13 +117,13 @@ export default class RollDialog extends foundry.applications.api.HandlebarsAppli
 		if (this.element.querySelector("#multibonus-toggle").value == "false") {
 			this.element.querySelector("#multibonus-toggle").value = "true";
 			this.multiTargetToggle = 1;
-			this.multiTargetToggleString = game.i18n.localize("DND4E.RollMultiSharedChange");
+			this.multiTargetToggleString = _loc("DND4E.RollMultiSharedChange");
 			this.multiTargetToggleIcon = "<i class=\"fa-solid fa-users-rays\"></i>";
 			this.#showTab(this.currentTab);
 		} else if (this.element.querySelector("#multibonus-toggle").value == "true") {
 			this.element.querySelector("#multibonus-toggle").value = "false";
 			this.multiTargetToggle = 0;
-			this.multiTargetToggleString = game.i18n.localize("DND4E.RollMultiIndividualChange");
+			this.multiTargetToggleString = _loc("DND4E.RollMultiIndividualChange");
 			this.multiTargetToggleIcon = "<i class=\"fa-solid fa-person-rays\"></i>";
 			this.currentTab = 0;
 			this.#showTab(this.currentTab);

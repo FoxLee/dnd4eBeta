@@ -21,7 +21,7 @@ export class LongRestDialog extends DocumentSheet4e {
 	};
 	
 	get title() {
-		return `${this.document.name} - ${game.i18n.localize("DND4E.LongRest")}`;
+		return `${this.document.name} - ${_loc("DND4E.LongRest")}`;
 	}
 
 	static PARTS = {

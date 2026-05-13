@@ -133,19 +133,19 @@ export const addChatMessageContextOptions = function(html, options) {
 	options.push(
 		// Token Selection Right-Click Options
 		{
-			name: game.i18n.localize("DND4E.SeleteAllTargets"),
+			name: _loc("DND4E.SeleteAllTargets"),
 			icon: "<i class=\"fa-regular fa-users\"></i>",
 			condition: isAttackRoll,
 			callback: li => selectTargetTokens(li, "all"),
 		},
 		{
-			name: game.i18n.localize("DND4E.SeleteHitTargets"),
+			name: _loc("DND4E.SeleteHitTargets"),
 			icon: "<i class=\"fa-solid fa-users\"></i>",
 			condition: isAttackRoll,
 			callback: li => selectTargetTokens(li, "hit"),
 		},
 		{
-			name: game.i18n.localize("DND4E.SeleteMissedTargets"),
+			name: _loc("DND4E.SeleteMissedTargets"),
 			icon: "<i class=\"fa-light fa-users\"></i>",
 			condition: isAttackRoll,
 			callback: li => selectTargetTokens(li, "miss"),
@@ -153,37 +153,37 @@ export const addChatMessageContextOptions = function(html, options) {
 
 		// Damage Right-Click Options
 		{
-			name: game.i18n.localize("DND4E.ChatContextDamage"),
+			name: _loc("DND4E.ChatContextDamage"),
 			icon: "<i class=\"fas fa-user-minus\"></i>",
 			condition: canApplyDamage,
 			callback: li => applyChatCardDamage(li, 1),
 		},
 		{
-			name: game.i18n.localize("DND4E.ChatContextHealing"),
+			name: _loc("DND4E.ChatContextHealing"),
 			icon: "<i class=\"fas fa-user-plus\"></i>",
 			condition: canApplyDamage,
 			callback: li => applyChatCardDamage(li, -1),
 		},
 		{
-			name: game.i18n.localize("DND4E.ChatContextTempHp"),
+			name: _loc("DND4E.ChatContextTempHp"),
 			icon: "<i class=\"fas fa-user-clock fa-fw\"></i>",
 			condition: canApplyDamage,
 			callback: li => applyChatCardTempHp(li),
 		},
 		{
-			name: game.i18n.localize("DND4E.ChatContextDoubleDamage"),
+			name: _loc("DND4E.ChatContextDoubleDamage"),
 			icon: "<i class=\"fas fa-user-injured\"></i>",
 			condition: canApplyDamage,
 			callback: li => applyChatCardDamage(li, 2),
 		},
 		{
-			name: game.i18n.localize("DND4E.ChatContextHalfDamage"),
+			name: _loc("DND4E.ChatContextHalfDamage"),
 			icon: "<i class=\"fas fa-user-shield\"></i>",
 			condition: canApplyDamage,
 			callback: li => applyChatCardDamage(li, 0.5),
 		},
 		{
-			name: game.i18n.localize("DND4E.ChatContextTrueDamage"),
+			name: _loc("DND4E.ChatContextTrueDamage"),
 			icon: "<i class=\"fa-light fa-user-shield\"></i>",
 			condition: canApplyDamage,
 			callback: li => applyChatCardDamage(li, 1, true),
@@ -193,7 +193,7 @@ export const addChatMessageContextOptions = function(html, options) {
 	// Apply Power Effects to Select Tokens
 	for (const [effectType, l] of Object.entries(game.dnd4e.config.powerEffectTypes)) {
 		options.push({
-			name: game.i18n.localize(`DND4E.ChatContextEffect${effectType}`),
+			name: _loc(`DND4E.ChatContextEffect${effectType}`),
 			icon: "<i class=\"fa-regular fas fa-bolt\"></i>",
 			condition: li => canApplyEffect(li, effectType),
 			callback: li => applyEffectToSelectTokens(li, effectType),
@@ -276,7 +276,7 @@ export const hoverTokenActorName = function(event) {
 export const clickRollMessageDamageButtons = function(event) {
 	event.preventDefault();
 	if (canvas.tokens.controlled.length < 1) {
-		ui.notifications.error(game.i18n.localize("DND4E.NeedTokenSelected"));
+		ui.notifications.error(_loc("DND4E.NeedTokenSelected"));
 	}
 
 	// Extract card data
@@ -485,7 +485,9 @@ export function _onClickDiceRoll(event) {
 /* -------------------------------------------- */
 
 Hooks.on("renderChatMessageHTML", (message, html) => {
-	//updateApplyEffectsTooltips(html);
+	const NO_VALUE = false;
+	const NO_OPTIONS = null;
+	updateApplyEffectsTooltips(NO_VALUE, NO_OPTIONS, html);
 
 	const spans = html.querySelectorAll("span.roll-expression");
 	spans.forEach(el => {
@@ -505,16 +507,15 @@ Hooks.on("renderChatMessageHTML", (message, html) => {
 });
 
 //Function for changing the tooltip of the apply effect button of power cards based on the applyEffectsToSelection functions
-export function updateApplyEffectsTooltips(html = {}) {
+export function updateApplyEffectsTooltips(value, options, html = {}) {
 
-	const settingValue = game.settings.get("dnd4e", "applyEffectsToSelection");
+	const settingValue = value == null ? game.settings.get("dnd4e", "applyEffectsToSelection") : value;
 	// True -> Selected
 	// False -> Targeted
 	const targetKey = settingValue ? "DND4E.EffectsApplyTokensSelected" : "DND4E.EffectsApplyTokensTargeted";
 
-	const localizedTarget = game.i18n.localize(targetKey);
-	const baseText = game.i18n.localize("DND4E.EffectsApplyTokens");
-	const finalTooltip = baseText.replace("{target}", localizedTarget);
+	const localizedTarget = _loc(targetKey);
+	const finalTooltip = _loc("DND4E.EffectsApplyTokens", { target: localizedTarget });
 
 	if (html) {
 		html.querySelectorAll("*[data-action=\"applyEffect\"]").forEach(el => el.setAttribute("data-tooltip", finalTooltip));

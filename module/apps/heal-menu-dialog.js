@@ -31,7 +31,7 @@ export class HealMenuDialog extends DocumentSheet4e {
 	};
 
 	get title() {
-		return `${this.document.name} - ${game.i18n.localize("DND4E.Healing")}`;
+		return `${this.document.name} - ${_loc("DND4E.Healing")}`;
 	}
 
 	static PARTS = {
@@ -66,23 +66,23 @@ export class HealMenuDialog extends DocumentSheet4e {
 
 	static #setButtonEnabledState(event, target) {
 		let hpButtonEnabled = true;
-		let hpButtonText = game.i18n.localize("DND4E.HealingMenuHealHP");
+		let hpButtonText = _loc("DND4E.HealingMenuHealHP");
 		let tempHPButtonEnabled = true;
-		let tempHPButtonText = game.i18n.localize("DND4E.HealingMenuGainTempHP");
+		let tempHPButtonText = _loc("DND4E.HealingMenuGainTempHP");
 		let evaluateFurtherHPButton = true;
 		if (document.getElementById("hpMax").value === "true") {
 			hpButtonEnabled = false;
-			hpButtonText = game.i18n.localize("DND4E.HealingMenuAtMaxHP");
+			hpButtonText = _loc("DND4E.HealingMenuAtMaxHP");
 			evaluateFurtherHPButton = false;
 		}
 
 		if (document.getElementById("spend-healing-surge").checked === true) {
 			if (document.getElementById("hasSurges").value === "false") {
 				tempHPButtonEnabled = false;
-				tempHPButtonText = game.i18n.localize("DND4E.HealingMenuOutOfSurges");
+				tempHPButtonText = _loc("DND4E.HealingMenuOutOfSurges");
 				if (evaluateFurtherHPButton) {
 					hpButtonEnabled = true;
-					hpButtonText = game.i18n.localize("DND4E.HealingMenuHealOneHP");
+					hpButtonText = _loc("DND4E.HealingMenuHealOneHP");
 				}
 			}
 		}
@@ -145,23 +145,23 @@ export class HealMenuDialog extends DocumentSheet4e {
 		let messageText = "";
 		if (healData["spend-healing-surge"] && this.document.system.details.surges.value) {
 			if (healType === "tempHP") {
-				messageText = game.i18n.format("DND4E.HealingResultSurgeTemp", { name: charName, temps: rollText });	
+				messageText = _loc("DND4E.HealingResultSurgeTemp", { name: charName, temps: rollText });	
 			} else {
-				messageText = game.i18n.format("DND4E.HealingResultSurge", { name: charName, healing: rollText });		
+				messageText = _loc("DND4E.HealingResultSurge", { name: charName, healing: rollText });		
 			}
 			updateData["system.details.surges.value"] = Math.max(this.document.system.details.surges.value - 1, 0);
 			await this.document.update(updateData);
 		} else {
 			if (healType === "tempHP") {
-				messageText = game.i18n.format("DND4E.HealingResultTemp", { name: charName, temps: rollText });
+				messageText = _loc("DND4E.HealingResultTemp", { name: charName, temps: rollText });
 			} else {
-				messageText = game.i18n.format("DND4E.HealingResult", { name: charName, healing: rollText });
+				messageText = _loc("DND4E.HealingResult", { name: charName, healing: rollText });
 			}			
 		}
 
 		ChatMessage.create({
 			user: game.user.id,
-			flavor: game.i18n.localize("DND4E.Healing"),
+			flavor: _loc("DND4E.Healing"),
 			speaker: { actor: this.object, alias: this.document.name },
 			content: messageText,
 		});

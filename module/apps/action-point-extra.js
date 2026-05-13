@@ -20,7 +20,7 @@ export class ActionPointExtraDialog extends DocumentSheet4e {
 	};
 	
 	get title() {
-		return `${this.document.name} - ${game.i18n.localize("DND4E.ActionPointRiders")}`;
+		return `${this.document.name} - ${_loc("DND4E.ActionPointRiders")}`;
 	}
 
 	static PARTS = {
@@ -38,7 +38,7 @@ export class ActionPointExtraDialog extends DocumentSheet4e {
 		foundry.utils.mergeObject(context, {
 			system: this.document.system,
 			buttons: [
-				{ type: "submit", icon: "fa-solid fa-save", label: `${game.i18n.localize("DND4E.Update")} ${game.i18n.localize("DND4E.ActionPointRiders")}` },
+				{ type: "submit", icon: "fa-solid fa-save", label: `${_loc("DND4E.Update")} ${_loc("DND4E.ActionPointRiders")}` },
 			],
 		});
 		return context;

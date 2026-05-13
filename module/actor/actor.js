@@ -261,7 +261,7 @@ export class Actor4e extends Actor {
 			for (let [id, abl] of Object.entries(system.abilities)) {
 				abl.mod = Math.floor((abl.value - 10) / 2);
 				abl.modHalf = abl.mod + Math.floor(system.details.level / 2);
-				abl.label = game.i18n.localize(DND4E.abilities[id]);
+				abl.label = _loc(DND4E.abilities[id]);
 			}
 
 			//AC mod check, check if light armour (or somthing else that add/negates adding mod)
@@ -557,7 +557,7 @@ export class Actor4e extends Actor {
 	_prepareDerivedDataGlobalValues(actorData, system) {
 		//Calculate global modifiers
 		for (let [id, mod] of Object.entries(system.modifiers)) {
-			mod.label = game.i18n.localize(DND4E.modifiers[id]);
+			mod.label = _loc(DND4E.modifiers[id]);
 			
 			let modifierBonusValue = 0;
 			if (!((mod.bonus.length === 1) && jQuery.isEmptyObject(mod.bonus[0]))) {
@@ -1134,7 +1134,7 @@ export class Actor4e extends Actor {
 			for (let [id, res] of Object.entries(system.resistances)) {
 				res.vuln = res?.vuln || 0;
 				res.res = res?.res || 0;
-				res.label = game.i18n.localize(DND4E.damageTypes[id]);
+				res.label = _loc(DND4E.damageTypes[id]);
 
 				if (isNaN(parseInt(res?.absolute))) { //All logic only required if there is no usable absolute value
 				
@@ -1170,17 +1170,17 @@ export class Actor4e extends Actor {
 					
 					for (let val of damageMods) {
 						if (val < 0) {
-							//console.debug(`${game.i18n.localize(DND4E.damageTypes[id])}: Checked new value ${val} against existing value ${res?.vuln}`);
+							//console.debug(`${_loc(DND4E.damageTypes[id])}: Checked new value ${val} against existing value ${res?.vuln}`);
 							res.vuln = Math.min(res.vuln, val);
 						} else if (val > 0) {
-							//console.debug(`${game.i18n.localize(DND4E.damageTypes[id])}: Checked new value ${val} against existing value ${res?.res}`);
+							//console.debug(`${_loc(DND4E.damageTypes[id])}: Checked new value ${val} against existing value ${res?.res}`);
 							res.res = Math.max(res.res, val);
 						}
 					}
 					
 					//Get the final modifier for this type of damage by combining res and vuln numbers. Also make sure that neither one can cross 0 on the number line.
 					res.value = Math.max(res.res, 0) + Math.min(res.vuln, 0);
-					//console.debug(`${game.i18n.localize(DND4E.damageTypes[id])}: final result of ${res.value} from res ${res.res} and vulnerability ${res.vuln}`);
+					//console.debug(`${_loc(DND4E.damageTypes[id])}: final result of ${res.value} from res ${res.res} and vulnerability ${res.vuln}`);
 				
 				} else {
 					res.value = res.absolute;
@@ -1219,11 +1219,11 @@ export class Actor4e extends Actor {
 			return;
 		}
 		const secondwindEffect = {
-			name: game.i18n.localize("DND4E.SecondWind"),
+			name: _loc("DND4E.SecondWind"),
 			img: "icons/magic/life/heart-glowing-red.webp",
 			origin: this.uuid,
 			disabled: false,
-			description: game.i18n.localize("DND4E.SecondWindEffect"),
+			description: _loc("DND4E.SecondWindEffect"),
 			system: {
 				changes: [
 					{ key: "system.modifiers.defences.untyped", mode: 2, value: 2 },
@@ -1806,7 +1806,7 @@ export class Actor4e extends Actor {
 		return d20Roll(foundry.utils.mergeObject(options, {
 			parts: parts,
 			data: data,
-			title: game.i18n.format("DND4E.SkillPromptTitle", { skill: CONFIG.DND4E.skills[skillId]?.label }),
+			title: _loc("DND4E.SkillPromptTitle", { skill: CONFIG.DND4E.skills[skillId]?.label }),
 			speaker: ChatMessage.getSpeaker({ actor: this }),
 			flavor: flavText,
 		}));
@@ -1834,10 +1834,10 @@ export class Actor4e extends Actor {
 		return d20Roll(foundry.utils.mergeObject(options, {
 			parts: parts,
 			data: data,
-			title: game.i18n.format("DND4E.AbilityPromptTitle", { ability: CONFIG.DND4E.abilities[label] }),
+			title: _loc("DND4E.AbilityPromptTitle", { ability: CONFIG.DND4E.abilities[label] }),
 			speaker: ChatMessage.getSpeaker({ actor: this }),
 			flavor: flavText,
-			// flavor: "Flowery Text Here. MORE AND MORE AND \r\n MORE S MORE " + game.i18n.format("DND4E.AbilityPromptTitle", {ability: CONFIG.DND4E.abilities[label]}),
+			// flavor: "Flowery Text Here. MORE AND MORE AND \r\n MORE S MORE " + _loc("DND4E.AbilityPromptTitle", {ability: CONFIG.DND4E.abilities[label]}),
 			// halflingLucky: feats.halflingLucky
 		}));
 	}
@@ -1865,7 +1865,7 @@ export class Actor4e extends Actor {
 		return d20Roll(foundry.utils.mergeObject(options, {
 			parts: parts,
 			data: data,
-			title: game.i18n.format("DND4E.DefencePromptTitle", { defences: CONFIG.DND4E.defensives[label].label }),
+			title: _loc("DND4E.DefencePromptTitle", { defences: CONFIG.DND4E.defensives[label].label }),
 			speaker: ChatMessage.getSpeaker({ actor: this }),
 			flavor: flavText,
 		}));		
@@ -1927,9 +1927,9 @@ export class Actor4e extends Actor {
 			parts: parts,
 			data: { init: init },
 			event,
-			title: game.i18n.localize("DND4E.InitiativeRoll"),
+			title: _loc("DND4E.InitiativeRoll"),
 			speaker: ChatMessage.getSpeaker({ actor: this }),
-			flavor: isReroll ? `${this.name} ${game.i18n.localize("DND4E.RollsInitReroll")}!` : `${this.name} ${game.i18n.localize("DND4E.RollsInit")}!`,
+			flavor: isReroll ? `${this.name} ${_loc("DND4E.RollsInitReroll")}!` : `${this.name} ${_loc("DND4E.RollsInit")}!`,
 			"options.flags.dnd4e.roll.type": "init",
 		});
 	
@@ -1941,13 +1941,13 @@ export class Actor4e extends Actor {
 	}
 
 	async rollSave(event, options) {
-		//let message = `${game.i18n.localize("DND4E.RollSave")} ${options.dc || 10}`;
+		//let message = `${_loc("DND4E.RollSave")} ${options.dc || 10}`;
 		
-		let message = `(${game.i18n.localize("DND4E.AbbreviationDC")} ${options.dc || 10})`;
+		let message = `(${_loc("DND4E.AbbreviationDC")} ${options.dc || 10})`;
 		if (options.effectSave) {
-			message = `${game.i18n.localize("DND4E.SaveVs")} <strong>${this.effects.get(options.effectId).name}</strong> ${message}`;
+			message = `${_loc("DND4E.SaveVs")} <strong>${this.effects.get(options.effectId).name}</strong> ${message}`;
 		} else {
-			message = `${game.i18n.localize("DND4E.RollSave")} ${message}`;
+			message = `${_loc("DND4E.RollSave")} ${message}`;
 		}
 
 		const parts = [];
@@ -2002,7 +2002,7 @@ export class Actor4e extends Actor {
 			actor: this,
 			data: {},
 			title: "",
-			flavor: game.i18n.localize("DND4E.RollDeathSave"),
+			flavor: _loc("DND4E.RollDeathSave"),
 			speaker: ChatMessage.getSpeaker({ actor: this }),
 			messageData: { "flags.dnd4e.roll": { type: "save", itemId: this.id } },
 			fastForward: true,
@@ -2022,16 +2022,16 @@ export class Actor4e extends Actor {
 			await ChatMessage.create({
 				user: game.user.id,
 				speaker: ChatMessage.getSpeaker(),
-				flavor: game.i18n.localize("DND4E.DeathSave"),
-				content: game.i18n.format("DND4E.DeathSaveFailure", { name: this.name }),
+				flavor: _loc("DND4E.DeathSave"),
+				content: _loc("DND4E.DeathSaveFailure", { name: this.name }),
 			});
 		}
 		else if (roll.total >= rollConfig.critical) {
 			await ChatMessage.create({
 				user: game.user.id,
 				speaker: ChatMessage.getSpeaker(),
-				flavor: game.i18n.localize("DND4E.DeathSave"),
-				content: game.i18n.format("DND4E.DeathSaveCriticalSuccess", { name: this.name }),
+				flavor: _loc("DND4E.DeathSave"),
+				content: _loc("DND4E.DeathSaveCriticalSuccess", { name: this.name }),
 			});
 		}
 		Helper.debugLog(roll.total);
@@ -2059,7 +2059,7 @@ export class Actor4e extends Actor {
 						await r.roll();
 
 					} catch (error) {
-						ui.notifications.error(game.i18n.localize("DND4E.InvalidHealingBonus"));
+						ui.notifications.error(_loc("DND4E.InvalidHealingBonus"));
 						r = new Roll("0");
 						// await r.roll({async : true});
 						await r.roll();
@@ -2100,8 +2100,8 @@ export class Actor4e extends Actor {
 			ChatMessage.create({
 				user: game.user.id,
 				speaker: { actor: this, alias: this.name },
-				flavor: game.i18n.localize("DND4E.ShortRest"),
-				content: options.surge >= 1 ? game.i18n.format("DND4E.ShortRestResult", { name: this.name, surges: options.surge, healing: updateData["system.attributes.hp.value"] - Math.max(0, this.system.attributes.hp.value) }) : game.i18n.format("DND4E.ShortRestChat", { name: this.name }),				
+				flavor: _loc("DND4E.ShortRest"),
+				content: options.surge >= 1 ? _loc("DND4E.ShortRestResult", { name: this.name, surges: options.surge, healing: updateData["system.attributes.hp.value"] - Math.max(0, this.system.attributes.hp.value) }) : _loc("DND4E.ShortRestChat", { name: this.name }),				
 			});
 			
 			if (!game.settings.get("dnd4e", "deathSaveRest")) {
@@ -2169,8 +2169,8 @@ export class Actor4e extends Actor {
 			ChatMessage.create({
 				user: game.user.id,
 				speaker: { actor: this, alias: this.system.name },
-				flavor: game.i18n.localize("DND4E.LongRest"),
-				content: game.i18n.format("DND4E.LongRestResult", { name: this.name }),
+				flavor: _loc("DND4E.LongRest"),
+				content: _loc("DND4E.LongRestResult", { name: this.name }),
 			});
 		
 			for (let r of Object.entries(this.system.resources)) {
@@ -2225,10 +2225,10 @@ export class Actor4e extends Actor {
 		ChatMessage.create({
 			user: game.user.id,
 			speaker: { actor: this, alias: this.name },
-			flavor: game.i18n.localize("DND4E.SecondWind"),
-			content: `${game.i18n.format("DND4E.SecondWindChat", { name: this.name, number: hpGain })}
+			flavor: _loc("DND4E.SecondWind"),
+			content: `${_loc("DND4E.SecondWindChat", { name: this.name, number: hpGain })}
 			<ul>
-				<li>${game.i18n.localize("DND4E.SecondWindEffect")}</li>
+				<li>${_loc("DND4E.SecondWindEffect")}</li>
 				${extra}
 			</ul>`,
 		});		
@@ -2264,9 +2264,9 @@ export class Actor4e extends Actor {
 				user: game.user.id,
 				speaker: { actor: this, alias: this.name },
 				// flavor: restFlavor,
-				content: `${this.name} ${game.i18n.localize("DND4E.ActionPointUseChat")}:
+				content: `${this.name} ${_loc("DND4E.ActionPointUseChat")}:
 				<ul>
-					<li>${game.i18n.localize("DND4E.ActionPointEffect")}</li>
+					<li>${_loc("DND4E.ActionPointEffect")}</li>
 					${extra}
 				</ul>`,
 			});
@@ -2326,7 +2326,7 @@ export class Actor4e extends Actor {
 		// Update Item data
 		if (limitedUses && consumeUse) {
 			const uses = parseInt(itemData.uses.value || 0);
-			if (uses <= 0) ui.notifications.warn(game.i18n.format("DND4E.ItemNoUses", { name: item.name }));
+			if (uses <= 0) ui.notifications.warn(_loc("DND4E.ItemNoUses", { name: item.name }));
 			
 			await item.update({ "system.uses.value": Math.max(parseInt(item.system.uses.value || 0) - 1, 0) });
 			// item.update({"system.uses.value": Math.max(parseInt(item.system.uses.value || 0) - 1, 0)})
@@ -2597,11 +2597,11 @@ export class Actor4e extends Actor {
 		// Healing Surge related checks
 		if (surges.surgeAmount) {
 			if (this.system.details.surges.value < surges.surgeAmount) { //check to see if enough surges left to use tihs source
-				ui.notifications.error(game.i18n.localize("DND4E.HealingSurgeWarning"));
+				ui.notifications.error(_loc("DND4E.HealingSurgeWarning"));
 				return;
 			}
 			else if (this.system.attributes.hp.value >= this.system.attributes.hp.max) { //check to see if the character is already at max HP
-				ui.notifications.error(game.i18n.localize("DND4E.HealingOverWarning"));
+				ui.notifications.error(_loc("DND4E.HealingOverWarning"));
 				return;
 			}
 			// amount+= this.system.details.surgeValue*surges.surgeAmount*multiplier; //No longer counts to healing
@@ -2869,7 +2869,7 @@ export class Actor4e extends Actor {
 						user: Helper.firstOwner(this),
 						speaker: { actor: this, alias: this.isToken ? this.token.name : this.name },
 						content: html,
-						flavor: `${dot.type == "healing" ? game.i18n.localize ("EFFECT.statusRegen") : game.i18n.localize ("DND4E.OngoingDamage")}: ${dot.effectName}`,
+						flavor: `${dot.type == "healing" ? _loc ("EFFECT.statusRegen") : _loc ("DND4E.OngoingDamage")}: ${dot.effectName}`,
 						whisper: chatRecipients,
 						//messageMode: "gm",
 						/*rolls: [{

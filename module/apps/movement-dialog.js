@@ -25,7 +25,7 @@ export class MovementDialog extends DocumentSheet4e {
 	};
 
 	get title() {
-		return `${this.document.name} - ${game.i18n.localize("DND4E.SpeedAndMove")}`;
+		return `${this.document.name} - ${_loc("DND4E.SpeedAndMove")}`;
 	}
 
 	static PARTS = {
@@ -63,7 +63,7 @@ export class MovementDialog extends DocumentSheet4e {
 		console.debug(target.parentElement.dataset);
 		console.debug(target.parentElement);
 		console.debug(this.document.system.movement[moveName]);
-		const options = { document: this.document, target: targetString, label: `${game.i18n.format("DND4E.MovementBonus", { mode: moveName })}` };
+		const options = { document: this.document, target: targetString, label: `${_loc("DND4E.MovementBonus", { mode: moveName })}` };
 		new AttributeBonusDialog(options).render(true);
 	}
 }

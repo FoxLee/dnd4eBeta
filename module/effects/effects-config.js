@@ -280,14 +280,14 @@ export default class ActiveEffectConfig4e extends foundry.applications.sheets.Ac
 			let effectUpdates = {};
 			
 			if ((scope == "copyName") || (scope == "copyAll")) {
-				effectUpdates.name = game.i18n.localize(statuses[statusIndex].name);
+				effectUpdates.name = _loc(statuses[statusIndex].name);
 			}
 			if ((scope == "copyIcon") || (scope == "copyAll")) {
 				effectUpdates.img = statuses[statusIndex].img;
 				Helper.debugLog(effectUpdates);
 			}
 			if ((scope == "copyDesc") || (scope == "copyAll")) {
-				effectUpdates.description = game.i18n.localize(statuses[statusIndex].description);
+				effectUpdates.description = _loc(statuses[statusIndex].description);
 			}
 			if ((scope == "copyMods") || (scope == "copyAll")) {
 				effectUpdates.changes = statuses[statusIndex].changes;
@@ -303,7 +303,7 @@ export default class ActiveEffectConfig4e extends foundry.applications.sheets.Ac
 			return this.submit({ preventClose: true, updateData: effectUpdates });
 			
 		} catch(err) {
-			ui.notifications.error(game.i18n.localize("ERROR.4eCopyStatusDetails"));
+			ui.notifications.error(_loc("ERROR.4eCopyStatusDetails"));
 			Helper.debugLog(err);
 		}
 	}

@@ -304,13 +304,13 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 				context.isArmour = true;
 				context.hasEnhance = true;
 				context.hasBaseProps = true;
-				context.armourBaseTypes = CONFIG.DND4E[itemData.system.armour.subtype] ? { ...CONFIG.DND4E[itemData.system.armour.subtype], ...{ custom: game.i18n.localize("DND4E.Custom") } } : { "": game.i18n.localize("DND4E.None") };
+				context.armourBaseTypes = CONFIG.DND4E[itemData.system.armour.subtype] ? { ...CONFIG.DND4E[itemData.system.armour.subtype], ...{ custom: _loc("DND4E.Custom") } } : { "": _loc("DND4E.None") };
 				context.isArmourBaseTypeCustom = (itemData.system.armourBaseType === "custom");
 			}
 			else if ((itemData.system.armour.type === "arms") && CONFIG.DND4E.profArmor[itemData.system.armour.subtype]) {
 				context.isShield = true;
 				context.hasBaseProps = true;
-				context.shieldBaseTypes = { ...CONFIG.DND4E.shield, ...{ custom: game.i18n.localize("DND4E.Custom") } };
+				context.shieldBaseTypes = { ...CONFIG.DND4E.shield, ...{ custom: _loc("DND4E.Custom") } };
 				context.isShieldBaseTypeCustom = (itemData.system.shieldBaseType === "custom");
 			}
 			else if (itemData.system.armour.type === "neck") {
@@ -370,21 +370,21 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 			
 			//Setup range and area keys
 			let autoKeys = {};
-			if (["melee", "touch", "reach"].includes(itemData.system.rangeType)) autoKeys.melee = { label: game.i18n.localize("DND4E.Melee") };
-			if (["range"].includes(itemData.system.rangeType)) autoKeys.ranged = { label: game.i18n.localize("DND4E.rangeRanged") };
-			if (["rangeBurst", "rangeBlast", "wall"].includes(itemData.system.rangeType)) autoKeys.area = { label: game.i18n.localize("DND4E.rangeArea") };
-			if (["closeBurst", "closeBlast"].includes(itemData.system.rangeType)) autoKeys.close = { label: game.i18n.localize("DND4E.rangeClose") };
-			if (["closeBurst", "rangeBurst"].includes(itemData.system.rangeType)) autoKeys.burst = { label: game.i18n.localize("DND4E.rangeJustBurst") };
-			if (["closeBlast", "rangeBlast"].includes(itemData.system.rangeType)) autoKeys.blast = { label: game.i18n.localize("DND4E.rangeJustBlast") };
+			if (["melee", "touch", "reach"].includes(itemData.system.rangeType)) autoKeys.melee = { label: _loc("DND4E.Melee") };
+			if (["range"].includes(itemData.system.rangeType)) autoKeys.ranged = { label: _loc("DND4E.rangeRanged") };
+			if (["rangeBurst", "rangeBlast", "wall"].includes(itemData.system.rangeType)) autoKeys.area = { label: _loc("DND4E.rangeArea") };
+			if (["closeBurst", "closeBlast"].includes(itemData.system.rangeType)) autoKeys.close = { label: _loc("DND4E.rangeClose") };
+			if (["closeBurst", "rangeBurst"].includes(itemData.system.rangeType)) autoKeys.burst = { label: _loc("DND4E.rangeJustBurst") };
+			if (["closeBlast", "rangeBlast"].includes(itemData.system.rangeType)) autoKeys.blast = { label: _loc("DND4E.rangeJustBlast") };
 			itemData.system.autoKeys = autoKeys;
 			if (itemData.system.rangeType == "weapon") {
-				if (itemData.system.weaponType == "melee") autoKeys.melee = { label: game.i18n.localize("DND4E.Melee") };
-				else if (itemData.system.weaponType == "ranged") autoKeys.ranged = { label: game.i18n.localize("DND4E.rangeRanged") };
+				if (itemData.system.weaponType == "melee") autoKeys.melee = { label: _loc("DND4E.Melee") };
+				else if (itemData.system.weaponType == "ranged") autoKeys.ranged = { label: _loc("DND4E.rangeRanged") };
 				else {
 					const weaponUse = (context.document?.parent ? Helper.getWeaponUse(itemData.system, context.document.parent) : null);
 					if (weaponUse != null) {
-						if (weaponUse.system.isRanged) autoKeys.ranged = { label: game.i18n.localize("DND4E.rangeRanged") };
-						else autoKeys.melee = { label: game.i18n.localize("DND4E.Melee") };
+						if (weaponUse.system.isRanged) autoKeys.ranged = { label: _loc("DND4E.rangeRanged") };
+						else autoKeys.melee = { label: _loc("DND4E.Melee") };
 					}
 				}
 			}
@@ -505,7 +505,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 		for (const [key, value] of Object.entries(CONFIG.DND4E.powerEffectTypes)) {
 			categories[key] = {
 				type: key,
-				label: game.i18n.localize(value),
+				label: _loc(value),
 				effects: [],
 			};
 		}
@@ -536,7 +536,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 			case "createPowerEffect":
 				Helper.debugLog(this);
 				this.item.createEmbeddedDocuments("ActiveEffect", [{
-					name: game.i18n.localize("DND4E.EffectNew"),
+					name: _loc("DND4E.EffectNew"),
 					img: this.item.img || "icons/svg/aura.svg",
 					origin: this.item.uuid,
 					system: { durationType: li.dataset.effectType === "temporary" ? "endOfUserTurn" : undefined, powerEffectType: li.dataset.effectType },
@@ -577,9 +577,9 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 		if (game.settings.get("dnd4e", "itemDeleteConfirmation")) {
 			return foundry.applications.api.Dialog.confirm({
 				window: {
-					title: game.i18n.format("DND4E.DeleteConfirmTitle", { name: item.name }),
+					title: _loc("DND4E.DeleteConfirmTitle", { name: item.name }),
 				},
-				content: game.i18n.format("DND4E.DeleteConfirmContent", { name: item.name }),
+				content: _loc("DND4E.DeleteConfirmContent", { name: item.name }),
 				yes: {
 					default: true,
 					callback: () => { return item.delete(); },
@@ -610,8 +610,8 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 		if (!this.item.actor.isOwner) return;
 		event.preventDefault();
 		let shouldConvert = await foundry.applications.api.Dialog.confirm({
-			window: { title: `${game.i18n.localize("DND4E.CurrencyConvert")}` },
-			content: `<p>${game.i18n.localize("DND4E.CurrencyConvertHint")}</p>`,
+			window: { title: `${_loc("DND4E.CurrencyConvert")}` },
+			content: `<p>${_loc("DND4E.CurrencyConvertHint")}</p>`,
 		});
 		if (shouldConvert) return this.convertCurrency();
 	}
@@ -738,7 +738,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 			console.debug(attributes);
 			
 			if(consume.type === "resource"){
-				return {"": game.i18n.localize("DND4E.None"), ...attributes.bar.concat(attributes.value).reduce((obj, a) => {
+				return {"": _loc("DND4E.None"), ...attributes.bar.concat(attributes.value).reduce((obj, a) => {
 					let k = a.join(".");
 					if(k.startsWith("resources") && k.endsWith("value")){
 						obj[k] = a[1];
@@ -748,7 +748,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 			}
 			
 			if(consume.type === "currency"){
-				return {"": game.i18n.localize("DND4E.None"), ...attributes.bar.concat(attributes.value).reduce((obj, a) => {
+				return {"": _loc("DND4E.None"), ...attributes.bar.concat(attributes.value).reduce((obj, a) => {
 					console.debug(a);
 					let k = a.join(".");
 					if(k.startsWith("currency")){
@@ -758,7 +758,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 				}, {})};
 			}
 			
-			return {"": game.i18n.localize("DND4E.None"), ...attributes.bar.concat(attributes.value).reduce((obj, a) => {
+			return {"": _loc("DND4E.None"), ...attributes.bar.concat(attributes.value).reduce((obj, a) => {
 				let k = a.join(".");
 				obj[k] = k;
 				return obj;
@@ -770,9 +770,9 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 			
 			if (consume.type === "resource") {
 				const resourceLabels = {
-					primary: (actor ? actor.system.resources.primary.label : game.i18n.localize("DND4E.ResourcePrimary")),
-					secondary: (actor ? actor.system.resources.secondary.label : game.i18n.localize("DND4E.ResourceSecondary")),
-					tertiary: (actor ? actor.system.resources.tertiary.label : game.i18n.localize("DND4E.ResourceTertiary")),
+					primary: (actor ? actor.system.resources.primary.label : _loc("DND4E.ResourcePrimary")),
+					secondary: (actor ? actor.system.resources.secondary.label : _loc("DND4E.ResourceSecondary")),
+					tertiary: (actor ? actor.system.resources.tertiary.label : _loc("DND4E.ResourceTertiary")),
 				};
 				//console.debug(resourceLabels);
 				const resourceKeys = Object.keys(foundry.utils.flattenObject(attributes.resources)).reduce((obj, a) => {
@@ -783,7 +783,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 					return obj;
 				}, {});
 				//console.debug(resourceKeys);
-				return { "": game.i18n.localize("DND4E.None"), ...resourceKeys };
+				return { "": _loc("DND4E.None"), ...resourceKeys };
 			}
 			
 			if (consume.type === "currency") {
@@ -791,7 +791,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 					obj[`system.currency.${a}`] = CONFIG.DND4E.currencies[a];
 					return obj;
 				}, {});
-				return { "": game.i18n.localize("DND4E.None"), ...currencyKeys };
+				return { "": _loc("DND4E.None"), ...currencyKeys };
 			}
 			
 			if (consume.type === "ritualcomp") {
@@ -799,7 +799,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 					obj[`system.ritualcomp.${a}`] = CONFIG.DND4E.ritualComponents[a];
 					return obj;
 				}, {});
-				return { "": game.i18n.localize("DND4E.None"), ...ritualcompKeys };
+				return { "": _loc("DND4E.None"), ...ritualcompKeys };
 			}
 			
 			const attributeKeys = Object.keys(foundry.utils.flattenObject(attributes)).reduce((obj, a) => {
@@ -807,7 +807,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 				return obj;
 			}, {});
 			
-			return { "": game.i18n.localize("DND4E.None"), ...attributeKeys };
+			return { "": _loc("DND4E.None"), ...attributeKeys };
 			/*}*/
 		}
 
@@ -816,7 +816,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 
 		// Ammunition
 		else if (consume.type === "ammo") {
-			return { "": game.i18n.localize("DND4E.None"), ...actor.itemTypes.consumable.reduce((ammo, i) => {
+			return { "": _loc("DND4E.None"), ...actor.itemTypes.consumable.reduce((ammo, i) => {
 				if (i.system.consumableType === "ammo") {
 					ammo[i.id] = `${i.name} (${i.system.quantity})`;
 				}
@@ -826,7 +826,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 
 		// Materials
 		else if (consume.type === "material") {
-			return { "": game.i18n.localize("DND4E.None"), ...actor.items.reduce((obj, i) => {
+			return { "": _loc("DND4E.None"), ...actor.items.reduce((obj, i) => {
 				if (["consumable", "loot"].includes(i.system.type)) {
 					obj[i.id] = `${i.name} (${i.system.quantity})`;
 				}
@@ -836,12 +836,12 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 
 		// Charges
 		else if (consume.type === "charges") {
-			return { "": game.i18n.localize("DND4E.None"), ...actor.items.reduce((obj, i) => {
+			return { "": _loc("DND4E.None"), ...actor.items.reduce((obj, i) => {
 				const uses = i.system.uses || {};
 				if (uses.per && uses.max) {
 					const label = uses.per === "charges" ?
-						` (${game.i18n.format("DND4E.AbilityUseChargesLabel", { value: uses.value })})` :
-						` (${game.i18n.format("DND4E.AbilityUseConsumableLabel", { max: uses.max, per: uses.per })})`;
+						` (${_loc("DND4E.AbilityUseChargesLabel", { value: uses.value })})` :
+						` (${_loc("DND4E.AbilityUseConsumableLabel", { max: uses.max, per: uses.per })})`;
 					obj[i.id] = i.name + label;
 				}
 				return obj;
@@ -923,7 +923,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 	 */
 	_getItemStatus(item) {
 		if (["weapon", "equipment"].includes(item.type)) {
-			return game.i18n.localize(item.system.equipped ? "DND4E.Equipped" : "DND4E.Unequipped");
+			return _loc(item.system.equipped ? "DND4E.Equipped" : "DND4E.Unequipped");
 		}
 		else {
 			return null;
@@ -947,7 +947,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 			const shortType = item.system.weaponType.substring(0, 3) || "";
 			
 			if (item.system.enhance != 0) {				
-				props.push(`<li class="enhancement">${game.i18n.localize("DND4E.Enhancement")}\n +${item.system.enhance}&nbsp;${game.i18n.localize("DND4E.RollsAtkDmg")}</li>`);
+				props.push(`<li class="enhancement">${_loc("DND4E.Enhancement")}\n +${item.system.enhance}&nbsp;${_loc("DND4E.RollsAtkDmg")}</li>`);
 			}
 
 			props.push(...Object.entries(item.system.properties)
@@ -977,7 +977,7 @@ export default class ItemSheet4e extends foundry.applications.api.HandlebarsAppl
 			);
 
 			if (item.system.isRanged)
-				props.push(`<li class="range">${game.i18n.localize("DND4E.Range")}: ${item.system.range.value} / ${item.system.range.long}</li>`);
+				props.push(`<li class="range">${_loc("DND4E.Range")}: ${item.system.range.value} / ${item.system.range.long}</li>`);
 
 		}
 
