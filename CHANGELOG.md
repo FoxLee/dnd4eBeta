@@ -1,5 +1,8 @@
 # Changelog
 
+## Version 0.7.14
+- Fixed a bug where damage could prevent turn passing (SagaTympana)
+
 ## Version 0.7.13
 - Fixed a bug where damage resistance worked incorrectly agianst ongoing damage (SagaTympana)
 - Fixed a bug where some roll expressions failed to display in chat cards (SagaTympana)
