@@ -1526,15 +1526,12 @@
 	"Other": "Other",
 	
 	"Elite": "Elite",
-	"Companion": "Companion",
 	"Minion": "Minion",
 	"Solo": "Solo",
 	"Standard": "Standard",
 	
 	"Artillery": "Artillery",
 	"Brute": "Brute",
-	"Controller": "Controller",
-	"Leader": "Leader",
 	"Lurker": "Lurker",
 	"Skirmisher": "Skirmisher",
 	"Soldier": "Soldier",
@@ -1558,7 +1555,6 @@
 	
 	"Blaster": "Blaster",
 	"Hazard": "Hazard",
-	"Lurker":"Lurker",
 	"Obstacle": "Obstacle",
 	"Trap": "Trap",
 	"Warder": "Warder"

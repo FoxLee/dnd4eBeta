@@ -2,14 +2,14 @@ export class Helper {
 
 	static async executeMacro(item) {
 		const macro = new Macro ({
-			name : item.name,
-			type : item.system.macro.type,
-			scope : item.system.macro.scope,
-			command : item.system.macro.command, //cmd,
-			author : game.user.id
-		})
-		macro.item = item
-		macro.actor = item.actor
+			name: item.name,
+			type: item.system.macro.type,
+			scope: item.system.macro.scope,
+			command: item.system.macro.command, //cmd,
+			author: game.user.id,
+		});
+		macro.item = item;
+		macro.actor = item.actor;
 		macro.launch = item.system.macro.launchOrder;
 		return macro.execute();
 	}
@@ -20,7 +20,7 @@ export class Helper {
 	 * @returns {boolean} if the object is defined (non null) and is not the empty string.
 	 */
 	static isNonEmpty(str) {
-		return str && str !== ""
+		return str && (str !== "");
 	}
 
 	/* -------------------------------------------- */
@@ -30,9 +30,9 @@ export class Helper {
 	* o is the root objet, defaulting to this.object.data
 	*/
 	static byString(s, o) {
-		s = s.replace(/\[(\w+)\]/g, '.$1'); // convert indexes to properties
-		s = s.replace(/^\./, '');					 // strip a leading dot
-		var a = s.split('.');
+		s = s.replace(/\[(\w+)\]/g, ".$1"); // convert indexes to properties
+		s = s.replace(/^\./, ""); // strip a leading dot
+		var a = s.split(".");
 		for (var i = 0, n = a.length; i < n; ++i) {
 			var k = a[i];
 			if (k in o) {
@@ -50,7 +50,7 @@ export class Helper {
 	 * @return {string} "({str})"
 	 */
 	static bracketed (str) {
-		return `(${str})`
+		return `(${str})`;
 	}
 
 	/**
@@ -61,60 +61,60 @@ export class Helper {
 	 * @returns {Item4e|null} The weapon details or null if either no suitable weapon is found or itemData.weaponUse is set to none.
 	 */
 	static getWeaponUse(itemData, actor) {
-		if(itemData.weaponUse === "none" || (itemData.weaponType === "none" && actor.itemTypes.weapon.length === 0)) return null;
-		let weaponUse = itemData.weaponUse? actor.items.get(itemData.weaponUse) : null;
+		if ((itemData.weaponUse === "none") || ((itemData.weaponType === "none") && (actor.itemTypes.weapon.length === 0))) return null;
+		let weaponUse = itemData.weaponUse ? actor.items.get(itemData.weaponUse) : null;
 		//If default weapon is in use, find a sutable weapon
-		if(itemData.weaponUse === "default" || itemData.weaponUse === "defaultOH") {
+		if ((itemData.weaponUse === "default") || (itemData.weaponUse === "defaultOH")) {
 			let setMelee = ["melee", "simpleM", "militaryM", "superiorM", "improvM", "naturalM", "siegeM"];
 			let setRanged = ["ranged", "simpleR", "militaryR", "superiorR", "improvR", "naturalR", "siegeR"];
 			return actor.itemTypes.weapon.sort(i => i.system.weaponHand === "hOff" ? 1 : -1).find((i) =>	{ // Flush off-hand to the end
-				if(i.system.equipped) {
+				if (i.system.equipped) {
 
-					if(itemData.weaponType === "any") {
+					if (itemData.weaponType === "any") {
 						return i;
 					}
 					
-					if(itemData.weaponType === "meleeRanged") {
-						if(setMelee.includes(i.system.weaponType) || setRanged.includes(i.system.weaponType) )
-							if(itemData.weaponUse === "defaultOH" && (i.system.weaponHand === "hOff"))
+					if (itemData.weaponType === "meleeRanged") {
+						if (setMelee.includes(i.system.weaponType) || setRanged.includes(i.system.weaponType))
+							if ((itemData.weaponUse === "defaultOH") && (i.system.weaponHand === "hOff"))
 								return i;
-							else if(itemData.weaponUse === "default")
-								return i;
-					}
-					else if(itemData.weaponType === "melee") {
-						if(setMelee.includes(i.system.weaponType) )
-							if(itemData.weaponUse === "defaultOH" && (i.system.weaponHand === "hOff"))
-								return i;
-							else if(itemData.weaponUse === "default") 
+							else if (itemData.weaponUse === "default")
 								return i;
 					}
-					else if(itemData.weaponType === "ranged") {
-						if(setRanged.includes(i.system.weaponType) || i.system.properties.tlg || i.system.properties.thv )
-							if(itemData.weaponUse === "defaultOH" && (i.system.weaponHand === "hOff"))
+					else if (itemData.weaponType === "melee") {
+						if (setMelee.includes(i.system.weaponType))
+							if ((itemData.weaponUse === "defaultOH") && (i.system.weaponHand === "hOff"))
 								return i;
-							else if(itemData.weaponUse === "default")
+							else if (itemData.weaponUse === "default") 
 								return i;
 					}
-					else if(itemData.weaponType === "implement") {
-						if(i.system.properties.imp || i.system.properties.impA || i.system.properties.impD )
-							if(itemData.weaponUse === "defaultOH" && (i.system.weaponHand === "hOff"))
+					else if (itemData.weaponType === "ranged") {
+						if (setRanged.includes(i.system.weaponType) || i.system.properties.tlg || i.system.properties.thv)
+							if ((itemData.weaponUse === "defaultOH") && (i.system.weaponHand === "hOff"))
 								return i;
-							else if(itemData.weaponUse === "default")
+							else if (itemData.weaponUse === "default")
+								return i;
+					}
+					else if (itemData.weaponType === "implement") {
+						if (i.system.properties.imp || i.system.properties.impA || i.system.properties.impD)
+							if ((itemData.weaponUse === "defaultOH") && (i.system.weaponHand === "hOff"))
+								return i;
+							else if (itemData.weaponUse === "default")
 								return i;
 					}
 					// else if(itemData.weaponType === "implementA") {
-						// if(i.system.properties.imp || i.system.properties.impA )
-							// if(itemData.weaponUse === "defaultOH" && (i.system.weaponHand === "hOff"))
-								// return i;
-							// else if(itemData.weaponUse === "default")
-								// return i;
+					// if(i.system.properties.imp || i.system.properties.impA )
+					// if(itemData.weaponUse === "defaultOH" && (i.system.weaponHand === "hOff"))
+					// return i;
+					// else if(itemData.weaponUse === "default")
+					// return i;
 					// }
 					// else if(itemData.weaponType === "implementD") {
-						// if(i.system.properties.imp || i.system.properties.impD )
-							// if(itemData.weaponUse === "defaultOH" && (i.system.weaponHand === "hOff"))
-								// return i;
-							// else if(itemData.weaponUse === "default")
-								// return i;
+					// if(i.system.properties.imp || i.system.properties.impD )
+					// if(itemData.weaponUse === "defaultOH" && (i.system.weaponHand === "hOff"))
+					// return i;
+					// else if(itemData.weaponUse === "default")
+					// return i;
 					// }
 				}
 			}, {});
@@ -130,56 +130,56 @@ export class Helper {
 	 */
 	static lacksRequiredWeaponEquipped(itemData, weaponUse) {
 		// a power needs a weapon equipped to roll attack if a weapon type has been specified that is not None or Implement And weaponUse is not none.
-		const powerNeedsAWeapon = itemData.weaponType && !["none", "implement", "any"].includes(itemData.weaponType) && itemData.weaponUse !== "none"
-		return !weaponUse && powerNeedsAWeapon
+		const powerNeedsAWeapon = itemData.weaponType && !["none", "implement", "any"].includes(itemData.weaponType) && (itemData.weaponUse !== "none");
+		return !weaponUse && powerNeedsAWeapon;
 	}
 
 	static get variableRegex() {
-		return new RegExp(/@([a-z.0-9_\-]+)/gi);
+		return new RegExp(/@([a-z.0-9_-]+)/gi);
 	}
 
 	static async applyEffects(arrayOfParts, rollData, actorData, powerData, weaponData = null, effectType, extraDamage = []) {
-		const debug = game.settings.get("dnd4e", "debugEffectBonus") ? `D&D4e |` : ""
+		const debug = game.settings.get("dnd4e", "debugEffectBonus") ? "D&D4e |" : "";
 		if (actorData.effects) {
-			const powerInnerData = powerData.system
-			const weaponInnerData = weaponData?.system
-			let enhValue = weaponInnerData?.enhance||0;
+			const powerInnerData = powerData.system;
+			const weaponInnerData = weaponData?.system;
+			let enhValue = weaponInnerData?.enhance || 0;
 			if (debug) {
-				console.log(`${debug} Debugging ${effectType} effects for ${powerData.name}.	Supplied Weapon: ${weaponData?.name}`)
+				console.log(`${debug} Debugging ${effectType} effects for ${powerData.name}.	Supplied Weapon: ${weaponData?.name}`);
 			}
 			
 			//Using inherent enhancements?
-			if(game.settings.get("dnd4e", "inhEnh")) {
+			if (game.settings.get("dnd4e", "inhEnh")) {
 				//If our enhancement is lower than the inherent level, adjust it upward
-				enhValue = Math.max(weaponInnerData?.enhance||0,Helper.findKeyScale(actorData.system.details.level, CONFIG.DND4E.SCALE.basic, 1));
+				enhValue = Math.max(weaponInnerData?.enhance || 0, Helper.findKeyScale(actorData.system.details.level, CONFIG.DND4E.SCALE.basic, 1));
 				Helper.debugLog(`Checked inherent atk/dmg enhancement of +'${Helper.findKeyScale(actorData.system.details.level, CONFIG.DND4E.SCALE.basic, 1)}' for this level against weapon value of +${weaponInnerData?.enhance})`);
 			}
 
-			const effectsToProcess = []
-			const effects = actorData.getActiveEffects().filter((effect) => effect.disabled === false)
+			const effectsToProcess = [];
+			const effects = actorData.getActiveEffects().filter((effect) => effect.disabled === false);
 			effects.forEach((effect) => {
 				effect.changes.forEach((change => {
 					if (change.key.startsWith(`power.${effectType}`) || (weaponInnerData && change.key.startsWith(`weapon.${effectType}`))) {
 						effectsToProcess.push({
-							name : effect.name,
+							name: effect.name,
 							key: change.key,
-							value: change.value
-						})
+							value: change.value,
+						});
 					}
-				}))
-			})
+				}));
+			});
 			
 			//Dummy up some extra effects to represent global atk/damage bonuses
 			const globalMods = actorData.system.modifiers;
-			if(globalMods[effectType]?.value){
+			if (globalMods[effectType]?.value) {
 				for (const [key, value] of Object.entries(globalMods[effectType])) {
 					//No way to sort bonus array types, so we'll combine them with untyped before checks.
-					const adjValue = ( key == 'untyped' ? value + globalMods[effectType].bonusValue : value);
-					if(!['value','bonus','warn','bonusValue','label'].includes(key) && adjValue != 0){
+					const adjValue = (key == "untyped" ? value + globalMods[effectType].bonusValue : value);
+					if (!["value", "bonus", "warn", "bonusValue", "label"].includes(key) && (adjValue != 0)) {
 						effectsToProcess.push({
-							name : `Global ${effectType} modifier`,
+							name: `Global ${effectType} modifier`,
 							key: `modifiers.${effectType}.global.${key}`,
-							value: adjValue
+							value: adjValue,
 						});
 					}
 				}
@@ -187,33 +187,33 @@ export class Helper {
 			
 			if (effectsToProcess.length > 0) {
 				if (debug) {
-					console.log(`${debug} Found the following possible active effects`)
-					effectsToProcess.forEach((effect) => console.log(`${debug} ${effect.name} : ${effect.key} = ${effect.value}`))
+					console.log(`${debug} Found the following possible active effects`);
+					effectsToProcess.forEach((effect) => console.log(`${debug} ${effect.name} : ${effect.key} = ${effect.value}`));
 				}
 
-				const suitableKeywords = ['global']
-				this._addKeywords(suitableKeywords, powerInnerData.damageType)
-				this._addKeywords(suitableKeywords, powerInnerData.effectType)
+				const suitableKeywords = ["global"];
+				this._addKeywords(suitableKeywords, powerInnerData.damageType);
+				this._addKeywords(suitableKeywords, powerInnerData.effectType);
 				if (weaponInnerData) {
-					this._addKeywords(suitableKeywords, weaponInnerData.weaponGroup)
-					this._addKeywords(suitableKeywords, weaponInnerData.properties)
-					this._addKeywords(suitableKeywords, weaponInnerData.damageType)
-					this._addKeywords(suitableKeywords, weaponInnerData.implement) // implement group for implement powers.	Bad naming of property, sorry -Drac
-					if(weaponInnerData.weaponBaseType){
-						suitableKeywords.push(weaponInnerData.weaponBaseType)
+					this._addKeywords(suitableKeywords, weaponInnerData.weaponGroup);
+					this._addKeywords(suitableKeywords, weaponInnerData.properties);
+					this._addKeywords(suitableKeywords, weaponInnerData.damageType);
+					this._addKeywords(suitableKeywords, weaponInnerData.implement); // implement group for implement powers.	Bad naming of property, sorry -Drac
+					if (weaponInnerData.weaponBaseType) {
+						suitableKeywords.push(weaponInnerData.weaponBaseType);
 					}
 				}
 
 				if (powerInnerData.powersource) {
-					suitableKeywords.push(powerInnerData.powersource)
+					suitableKeywords.push(powerInnerData.powersource);
 				}
 				if (powerInnerData.secondPowersource) {
-					suitableKeywords.push(powerInnerData.secondPowersource)
+					suitableKeywords.push(powerInnerData.secondPowersource);
 				}
-				if(powerInnerData.weaponType){
+				if (powerInnerData.weaponType) {
 					//Tool-based keywords like implement and weapon belong to the power, so in most cases we do not need to check the weapon to know which ones to use. Melee/ranged weapons and "any" are the exceptions, so we check the equipped weapon just for those.
 					
-					switch(powerInnerData.weaponType){
+					switch (powerInnerData.weaponType) {
 						case "none": break;
 						case "implement":
 							suitableKeywords.push("usesImplement");
@@ -229,10 +229,10 @@ export class Helper {
 							suitableKeywords.push("rangedWeapon");
 							break;
 						default:
-							if(weaponInnerData) {
-								 if(weaponInnerData.WeaponType === "implement") {
+							if (weaponInnerData) {
+								if (weaponInnerData.WeaponType === "implement") {
 									suitableKeywords.push("usesImplement");
-								} else if(weaponInnerData.isRanged) {
+								} else if (weaponInnerData.isRanged) {
 									suitableKeywords.push("weapon");
 									suitableKeywords.push("rangedWeapon");
 									suitableKeywords.push("ranged");
@@ -246,29 +246,29 @@ export class Helper {
 					}
 					
 					//Check for proficiency with tool
-					switch(powerInnerData.weaponType){
+					switch (powerInnerData.weaponType) {
 						case "none": break;
 						case "implement":
-							if(weaponInnerData) {
-								if(weaponInnerData.proficientI) suitableKeywords.push('proficient');
+							if (weaponInnerData) {
+								if (weaponInnerData.proficientI) suitableKeywords.push("proficient");
 							}
 							break;
 						case "any":
-							if(weaponInnerData) {
-								 if(weaponInnerData.WeaponType === "implement") {
-									if(weaponInnerData.proficientI) suitableKeywords.push('proficient');
+							if (weaponInnerData) {
+								if (weaponInnerData.WeaponType === "implement") {
+									if (weaponInnerData.proficientI) suitableKeywords.push("proficient");
 								}
 							}
 							break;
 						default:
-							if(weaponInnerData) {
-								if(weaponInnerData.proficient) suitableKeywords.push('proficient');
+							if (weaponInnerData) {
+								if (weaponInnerData.proficient) suitableKeywords.push("proficient");
 							}
 					}
 				}
 				
-				if(powerInnerData.rangeType){
-					switch(powerInnerData.rangeType){
+				if (powerInnerData.rangeType) {
+					switch (powerInnerData.rangeType) {
 						case "closeBurst":
 							suitableKeywords.push("close");
 							suitableKeywords.push("burst");
@@ -304,21 +304,21 @@ export class Helper {
 				}
 				
 				//Special case for detecting one-handed weapons
-				if(weaponInnerData){
-					if(!weaponInnerData.properties.two){ //Skip if it's tagged two-handed
+				if (weaponInnerData) {
+					if (!weaponInnerData.properties.two) { //Skip if it's tagged two-handed
 						//Make sure it's some kind of weapon
 						const wpnGroupValues = Object.values(weaponInnerData.weaponGroup);
-						const isWeapon = wpnGroupValues.some(function(element){
+						const isWeapon = wpnGroupValues.some(function(element) {
 							return element;
 						});
-						if(isWeapon){
+						if (isWeapon) {
 							suitableKeywords.push("one");
 						}
 					}
 				}
 				
-				if(powerInnerData.attack?.def){
-					switch(powerInnerData.attack.def){
+				if (powerInnerData.attack?.def) {
+					switch (powerInnerData.attack.def) {
 						case "ac":
 							suitableKeywords.push("vsAC");
 							break;
@@ -334,24 +334,24 @@ export class Helper {
 					}
 				}
 				
-				if(powerInnerData.attack?.isBasic){
+				if (powerInnerData.attack?.isBasic) {
 					suitableKeywords.push("basic");
-					if(suitableKeywords.includes("melee")) suitableKeywords.push("mBasic");
-					if(suitableKeywords.includes("ranged")) suitableKeywords.push("rBasic");
-				};
+					if (suitableKeywords.includes("melee")) suitableKeywords.push("mBasic");
+					if (suitableKeywords.includes("ranged")) suitableKeywords.push("rBasic");
+				}
 				
-				if(powerInnerData.attack?.isCharge || rollData?.isCharge) suitableKeywords.push("charge");
-				if(powerInnerData.attack?.isOpp || rollData?.isOpp) suitableKeywords.push("opp");				
-				if(powerInnerData.attack?.def) suitableKeywords.push(`vs${powerInnerData.attack.def.capitalize()}`);
-				if(powerInnerData.attack?.ability) suitableKeywords.push(`uses${powerInnerData.attack.ability.capitalize()}`);
+				if (powerInnerData.attack?.isCharge || rollData?.isCharge) suitableKeywords.push("charge");
+				if (powerInnerData.attack?.isOpp || rollData?.isOpp) suitableKeywords.push("opp");				
+				if (powerInnerData.attack?.def) suitableKeywords.push(`vs${powerInnerData.attack.def.capitalize()}`);
+				if (powerInnerData.attack?.ability) suitableKeywords.push(`uses${powerInnerData.attack.ability.capitalize()}`);
 				
-				if(powerInnerData?.keywordsCustom){
-					const customKeys = powerInnerData.keywordsCustom.split(';');
+				if (powerInnerData?.keywordsCustom) {
+					const customKeys = powerInnerData.keywordsCustom.split(";");
 					customKeys.forEach((item) => suitableKeywords.push(item));
 				}
 
 				// Can be done with already with a global bonus of some multiple of @bloodied, but useful for defence bonuses like the Deva's Astral Majesty
-				if(rollData?.details.isBloodied){
+				if (rollData?.details.isBloodied) {
 					suitableKeywords.push("bloodied");
 				}
 
@@ -371,39 +371,39 @@ export class Helper {
 	// A pared down version of applyEffects suitable for determining bonuses to saving throws against effects or the DCs of effects. Only needs to know
 	// about effect keywords and statuses inflicted by the effect. effectType can be `save` or `saveDC`.
 	static async applySaveEffects(arrayOfParts, rollData, actorData, effectData, effectType) {
-		const debug = game.settings.get("dnd4e", "debugEffectBonus") ? `D&D4e |` : ""
+		const debug = game.settings.get("dnd4e", "debugEffectBonus") ? "D&D4e |" : "";
 		if (actorData.effects) {
 			if (debug) {
-				Helper.debugLog(`${debug} Debugging ${effectType} effects for ${effectData?.name}.`)
+				Helper.debugLog(`${debug} Debugging ${effectType} effects for ${effectData?.name}.`);
 			}
 
-			const effectsToProcess = []
-			const effects = actorData.getActiveEffects().filter((effect) => effect.disabled === false)
+			const effectsToProcess = [];
+			const effects = actorData.getActiveEffects().filter((effect) => effect.disabled === false);
 			effects.forEach((effect) => {
 				effect.changes.forEach((change => {
 					if (change.key.startsWith(`effect.${effectType}`)) {
 						effectsToProcess.push({
-							name : effect.name,
+							name: effect.name,
 							key: change.key,
-							value: change.value
-						})
+							value: change.value,
+						});
 					}
-				}))
-			})
+				}));
+			});
 			
 			// No global bonuses to save DCs
-			if (effectType === 'save') {
+			if (effectType === "save") {
 				//Dummy up some extra effects to represent global atk/damage bonuses
 				const globalMods = actorData.system.details.saves;
-				if(globalMods.value){
+				if (globalMods.value) {
 					for (const [key, value] of Object.entries(globalMods)) {
 						//No way to sort bonus array types, so we'll combine them with untyped before checks.
-						const adjValue = ( key == 'untyped' ? value + globalMods.bonusValue : value);
-						if(!['value','bonus','warn','bonusValue','label', 'cssClass', 'selected'].includes(key) && adjValue != 0){
+						const adjValue = (key == "untyped" ? value + globalMods.bonusValue : value);
+						if (!["value", "bonus", "warn", "bonusValue", "label", "cssClass", "selected"].includes(key) && (adjValue != 0)) {
 							effectsToProcess.push({
-								name : `Global save modifier`,
+								name: "Global save modifier",
 								key: `effect.save.global.${key}`,
-								value: adjValue
+								value: adjValue,
 							});
 						}
 					}
@@ -412,19 +412,19 @@ export class Helper {
 			
 			if (effectsToProcess.length > 0) {
 				if (debug) {
-					console.log(`${debug} Found the following possible active effects`)
-					effectsToProcess.forEach((effect) => console.log(`${debug} ${effect.name} : ${effect.key} = ${effect.value}`))
+					console.log(`${debug} Found the following possible active effects`);
+					effectsToProcess.forEach((effect) => console.log(`${debug} ${effect.name} : ${effect.key} = ${effect.value}`));
 				}
 
-				const suitableKeywords = ['global']
+				const suitableKeywords = ["global"];
 				let keywords = effectData?.system.keywords;
 				if (keywords) {
 					keywords.forEach((k) => suitableKeywords.push(k));
 				}
 				
 				let customKeywords = effectData?.system.keywordsCustom;
-				if (customKeywords){
-					const customKeys = customKeywords.split(';');
+				if (customKeywords) {
+					const customKeys = customKeywords.split(";");
 					customKeys.forEach((k) => suitableKeywords.push(k));
 				}
 
@@ -434,13 +434,13 @@ export class Helper {
 				}
 
 				if (effectData?.system.dots.length) {
-					suitableKeywords.push('ongoing');
+					suitableKeywords.push("ongoing");
 					effectData.system.dots.forEach((d) => {
 						d.typesArray.forEach((t) => {
 							suitableKeywords.push(t);
 							// Since game text describes this as "untyped" let's allow users to use that language in effect keys.
-							if (t === 'physical') suitableKeywords.push('untyped');
-						})
+							if (t === "physical") suitableKeywords.push("untyped");
+						});
 					});
 				}
 
@@ -460,38 +460,38 @@ export class Helper {
 	static async _applyEffectsInternal(arrayOfParts, rollData, effectsToProcess, suitableKeywords, actorData, effectType, debug, extraDamage = []) {
 		// filter out to just the relevant effects by keyword
 		const matchingEffects = effectsToProcess.filter((effect) => {
-			const keyParts = effect.key.split(".")
-			if (keyParts.length >= 4 && keyParts[1] === effectType){
+			const keyParts = effect.key.split(".");
+			if ((keyParts.length >= 4) && (keyParts[1] === effectType)) {
 				const keywords = keyParts.slice(2, -1);
 				for (const keyword of keywords) {
 					if (!suitableKeywords.includes(keyword)) {
-						return false
+						return false;
 					}
 				}
-				return true
+				return true;
 			}
-		})
+		});
 
 		if (debug) {
-			console.log(`${debug} The following effects were deemed suitable by keyword filter`)
-			matchingEffects.forEach((effect) => console.log(`${debug} ${effect.name} : ${effect.key} = ${effect.value}`))
+			console.log(`${debug} The following effects were deemed suitable by keyword filter`);
+			matchingEffects.forEach((effect) => console.log(`${debug} ${effect.name} : ${effect.key} = ${effect.value}`));
 		}
 
-		const newParts = {}
+		const newParts = {};
 		for (const effect of matchingEffects) {
-			const keyParts = effect.key.split(".")
+			const keyParts = effect.key.split(".");
 			if (keyParts.length >= 4) {
-				const bonusType = keyParts[keyParts.length - 1]
-				const effectValueString = Roll.replaceFormulaData(String(effect.value), actorData.getRollData())
-				const effectDice = await this.rollWithErrorHandling(effectValueString, {context : effect.key})
-				const effectValue = effectDice.total
+				const bonusType = keyParts[keyParts.length - 1];
+				const effectValueString = Roll.replaceFormulaData(String(effect.value), actorData.getRollData());
+				const effectDice = await this.rollWithErrorHandling(effectValueString, { context: effect.key });
+				const effectValue = effectDice.total;
 				if (bonusType === "roll") {
 					let rollBonus = new Roll(effectValueString);
 					rollBonus.terms.forEach(term => {
 						if (term instanceof foundry.dice.terms.ParentheticalTerm) {
 							extraDamage.push(term.formula);
 						}
-						else if (term instanceof foundry.dice.terms.DiceTerm || typeof term.total === "number") {
+						else if ((term instanceof foundry.dice.terms.DiceTerm) || (typeof term.total === "number")) {
 							let termString = "";
 							if (term.flavor) termString = `(${term.expression})[${term.flavor}]`;
 							else termString = `(${term.expression})`;
@@ -501,52 +501,52 @@ export class Helper {
 				}
 				else if (bonusType === "untyped") {
 					if (newParts["untypedEffectBonus"]) {
-						newParts["untypedEffectBonus"] = newParts["untypedEffectBonus"] + effectValue
+						newParts["untypedEffectBonus"] = newParts["untypedEffectBonus"] + effectValue;
 						if (debug) {
-							console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue}: Additional untyped Bonus.	They Stack.`)
+							console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue}: Additional untyped Bonus.	They Stack.`);
 						}
 					}
 					else {
-						newParts["untypedEffectBonus"] = effectValue
+						newParts["untypedEffectBonus"] = effectValue;
 						if (debug) {
-							console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue}: First untyped Bonus`)
+							console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue}: First untyped Bonus`);
 						}
 					}
 				}
 				else {
-					const key = `${bonusType}EffectBonus`
+					const key = `${bonusType}EffectBonus`;
 					if (newParts[key]) {
 						if (newParts[key] < effectValue) {
-							newParts[key] = effectValue
+							newParts[key] = effectValue;
 							if (debug) {
-								console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue}: Is greater than existing ${bonusType}, replacing`)
+								console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue}: Is greater than existing ${bonusType}, replacing`);
 							}
 						}
 						else {
 							if (debug) {
-								console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue} : Is not greater than existing ${bonusType}, discarding`)
+								console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue} : Is not greater than existing ${bonusType}, discarding`);
 							}
 						}
 					}
 					else {
-						newParts[key] = effectValue
+						newParts[key] = effectValue;
 						if (debug) {
-							console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue} : First ${bonusType} Bonus`)
+							console.log(`${debug} ${effect.name} : ${effect.key} => ${effect.value} = ${effectValue} : First ${bonusType} Bonus`);
 						}
 					}
 				}
 			}
 			else {
-				ui.notifications.warn(`Tried to process a bonus effect that had too few .'s in it: ${effect.key}: ${effect.value}`)
-				Helper.debugLog(`Tried to process a bonus effect that had too few .'s in it: ${effect.key}: ${effect.value}`)
+				ui.notifications.warn(`Tried to process a bonus effect that had too few .'s in it: ${effect.key}: ${effect.value}`);
+				Helper.debugLog(`Tried to process a bonus effect that had too few .'s in it: ${effect.key}: ${effect.value}`);
 			}
 		}
 		
 		for (const [key, value] of Object.entries(newParts)) {
 			for (const parts of arrayOfParts) {
-				parts.push("@" + key)
+				parts.push("@" + key);
 			}
-			rollData[key] = value
+			rollData[key] = value;
 		}
 	}
 
@@ -568,15 +568,15 @@ export class Helper {
 	 * @return {object} An object of {variable = value}. TODO: Is this not just getRollData?
 	 */
 	static getDataObject(formula, rollData) {
-		const result = {}
-		const variables = formula.match(this.variableRegex)
+		const result = {};
+		const variables = formula.match(this.variableRegex);
 		if (variables) {
 			variables.forEach(variable => {
 				// get the value for that variable - call this method with just the variable and with return data off
-				result[variable.substring(1)] = Roll.replaceFormulaData(variable, rollData) // trim off the leading @
-			})
+				result[variable.substring(1)] = Roll.replaceFormulaData(variable, rollData); // trim off the leading @
+			});
 		}
-		return result
+		return result;
 	}
 
 	/**
@@ -589,17 +589,17 @@ export class Helper {
 	 * @param {Object} missing		Value to use as missing replacements, such as {missing: "0"}.
 	 * @return {String} The formula with attributes replaced with values.
 	 */
-	static replaceData(formula, data, {missing=null, depth=1}={}) {
+	static replaceData(formula, data, { missing = null, depth = 1 } = {}) {
 		// Exit early if the formula is invalid.
-		if ( typeof formula != "string" || depth < 1) {
-		return 0;
+		if ((typeof formula != "string") || (depth < 1)) {
+			return 0;
 		}
 		// Replace attributes with their numeric equivalents.
-		let dataRgx = this.variableRegex
+		let dataRgx = this.variableRegex;
 		let rollFormula = formula.replace(dataRgx, (match, term) => {
 			let value = foundry.utils.getProperty(data, term);
 			// If there was a value returned, trim and return it.
-			if ( value || value == 0) {
+			if (value || (value == 0)) {
 				return String(value).trim();
 			}
 			// Otherwise, return either the missing replacement value, or the original @attr string for later replacement.
@@ -612,7 +612,7 @@ export class Helper {
 
 	static evaluate(s) {
 		let total = 0;
-		s = s.match(/[+\-]*(\.\d+|\d+(\.\d+)?)/g) || [];
+		s = s.match(/[+-]*(\.\d+|\d+(\.\d+)?)/g) || [];
 
 		while (s.length) {
 			total += parseFloat(s.shift());
@@ -633,16 +633,16 @@ export class Helper {
 	 */
 	static async rollWithErrorHandling(rollString, { errorMessageKey = "DND4E.InvalidRollExpression", context = "" }) {
 		if (!errorMessageKey) {
-			errorMessageKey = "DND4E.InvalidRollExpression"
+			errorMessageKey = "DND4E.InvalidRollExpression";
 		}
-		if (rollString && rollString !== "") {
+		if (rollString) {
 			const roll = new Roll(`${rollString}`);
 			// return roll.roll({async : true}).catch(err => {
 			return roll.roll().catch(err => {
-				let msg = context ? `${game.i18n.localize(errorMessageKey)} (in ${context}) : ${rollString}` : `${game.i18n.localize(errorMessageKey)} : ${rollString}`
+				let msg = context ? `${game.i18n.localize(errorMessageKey)} (in ${context}) : ${rollString}` : `${game.i18n.localize(errorMessageKey)} : ${rollString}`;
 				ui.notifications.error(msg);
-				Helper.debugLog(msg)
-				Helper.debugLog(err)
+				Helper.debugLog(msg);
+				Helper.debugLog(err);
 				// return new Roll("0").roll({async : true});
 				return new Roll("0").roll();
 			});
@@ -653,9 +653,9 @@ export class Helper {
 		}
 	}
 
-	static _areaValue(chatData, actorData){
-		if(chatData.area) {
-			try{
+	static _areaValue(chatData, actorData) {
+		if (chatData.area) {
+			try {
 				let areaForm = Roll.replaceFormulaData(`${chatData.area}`, actorData);
 				return	Roll.safeEval(areaForm);
 			} catch (e) {
@@ -666,58 +666,58 @@ export class Helper {
 		}
 	}
 
-	static _preparePowerCardData(chatData, CONFIG, actorData=null, attackTotal=null) {
+	static _preparePowerCardData(chatData, CONFIG, actorData = null, attackTotal = null) {
 		
-		let powerDetail = `<div class="basics">`; //Open the white section between flavour and effects
+		let powerDetail = "<div class=\"basics\">"; //Open the white section between flavour and effects
 		
-		let powerSource = (chatData.powersource && chatData.powersource !== "") ? `${CONFIG.DND4E.powerSource[`${chatData.powersource}`]}` : "";
+		let powerSource = (chatData.powersource) ? `${CONFIG.DND4E.powerSource[`${chatData.powersource}`]}` : "";
 		powerDetail += `<span class="usage">${CONFIG.DND4E.powerUseType[`${chatData.useType}`]}</span>`;
 		let tag = [];
 		
-		if(chatData.powersource) tag.push(powerSource);
+		if (chatData.powersource) tag.push(powerSource);
 
-		if(['melee', 'meleeRanged', 'ranged'].includes(chatData.weaponType) ) {
-			tag.push(`Weapon`);
+		if (["melee", "meleeRanged", "ranged"].includes(chatData.weaponType)) {
+			tag.push("Weapon");
 		} 
 		else if (chatData.weaponType === "implement") {
-			tag.push(`Implement`);
+			tag.push("Implement");
 		}
 
-		if (chatData.powersource && chatData.secondPowersource && chatData.secondPowersource != chatData.powersource){
-			tag.push(`${CONFIG.DND4E.powerSource[`${chatData.secondPowersource}`]}`)
+		if (chatData.powersource && chatData.secondPowersource && (chatData.secondPowersource != chatData.powersource)) {
+			tag.push(`${CONFIG.DND4E.powerSource[`${chatData.secondPowersource}`]}`);
 		}
 		
-		if(chatData.weaponDamageType) {
-			for ( let [damage, d] of Object.entries(chatData.weaponDamageType)) {
-				if(d && CONFIG.DND4E.damageTypes[damage]) tag.push(CONFIG.DND4E.damageTypes[damage])
+		if (chatData.weaponDamageType) {
+			for (let [damage, d] of Object.entries(chatData.weaponDamageType)) {
+				if (d && CONFIG.DND4E.damageTypes[damage]) tag.push(CONFIG.DND4E.damageTypes[damage]);
 			}
 		}
-		else if(chatData.damageType) {
-			for ( let [damage, d] of Object.entries(chatData.damageType)) {
-				if(d && CONFIG.DND4E.damageTypes[damage]) tag.push(CONFIG.DND4E.damageTypes[damage])
+		else if (chatData.damageType) {
+			for (let [damage, d] of Object.entries(chatData.damageType)) {
+				if (d && CONFIG.DND4E.damageTypes[damage]) tag.push(CONFIG.DND4E.damageTypes[damage]);
 			}
 		}
 
-		if(chatData.effectType) {
-			for ( let [effect, e] of Object.entries(chatData.effectType)) {
-				if(e && CONFIG.DND4E.effectTypes[effect]) tag.push(CONFIG.DND4E.effectTypes[effect])
+		if (chatData.effectType) {
+			for (let [effect, e] of Object.entries(chatData.effectType)) {
+				if (e && CONFIG.DND4E.effectTypes[effect]) tag.push(CONFIG.DND4E.effectTypes[effect]);
 			}
 		}
 		
-		if(chatData?.keywordsCustom){
-			const customKeys = chatData.keywordsCustom.split(';');
+		if (chatData?.keywordsCustom) {
+			const customKeys = chatData.keywordsCustom.split(";");
 			customKeys.forEach((item) => tag.push(item));
 		}
 		
 		tag.sort();
 		
-		if(tag.length > 0) powerDetail += `<span class="sep">&#10022;</span><span class="keywords">${tag.join(', ')}</span>`;
+		if (tag.length > 0) powerDetail += `<span class="sep">&#10022;</span><span class="keywords">${tag.join(", ")}</span>`;
 		
 		powerDetail += `<br /><span class="action">${CONFIG.DND4E.abilityActivationTypes[chatData.actionType].label}</span> <span class="sep">&nbsp;</span>`;
 
-		if(chatData.rangeType === "weapon") {
+		if (chatData.rangeType === "weapon") {
 			powerDetail += ` <span class="range-type weapon">${CONFIG.DND4E.weaponType[chatData.weaponType]}</span>`;
-			if(chatData.rangePower) powerDetail += ` <span class="range-value">${chatData.rangePower}</span>`;
+			if (chatData.rangePower) powerDetail += ` <span class="range-value">${chatData.rangePower}</span>`;
 		}
 		else if (chatData.rangeType === "melee") {
 			powerDetail += ` <span class="range-type melee">${game.i18n.localize("DND4E.Melee")}</span> <span class="range-size">${chatData.rangePower}</span>`;
@@ -727,12 +727,12 @@ export class Helper {
 		}
 		else if (chatData.rangeType === "range") {
 			powerDetail += ` <span class="range-type ranged">${game.i18n.localize("DND4E.rangeRanged")}</span> <span class="range-size">${chatData.rangePower}</span>`;
-			if(chatData.range?.long) powerDetail += `/<span class="range-long">${chatData.range.long}</span>`;
+			if (chatData.range?.long) powerDetail += `/<span class="range-long">${chatData.range.long}</span>`;
 		}
-		else if (['closeBurst', 'closeBlast'].includes(chatData.rangeType)) {
+		else if (["closeBurst", "closeBlast"].includes(chatData.rangeType)) {
 			powerDetail += ` <span class="range-type close">${CONFIG.DND4E.rangeType[chatData.rangeType].label}</span> <span class="range-size">${this._areaValue(chatData, actorData)}</span>`;
 		}
-		else if (['rangeBurst', 'rangeBlast', 'wall'].includes(chatData.rangeType)) {
+		else if (["rangeBurst", "rangeBlast", "wall"].includes(chatData.rangeType)) {
 			powerDetail += ` <span class="range-type area">${CONFIG.DND4E.rangeType[chatData.rangeType].label}</span> <span class="range-size">${this._areaValue(chatData, actorData)}</span> <span class="label-within">${game.i18n.localize("DND4E.RangeWithin")}</span> <span class="range-within">${chatData.rangePower}</span>`;
 		}
 		else if (chatData.rangeType === "personal") {
@@ -745,66 +745,66 @@ export class Helper {
 			powerDetail += ` <span class="range-type melee">${game.i18n.localize("DND4E.Melee")}</span> <span class="range-size touch">${game.i18n.localize("DND4E.DistTouch")}</span>`;
 		}
 		else {
-			powerDetail += `</span>`;
+			powerDetail += "</span>";
 		}
-		powerDetail += `</span>`;
-		powerDetail += `</div>`; //Close basics
+		powerDetail += "</span>";
+		powerDetail += "</div>"; //Close basics
 
-		if(chatData.requirement) {
+		if (chatData.requirement) {
 			powerDetail += `<p class="requirement"><strong>${game.i18n.localize("DND4E.Requirement")}:</strong> ${chatData.requirement}</p>`;
 		}
 
-		if(chatData.trigger) {
+		if (chatData.trigger) {
 			powerDetail += `<p class="trigger"><strong>${game.i18n.localize("DND4E.Trigger")}:</strong> ${chatData.trigger}</p>`;
 		}
 
-		if(chatData.target && (typeof chatData.target === "string")) { //target can sometimes be an object for things that did not have a dropdown
+		if (chatData.target && (typeof chatData.target === "string")) { //target can sometimes be an object for things that did not have a dropdown
 			powerDetail += `<p class="target"><strong>${game.i18n.localize("DND4E.Target")}:</strong> ${chatData.target}</p>`;
 		}
 
-		if(!chatData.postEffect && chatData.effect.detail) {
+		if (!chatData.postEffect && chatData.effect.detail) {
 			powerDetail += `<p class="effect alt"><strong>${game.i18n.localize("DND4E.Effect")}:</strong> ${chatData.effect.detail}</p>`;
 		}
 		
-		if(!chatData.postSpecial && chatData.special) {
+		if (!chatData.postSpecial && chatData.special) {
 			powerDetail += `<p class="special"><strong>${game.i18n.localize("DND4E.Special")}:</strong> ${chatData.special}</p>`;
-			for (let [i, entry] of Object.entries(chatData.specialAdd.parts)){
+			for (let [i, entry] of Object.entries(chatData.specialAdd.parts)) {
 				powerDetail += `<p class="special multi">${entry}</p>`;
 			}
 		}
 
-		if(chatData.attack.isAttack) {
+		if (chatData.attack.isAttack) {
 			let attackForm = chatData.attack.formula;
-			attackForm = chatData.attack.formula.replaceAll('@powerMod',`@${chatData.attack?.ability}Mod`);
+			attackForm = chatData.attack.formula.replaceAll("@powerMod", `@${chatData.attack?.ability}Mod`);
 			const attackValues = Roll.replaceFormulaData(attackForm, actorData.getRollData());
-			if(!(attackTotal == undefined)){
+			if (!(attackTotal == undefined)) {
 				//if does not start with a number sign add one
 				attackTotal = attackTotal.toString();
-				if(!(attackTotal.startsWith("+") || attackTotal.startsWith("-"))) {
-					attackTotal = '+' + attackTotal;
+				if (!(attackTotal.startsWith("+") || attackTotal.startsWith("-"))) {
+					attackTotal = "+" + attackTotal;
 				}
-			}else if(chatData.attack.ability){
+			} else if (chatData.attack.ability) {
 				attackTotal = CONFIG.DND4E.abilities[chatData.attack.ability];
-			}else{
+			} else {
 				attackTotal = game.i18n.localize("DND4E.Attack");
 			}
 			
-			if(chatData.attack.detail) {
-				let attackDetail = chatData.attack.detail.replaceAll('@attackValues', `${attackValues}`);
-				attackDetail = attackDetail.replaceAll('@attackTotal', `${attackTotal}`);
+			if (chatData.attack.detail) {
+				let attackDetail = chatData.attack.detail.replaceAll("@attackValues", `${attackValues}`);
+				attackDetail = attackDetail.replaceAll("@attackTotal", `${attackTotal}`);
 				powerDetail += `<p class="attack"><strong>${game.i18n.localize("DND4E.Attack")}:</strong> ${attackDetail}</p>`;
 			}
 			else {
-				if(chatData.attack.ability === "form"){				
+				if (chatData.attack.ability === "form") {				
 					powerDetail += `<p class="attack"><strong>${game.i18n.localize("DND4E.Attack")}:</strong> <a class="attack-bonus" data-tooltip="${attackValues}">${attackTotal}</a>`;
 				}
-				else if(chatData.attack.ability){
+				else if (chatData.attack.ability) {
 					powerDetail += `<p class="attack"><strong>${game.i18n.localize("DND4E.Attack")}</strong>: <a class="attack-bonus" data-tooltip="`;		
-					if(game.settings.get("dnd4e","cardAtkDisplay")=="bonus"){
+					if (game.settings.get("dnd4e", "cardAtkDisplay") == "bonus") {
 						powerDetail += `${CONFIG.DND4E.abilities[chatData.attack.ability]} (${attackValues})">${attackTotal}</a>`;
-					} else if (game.settings.get("dnd4e","cardAtkDisplay")=="both"){
+					} else if (game.settings.get("dnd4e", "cardAtkDisplay") == "both") {
 						powerDetail += `(${attackValues})">${CONFIG.DND4E.abilities[chatData.attack.ability]} (${attackTotal})</a>`;
-					} else{
+					} else {
 						powerDetail += `${attackTotal} (${attackValues})">${CONFIG.DND4E.abilities[chatData.attack.ability]}</a>`;
 					}
 				} else {
@@ -814,145 +814,145 @@ export class Helper {
 			}
 		}
 
-		if (chatData.hit.detail){
+		if (chatData.hit.detail) {
 			powerDetail += `<p class="hit alt-highlight"><strong>${game.i18n.localize("DND4E.Hit")}:</strong> ${chatData.hit.detail}</p>`;
 		}
 
-		if (chatData.miss.detail){
+		if (chatData.miss.detail) {
 			powerDetail += `<p class="miss alt-highlight"><strong>${game.i18n.localize("DND4E.Miss")}:</strong> ${chatData.miss.detail}</p>`;
 		}
 
-		if(chatData.postEffect && chatData.effect.detail) {
+		if (chatData.postEffect && chatData.effect.detail) {
 			powerDetail += `<p class="effect alt-highlight"><strong>${game.i18n.localize("DND4E.Effect")}:</strong> ${this.paragraphTrim(chatData.effect.detail)}</p>`;
 		}
-		if(chatData.postSpecial && chatData.special) {
+		if (chatData.postSpecial && chatData.special) {
 			powerDetail += `<p class="special alt-highlight"><strong>${game.i18n.localize("DND4E.Special")}:</strong> ${chatData.special}</p>`;
-			for (let [i, entry] of Object.entries(chatData.specialAdd.parts)){
+			for (let [i, entry] of Object.entries(chatData.specialAdd.parts)) {
 				powerDetail += `<p>${entry}</p>`;
 			}
 		}
 
-		if(chatData.sustain?.actionType !== "none" && chatData.sustain?.actionType) {
+		if ((chatData.sustain?.actionType !== "none") && chatData.sustain?.actionType) {
 			powerDetail += `<p class="sustain alt-highlight"><strong>${game.i18n.localize("DND4E.Sustain")} ${CONFIG.DND4E.abilityActivationTypes[chatData.sustain.actionType].label}:</strong> ${chatData.sustain.detail}</p>`;
 		}
 
-		if(actorData){
+		if (actorData) {
 			powerDetail = Roll.replaceFormulaData(powerDetail, actorData.getRollData());
 		}
 		
 		return powerDetail;
 	}
 
-	static paragraphTrim(string){
+	static paragraphTrim(string) {
 		// Check if the string starts with <p>
-		if(string.startsWith('<p>')) {
+		if (string.startsWith("<p>")) {
 			// Remove the first occurrence of <p> and </p>
-			string = string.replace(/<p>(.*?)<\/p>/, '$1');
+			string = string.replace(/<p>(.*?)<\/p>/, "$1");
 		}
-		if(string.endsWith('</p>')){
+		if (string.endsWith("</p>")) {
 			// Removes the last four characters if they are '</p>'
 			string = string.slice(0, -4); 
 		}
 		return string;
 	}
-	static _isNumber(str){
+	static _isNumber(str) {
 		return /^-?\d+$/.test(str);
 	}
 
-	static async rechargeItems(actor, targetArray){
+	static async rechargeItems(actor, targetArray) {
 
 		const items = actor.items.filter(item => targetArray.includes(item.system.uses?.per));
-		const updateItems = items.map( item => {
+		const updateItems = items.map(item => {
 			return {
 				_id: item.id,
-				"system.uses.value": item.system.preparedMaxUses
+				"system.uses.value": item.system.preparedMaxUses,
 			};
 		});
 
-		if(updateItems) await actor.updateEmbeddedDocuments("Item", updateItems);
+		if (updateItems) await actor.updateEmbeddedDocuments("Item", updateItems);
 	}
 
-	static async endEffects(actor, targetArray){
+	static async endEffects(actor, targetArray) {
 		const effects = [];
-		for(let e of actor.effects){
-			if(targetArray.includes(e.system.durationType)){
+		for (let e of actor.effects) {
+			if (targetArray.includes(e.system.durationType)) {
 				effects.push(e.id);
 			}
 		}
-		if(effects) await actor.deleteEmbeddedDocuments("ActiveEffect", effects);
+		if (effects) await actor.deleteEmbeddedDocuments("ActiveEffect", effects);
 	}
 
-	static getInitiativeByToken(id){
-		if(!game.combat) return 0;
-		for(let t of game.combat.turns){
-			if(t.tokenId === id){
-				return t.initiative
+	static getInitiativeByToken(id) {
+		if (!game.combat) return 0;
+		for (let t of game.combat.turns) {
+			if (t.tokenId === id) {
+				return t.initiative;
 			}
 		}
 
 		return game.combat.turns[game.combat.turn]?.initiative || -1;
 	}
 
-	static getTokenIdForLinkedActor(actor){
-		if(actor.token?.id){
+	static getTokenIdForLinkedActor(actor) {
+		if (actor.token?.id) {
 			return actor.token.id;
 		}
 
 		const actorId = actor.id;
 
-		if(canvas.tokens.controlled){
-			for(let t of canvas.tokens.controlled){
-				if(t.actor.id === actorId){
+		if (canvas.tokens.controlled) {
+			for (let t of canvas.tokens.controlled) {
+				if (t.actor.id === actorId) {
 					return t.id;
 				}
 			}
 		}
 
-		if(!game.combat) return null;
+		if (!game.combat) return null;
 		
-		if(game.combat.turns[game.combat.turn].actor.id === actorId){
+		if (game.combat.turns[game.combat.turn].actor.id === actorId) {
 			return game.combat.turns[game.combat.turn].id;
 		}
 
-		for(let t of game.combat.turns){
-			if(t.actor.id === actorId){
+		for (let t of game.combat.turns) {
+			if (t.actor.id === actorId) {
 				return t.id;
 			}
 		}
 	}
 
-	static getCurrentTurnInitiative(){
-		return game.combat? game.combat.turns[game.combat.turn]?.initiative : 0;
+	static getCurrentTurnInitiative() {
+		return game.combat ? game.combat.turns[game.combat.turn]?.initiative : 0;
 	}
 
-	static async solidifyEffectActorData(effect, parentActor){
-		Helper.debugLog(effect)
-		Helper.debugLog(parentActor)
-		const regex = /\$solidify\((.*?)\)/g
+	static async solidifyEffectActorData(effect, parentActor) {
+		Helper.debugLog(effect);
+		Helper.debugLog(parentActor);
+		const regex = /\$solidify\((.*?)\)/g;
 
 		//dots
-		for(const dot of effect.system.dots){
-			if(regex.test(dot.amount)) {    
-				foundry.utils.logCompatibilityWarning("Use of $solidify() in Active Effect values is deprecated since 0.8.0; manage this behavior via the \"Use Source Actor Data\" setting on the Active Effect.")
+		for (const dot of effect.system.dots) {
+			if (regex.test(dot.amount)) {    
+				foundry.utils.logCompatibilityWarning("Use of $solidify() in Active Effect values is deprecated since 0.8.0; manage this behavior via the \"Use Source Actor Data\" setting on the Active Effect.");
 				// dot.amount = await this.parseSolidify(dot.amount, parentActor);
 				dot.amount = dot.amount.toString().replace(/\$solidify\((.*?)\)/g, (match, value) => {
 					return Roll.replaceFormulaData(value, parentActor.getRollData());
 				});
-			} else if (typeof dot.amount === "string" && effect.system.useSourceActorData) {
+			} else if ((typeof dot.amount === "string") && effect.system.useSourceActorData) {
 				dot.amount = Roll.replaceFormulaData(dot.amount, parentActor.getRollData());
 			}
 		}
 
 		//changes
-		for(const change of effect.system.changes){
-			if(regex.test(change.value)) {
-				foundry.utils.logCompatibilityWarning("Use of $solidify() in Active Effect values is deprecated since 0.8.0; manage this behavior via the \"Use Source Actor Data\" setting on the Active Effect.")
+		for (const change of effect.system.changes) {
+			if (regex.test(change.value)) {
+				foundry.utils.logCompatibilityWarning("Use of $solidify() in Active Effect values is deprecated since 0.8.0; manage this behavior via the \"Use Source Actor Data\" setting on the Active Effect.");
 				// change.value = this.parseSolidify(change.value, parentActor);
 				change.value = change.value.replace(/\$solidify\((.*?)\)/g, (match, value) => {
 					return Roll.replaceFormulaData(value, parentActor.getRollData());
 				});
 				Helper.debugLog(change.value);
-			} else if (typeof change.value === "string" && effect.system.useSourceActorData) {
+			} else if ((typeof change.value === "string") && effect.system.useSourceActorData) {
 				change.value = Roll.replaceFormulaData(change.value, parentActor.getRollData());
 			}
 		}
@@ -966,13 +966,13 @@ export class Helper {
 	// 	return newVal;
 	// }
 
-	static async applyEffectsToTokens(effectMap, tokenTarget, condition, parent){
+	static async applyEffectsToTokens(effectMap, tokenTarget, condition, parent) {
 
 		const combat = game.combat;
-		for(let effect of effectMap){
+		for (let effect of effectMap) {
 			let e = effect.toObject(); // This is to avoid editing the source effect
-			if(e.system.powerEffectType === condition){
-				for(let t of tokenTarget){
+			if (e.system.powerEffectType === condition) {
+				for (let t of tokenTarget) {
 					// let effectData = e.data;
 					// e.sourceName = parent.name;
 					e.origin = parent.uuid;
@@ -982,47 +982,47 @@ export class Helper {
 					const newEffectData = {
 						name: e.name,
 						type: e.type,
-						description: e.description ? e.description : '',
+						description: e.description ? e.description : "",
 						img: e.img,
 						origin: e.origin,
 						sourceName: parent.name,
 						system: e.system,
 						statuses: e.statuses,
 						tint: e.tint,
-						"flags": flags,
+						flags: flags,
 						changesID: e.uuid,
-						showIcon: e.showIcon
+						showIcon: e.showIcon,
 					};
 
-					if(parent && newEffectData.system.saveDC) {
+					if (parent && newEffectData.system.saveDC) {
 						let dcBonus = 0;
-						const dcParts = []
+						const dcParts = [];
 						const rollData = parent.getRollData();
 						await Helper.applySaveEffects([dcParts], rollData, parent, newEffectData, "saveDC");
-						for (let i=0; i < dcParts.length; i++) {
+						for (let i = 0; i < dcParts.length; i++) {
 							const key = dcParts[i].slice(1);
 							dcBonus += rollData[key];
 						}
 						newEffectData.system.saveDC = String(Number(newEffectData.system.saveDC) + dcBonus);
 					}
 
-					if(e.statuses[0] && game.settings.get("dnd4e","markAutomation")){
-						const marks = new Set(['mark_1','mark_2','mark_3','mark_4','mark_5','mark_6','mark_7']);
+					if (e.statuses[0] && game.settings.get("dnd4e", "markAutomation")) {
+						const marks = new Set(["mark_1", "mark_2", "mark_3", "mark_4", "mark_5", "mark_6", "mark_7"]);
 						const hasMark = marks.intersection(new Set(e.statuses)).size;
 						
-						if(hasMark){
+						if (hasMark) {
 							// If the effect already has `system.marker` assume it's for a reason
-							if(!e.changes.some(c => c.key === 'system.marker')) {
+							if (!e.changes.some(c => c.key === "system.marker")) {
 								const changeData = {
-									"key": "system.marker",
-									"mode": 5,
-									"value": e.origin,
-									"priority": null
-								}							
+									key: "system.marker",
+									mode: 5,
+									value: e.origin,
+									priority: null,
+								};							
 								newEffectData.changes.push(changeData);
 							}
 							
-							if(t?.actor?.allApplicableEffects){
+							if (t?.actor?.allApplicableEffects) {
 								for (let effect of t.actor.allApplicableEffects()) {
 									if (marks.intersection(effect.statuses).size) effect.delete();
 								}
@@ -1031,22 +1031,22 @@ export class Helper {
 					}
 
 					let actor;
-					if(t?.actor){
+					if (t?.actor) {
 						actor = t.actor;
 					} else { //extra condition for when actors this linked data target self
 						actor = parent;
 					}
 
-					if(actor.isOwner || game.user.isGM){
+					if (actor.isOwner || game.user.isGM) {
 						await actor.newActiveEffect(newEffectData);
 					} else {
-						game.socket.emit('system.dnd4e', {
+						game.socket.emit("system.dnd4e", {
 							actorID: actor.id,
 							tokenID: t?.id || null,
-							operation: 'applyTokenEffect',
+							operation: "applyTokenEffect",
 							user: game.user.id,
 							scene: canvas.scene.id,
-							effectData: newEffectData
+							effectData: newEffectData,
 						});
 					}
 					
@@ -1056,8 +1056,8 @@ export class Helper {
 		}
 	}
 
-	static async applyEffectsToTargets(effects, actor){
-		this.applyAllXEffectsToTokens(effects, actor, game.user.targets)
+	static async applyEffectsToTargets(effects, actor) {
+		this.applyAllXEffectsToTokens(effects, actor, game.user.targets);
 	}
 
 	/**
@@ -1067,8 +1067,8 @@ export class Helper {
 	 * @param {Actor} actor The source actor
 	 * @param {Set} selection the Tokens to apply to
 	 */
-	static async applyAllXEffectsToTokens(effects, actor, selection){
-		if (selection?.size){
+	static async applyAllXEffectsToTokens(effects, actor, selection) {
+		if (selection?.size) {
 			await this.applyEffectsToTokens(effects, selection, "all", actor);
 			const parentDisposition = actor.token?.disposition || actor.prototypeToken.disposition || null;
 			await this.applyEffectsToTokens(effects, this.filterActorSetByDisposition(selection, parentDisposition), "allies", actor);
@@ -1088,7 +1088,7 @@ export class Helper {
 
 	static isRollFastForwarded(event) {
 		const isModKeyPressed = this.isUsingFastForwardKey(event);
-		return game.settings.get("dnd4e","fastFowardSettings") ? !isModKeyPressed : isModKeyPressed;
+		return game.settings.get("dnd4e", "fastFowardSettings") ? !isModKeyPressed : isModKeyPressed;
 	}
 	
 	/**
@@ -1098,7 +1098,7 @@ export class Helper {
 	/* Returns the player object, or the player's ID if 
 	/* called with idOnly set to "true"
 	/**/
-	static firstOwner(doc,idOnly=false){
+	static firstOwner(doc, idOnly = false) {
 		// null docs could mean an empty lookup, null docs are not owned by anyone
 		if (!doc) return false;
 
@@ -1107,34 +1107,34 @@ export class Helper {
 		
 		//First check for an assigned character (but player must be active!)
 		game.users.forEach(function (player) {
-			if(player.active && player.character?.id === doc.id){
+			if (player.active && (player.character?.id === doc.id)) {
 				//debugLog(`Player found for ${doc.name}: ${player.id}`);
-				found = (idOnly ? player.id : player );
+				found = (idOnly ? player.id : player);
 				return;
 			}
 		});
-		if(found) return found;
+		if (found) return found;
 		
 		//If all players have ownership, the GM fallback will be used
-		if(doc.ownership['default'] != 3){
-		//If no assigned character, check for specific (active) player owner
+		if (doc.ownership["default"] != 3) {
+			//If no assigned character, check for specific (active) player owner
 			const owners = Object.entries(doc.ownership);
-			for (const [i, owner] of Object.entries(owners)){
-				if (1 !== 0){
+			for (const [i, owner] of Object.entries(owners)) {
+				if (i !== 0) {
 					const ownerData = game.users?.get(owner[0]);
-					if(!ownerData?.isGM && ownerData?.active && owner[1] === 3){
+					if (!ownerData?.isGM && ownerData?.active && (owner[1] === 3)) {
 						//debugLog(`Owner of ${doc.name}: ${ownerData.name}`);
 						found = (idOnly ? owner : ownerData);
 					}
 				}
 			}
 		}
-		if(found) return found;
+		if (found) return found;
 
 		// If we have no valid player, fall back to first GM
 		//debugLog(`No valid owner found for ${doc.name}, using GM fallback`);
 		const firstGM = game.users.find(u => u.isGM && u.active);
-		return ( idOnly ? firstGM.id : firstGM );
+		return (idOnly ? firstGM.id : firstGM);
 	}
 	
 	/**
@@ -1143,12 +1143,12 @@ export class Helper {
 	 * Intended for getting the correct value from multiple 
 	 * resistances and vulnerabilities.
 	 */
-	static sumExtremes(values = []){
+	static sumExtremes(values = []) {
 		if (!values.length) return;
 		let negatives = [0], positives = [0];
-		for (let v of values){
+		for (let v of values) {
 			if (v === 0) continue;
-			if ( v < 0 ){
+			if (v < 0) {
 				//debugLog(`negative: ${v}`)
 				negatives.push(v);
 			} else {
@@ -1168,13 +1168,13 @@ export class Helper {
 	 * @returns {set} New set of matching disposition
 	 */
 
-	static filterActorSetByDisposition(actorSet, disposition, same=true) {
-		if(disposition === null){
+	static filterActorSetByDisposition(actorSet, disposition, same = true) {
+		if (disposition === null) {
 			return [];
 		}
 		const filteredSet = new Set();
 		for (const actor of actorSet) {
-			if((actor.document?.disposition === disposition) === same) {
+			if ((actor.document?.disposition === disposition) === same) {
 				filteredSet.add(actor);
 			}
 		}
@@ -1194,8 +1194,8 @@ export class Helper {
 	 * @param {number} offsetNumber offset value to increase the input to adjust the scale. default value to zero
 	 * @returns {result} New set of matching disposition
 	 */
-	static findKeyScale(input, scale, offsetNumber=0){
-		input-=offsetNumber;
+	static findKeyScale(input, scale, offsetNumber = 0) {
+		input -= offsetNumber;
 		let result = 0;
 		// Iterate through the keys of the scale object
 		for (let key in scale) {
@@ -1213,7 +1213,7 @@ export class Helper {
 					}
 				}
 				// If there's no next key or input is lower than the next key, assign result
-				if (!nextKey || input < nextKey) {
+				if (!nextKey || (input < nextKey)) {
 					result = scale[key];
 					break;
 				}
@@ -1231,7 +1231,7 @@ export class Helper {
 	 */
 
 	static scaleFn(level = 1, offset = 1) {
-		return Helper.findKeyScale(level, CONFIG.DND4E.SCALE.basic, offset - 1)
+		return Helper.findKeyScale(level, CONFIG.DND4E.SCALE.basic, offset - 1);
 	}
 	
 	/**
@@ -1239,28 +1239,28 @@ export class Helper {
 	 * @param {string} initiative			The roll result
 	 * @returns {string|void}
 	 */
-	static initTooltip(init=null){
-		if(!init) return "";
+	static initTooltip(init = null) {
+		if (!init) return "";
 		
-		try{
-			let rollparts = init.toString().split('.');
+		try {
+			let rollparts = init.toString().split(".");
 			
-			if(rollparts.length != 2) return init;
+			if (rollparts.length != 2) return init;
 			
-			rollparts[2] = rollparts[1].substr(2,2);
-			rollparts[1] = rollparts[1].substr(0,2);
+			rollparts[2] = rollparts[1].substr(2, 2);
+			rollparts[1] = rollparts[1].substr(0, 2);
 			const tiebreaker = game.settings.get("dnd4e", "initiativeDexTiebreaker");
 			let html = `<span class="init-tiebroken" data-tooltip="${game.i18n.localize("DND4EUI.Tiebreaker")}: `;
 			
-			if (tiebreaker === 'system') {
+			if (tiebreaker === "system") {
 				html += `[${game.i18n.localize("DND4E.InitiativeScore")}] ${rollparts[1]}, `;
-			} else if (tiebreaker === 'dex') {
+			} else if (tiebreaker === "dex") {
 				html += `[${game.i18n.localize("DND4E.AbilityDex")}] ${rollparts[1]}, `;
 			}
 			html += `[${game.i18n.localize("SETTINGS.4eInitTBRand")}] ${rollparts[2]}">${rollparts[0]}</span>`;
 			
 			return html;
-		}catch(e){
+		} catch(e) {
 			console.warn(`Failed to create initiative tooltip: ${e}`);
 			return "";
 		}
@@ -1288,7 +1288,7 @@ export class Helper {
 	static getToken(tokenRef) {
 		if (!tokenRef)
 			return undefined;
-		if (tokenRef instanceof Token)
+		if (tokenRef instanceof foundry.canvas.placeables.Token)
 			return tokenRef;
 		if (tokenRef instanceof TokenDocument)
 			return tokenRef.object ?? undefined;
@@ -1296,17 +1296,17 @@ export class Helper {
 		if (typeof tokenRef === "string") {
 			entity = fromUuidSync(tokenRef);
 		}
-		if (entity instanceof Token)
+		if (entity instanceof foundry.canvas.placeables.Token)
 			return entity;
 		if (entity instanceof TokenDocument)
 			return entity.object ?? undefined;
 		if (entity instanceof Actor)
 			return this.tokenForActor(entity);
-		if (entity instanceof Item && entity.parent instanceof Actor)
+		if ((entity instanceof Item) && (entity.parent instanceof Actor))
 			return this.tokenForActor(entity.parent);
-		if (entity instanceof ActiveEffect && entity.parent instanceof Actor)
+		if ((entity instanceof ActiveEffect) && (entity.parent instanceof Actor))
 			return this.tokenForActor(entity.parent);
-		if (entity instanceof ActiveEffect && entity.parent instanceof Item)
+		if ((entity instanceof ActiveEffect) && (entity.parent instanceof Item))
 			return this.tokenForActor(entity.parent?.parent);
 		return undefined;
 	}
@@ -1314,23 +1314,23 @@ export class Helper {
 	static getPlaceable(tokenRef) {
 		if (!tokenRef)
 			return undefined;
-		if (tokenRef instanceof PlaceableObject)
+		if (tokenRef instanceof foundry.canvas.placeables.PlaceableObject)
 			return tokenRef;
 		let entity = tokenRef;
 		if (typeof tokenRef === "string") {
 			entity = fromUuidSync(tokenRef);
 		}
-		if (entity instanceof PlaceableObject)
+		if (entity instanceof foundry.canvas.placeables.PlaceableObject)
 			return entity;
-		if (entity.object instanceof PlaceableObject)
+		if (entity.object instanceof foundry.canvas.placeables.PlaceableObject)
 			return entity.object;
 		if (entity instanceof Actor)
 			return this.tokenForActor(entity);
-		if (entity instanceof Item && entity.parent instanceof Actor)
+		if ((entity instanceof Item) && (entity.parent instanceof Actor))
 			return this.tokenForActor(entity.parent);
-		if (entity instanceof ActiveEffect && entity.parent instanceof Actor)
+		if ((entity instanceof ActiveEffect) && (entity.parent instanceof Actor))
 			return this.tokenForActor(entity.parent);
-		if (entity instanceof ActiveEffect && entity.parent instanceof Item)
+		if ((entity instanceof ActiveEffect) && (entity.parent instanceof Item))
 			return this.tokenForActor(entity.parent?.parent);
 		return undefined;
 	}
@@ -1357,7 +1357,7 @@ export class Helper {
 				else if (prop === "isHex")
 					return false;
 				return Reflect.get(target, prop);
-			}
+			},
 		});
 		const GridDiagonals = CONST.GRID_DIAGONALS;
 		// First snap the poins to the nearest center point for equidistant/1,2,1/2,1,2
@@ -1400,7 +1400,7 @@ export class Helper {
 	*** gets the shortest distance betwen two tokens taking into account both tokens size
 	*** if wallblocking is set then wall are checked
 	**/
-	static computeDistance(t1 /*Token*/, t2 /*Token*/, wallsBlock = false ) {
+	static computeDistance(t1 /*Token*/, t2 /*Token*/, wallsBlock = false) {
 		if (!canvas || !canvas.scene)
 			return -1;
 		if (!canvas.grid || !canvas.dimensions)
@@ -1424,7 +1424,7 @@ export class Helper {
 			for (x = t1StartX; x < t1DocWidth; x++) {
 				for (y = t1StartY; y < t1DocHeight; y++) {
 					if (y === t1StartY + 1) {
-						if (x > t1StartX && x < t1DocWidth - t1StartX) {
+						if ((x > t1StartX) && (x < t1DocWidth - t1StartX)) {
 							// skip to the last y position;
 							y = t1DocHeight - t1StartY;
 						}
@@ -1435,7 +1435,7 @@ export class Helper {
 					for (x1 = t2StartX; x1 < t2DocWidth; x1++) {
 						for (y1 = t2StartY; y1 < t2DocHeight; y1++) {
 							if (y1 === t2StartY + 1) {
-								if (x1 > t2StartX && x1 < t2DocWidth - t2StartX) {
+								if ((x1 > t2StartX) && (x1 < t2DocWidth - t2StartX)) {
 									// skip to the last y position;
 									y1 = t2DocHeight - t2StartY;
 								}
@@ -1480,6 +1480,17 @@ export class Helper {
 		return true;
 	}
 
+	static mapTokenString(disposition /*string | number*/) {
+		if (typeof disposition === "number") return disposition;
+		if (disposition.toLocaleLowerCase().trim() === _loc("TOKEN.DISPOSITION.FRIENDLY")?.toLocaleLowerCase()) return 1;
+		else if (disposition.toLocaleLowerCase().trim() === _loc("TOKEN.DISPOSITION.HOSTILE")?.toLocaleLowerCase()) return -1;
+		else if (disposition.toLocaleLowerCase().trim() === _loc("TOKEN.DISPOSITION.NEUTRAL")?.toLocaleLowerCase()) return 0;
+		else if (disposition.toLocaleLowerCase().trim() === _loc("TOKEN.DISPOSITION.SECRET")?.toLocaleLowerCase()) return -2;
+		else if (disposition.toLocaleLowerCase().trim() === _loc("all")?.toLocaleLowerCase()) return null;
+		const validStrings = ["TOKEN.DISPOSITION.FRIENDLY", "TOKEN.DISPOSITION.HOSTILE", "TOKEN.DISPOSITION.NEUTRAL", "TOKEN.DISPOSITION.SECRET", "all"].map(s => _loc(s));
+		throw new Error(`findNearby ${disposition} is invalid. Disposition must be one of "${validStrings}"`);
+	}
+
 	static findNearby(disposition, token /*Token | uuuidString */, distance, options = { maxSize: undefined, includeToken: false, relative: true }) {
 		token = this.getToken(token);
 		if (!token)
@@ -1487,7 +1498,7 @@ export class Helper {
 		if (!canvas || !canvas.scene)
 			return [];
 		try {
-			if (!(token instanceof Token)) {
+			if (!(token instanceof foundry.canvas.placeables.Token)) {
 				throw new Error("find nearby token is not of type token or the token uuid is invalid");
 			}
 			let relative = options.relative ?? true;
@@ -1496,10 +1507,10 @@ export class Helper {
 				if (disposition.some(s => s === "all"))
 					disposition = [-1, 0, 1];
 				else
-					disposition = disposition.map(s => mapTokenString(s) ?? 0);
-				targetDisposition = disposition.map(i => typeof i === "number" && [-1, 0, 1].includes(i) && relative ? token.document.disposition * i : i);
+					disposition = disposition.map(s => this.mapTokenString(s) ?? 0);
+				targetDisposition = disposition.map(i => (typeof i === "number") && [-1, 0, 1].includes(i) && relative ? token.document.disposition * i : i);
 			}
-			else if (typeof disposition === "number" && [-1, 0, 1].includes(disposition)) {
+			else if ((typeof disposition === "number") && [-1, 0, 1].includes(disposition)) {
 				targetDisposition = relative ? [token.document.disposition * disposition] : [disposition];
 			}
 			else
@@ -1509,14 +1520,14 @@ export class Helper {
 				const tDocument = t.document;
 				if (!this.isValidTarget(t))
 					return false;
-				if (options.maxSize && (tDocument.height ?? 1) * (tDocument.width ?? 1) > options.maxSize)
+				if (options.maxSize && ((tDocument.height ?? 1) * (tDocument.width ?? 1) > options.maxSize))
 					return false;
 				let inRange = false;
 				if (t.actor &&
-					(t.id !== token.id || options?.includeToken) && // not the token
-					(disposition === null || targetDisposition.includes(t.document.disposition))) {
+					((t.id !== token.id) || options?.includeToken) && // not the token
+					((disposition === null) || targetDisposition.includes(t.document.disposition))) {
 					const tokenDistance = this.computeDistance(t, token, { wallsBlock: true });
-					inRange = 0 <= tokenDistance && tokenDistance <= distance;
+					inRange = (0 <= tokenDistance) && (tokenDistance <= distance);
 				}
 				else
 					return false; // wrong disposition
@@ -1536,7 +1547,7 @@ export class Helper {
 			return undefined;
 		if (!canvas.grid || !canvas.dimensions)
 			undefined;
-		if (!token || x === undefined || y === undefined)
+		if (!token || (x === undefined) || (y === undefined))
 			return undefined;
 		if (!canvas || !canvas.grid || !canvas.dimensions)
 			return undefined;
@@ -1566,7 +1577,7 @@ export class Helper {
 			return false;
 		if (!token)
 			return false;
-		const noFlankConditions = new Set(['blinded','dazed','dead', 'dominated', 'petrified','stunned','surprised','unconscious',]);
+		const noFlankConditions = new Set(["blinded", "dazed", "dead", "dominated", "petrified", "stunned", "surprised", "unconscious"]);
 		if (noFlankConditions.intersection(new Set(token.actor.statuses)).size) return false;
 		// For the target see how many square between this token and any friendly targets
 		// Find all tokens hostile to the target
@@ -1661,19 +1672,19 @@ export class Helper {
 	}
 }
 
-export async function handleApplyEffectToToken(data){
-	if(!game.user.isGM){
+export async function handleApplyEffectToToken(data) {
+	if (!game.user.isGM) {
 		return;
 	}
-	Helper.debugLog(data)
-	Helper.debugLog(game.scenes.get(data.scene))
+	Helper.debugLog(data);
+	Helper.debugLog(game.scenes.get(data.scene));
 	const effectData = data.effectData;
 	const actor = data.tokenID ? game.scenes.get(data.scene).tokens.get(data.tokenID).actor : game.actors.get(data.actorID);
 	await actor.newActiveEffectSocket(effectData);
 }
 
-export async function handleDeleteEffectToToken(data){
-	if(!game.user.isGM){
+export async function handleDeleteEffectToToken(data) {
+	if (!game.user.isGM) {
 		return;
 	}
 
@@ -1690,7 +1701,7 @@ export async function handlePromptEoTSaves(data) {
 }
 
 export async function handleAutoDoTs(data) {
-	if(!game.user.isGM) return;
+	if (!game.user.isGM) return;
 	const actor = data.tokenID ? game.scenes.get(data.scene).tokens.get(data.tokenID).actor : game.actors.get(data.actorID);
 
 	await actor.autoDoTsSocket(data.tokenID);
@@ -1709,13 +1720,13 @@ export async function handleAutoDoTs(data) {
 *	if not given? Not a null, which would have been useful :\
 *	Anyway the type check should take care of it.
 /*																			*/
-Handlebars.registerHelper('contains', function(lunch, lunchbox, meal) {
-	try{
-		if(typeof meal != "string") {
-			if(lunchbox instanceof Array) return lunchbox.includes(lunch);
-			if(lunchbox instanceof Set) return lunchbox.has(lunch);
+Handlebars.registerHelper("contains", function(lunch, lunchbox, meal) {
+	try {
+		if (typeof meal != "string") {
+			if (lunchbox instanceof Array) return lunchbox.includes(lunch);
+			if (lunchbox instanceof Set) return lunchbox.has(lunch);
 			//Test for object last, because arrays are also objects... heck you too Javascript >:<
-			if(lunchbox instanceof Object) return lunchbox.hasOwnProperty(lunch);
+			if (lunchbox instanceof Object) return lunch in lunchbox;
 		}
 		if (lunchbox.some(e => e[meal] === lunch)) return true;
 		return false;
@@ -1729,32 +1740,32 @@ Handlebars.registerHelper("isActor", function(obj) {
 	return obj.isCharacter || obj.isNPC;
 });
 
-Handlebars.registerHelper("isActive", function(effect){
+Handlebars.registerHelper("isActive", function(effect) {
 	return !effect.disabled && !effect.isSuppressed;
 });
 
-Handlebars.registerHelper("getSourceName", function(effect){
+Handlebars.registerHelper("getSourceName", function(effect) {
 	return effect.sourceName === "Unknown" ? effect.parent.name : effect.sourceName;
 });
 
-Handlebars.registerHelper("needsEffectButton", function(power){
-	return Helper.hasEffects(power, ["all", "allies", "enemies"])
+Handlebars.registerHelper("needsEffectButton", function(power) {
+	return Helper.hasEffects(power, ["all", "allies", "enemies"]);
 });
 
-Handlebars.registerHelper("needsHitEffectButton", function(power){
-	return Helper.hasEffects(power, ["hit"])
+Handlebars.registerHelper("needsHitEffectButton", function(power) {
+	return Helper.hasEffects(power, ["hit"]);
 });
 
-Handlebars.registerHelper("needsMissEffectButton", function(power){
-	return Helper.hasEffects(power, ["miss"])
+Handlebars.registerHelper("needsMissEffectButton", function(power) {
+	return Helper.hasEffects(power, ["miss"]);
 });
 
-Handlebars.registerHelper("needsHitOrMissEffectButton", function(power){
-	return Helper.hasEffects(power, ["hitOrMiss"])
+Handlebars.registerHelper("needsHitOrMissEffectButton", function(power) {
+	return Helper.hasEffects(power, ["hitOrMiss"]);
 });
 
-Handlebars.registerHelper("applyEffectsToSelection", function(){
-	return game.settings.get("dnd4e","applyEffectsToSelection")
+Handlebars.registerHelper("applyEffectsToSelection", function() {
+	return game.settings.get("dnd4e", "applyEffectsToSelection");
 });
 
 /* -------------------------------------------- */
@@ -1810,14 +1821,14 @@ function groupedSelectOptions(choices, options) {
 
 	// Create an option
 	const option = (name, label, chosen) => {
-		if ( localize ) label = game.i18n.localize(label);
+		if (localize) label = game.i18n.localize(label);
 		html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`;
 	};
 
 	// Create a group
 	const group = category => {
 		let label = category[labelAttr];
-		if ( localize ) game.i18n.localize(label);
+		if (localize) game.i18n.localize(label);
 		html += `<optgroup label="${label}">`;
 		children(category[childrenAttr]);
 		html += "</optgroup>";
@@ -1825,40 +1836,36 @@ function groupedSelectOptions(choices, options) {
 
 	// Add children
 	const children = children => {
-		for ( let [name, child] of Object.entries(children) ) {
-			if ( child[childrenAttr] ) group(child);
+		for (let [name, child] of Object.entries(children)) {
+			if (child[childrenAttr]) group(child);
 			else option(name, child[labelAttr], child[chosenAttr] ?? false);
 		}
 	};
 
 	// Create the options
 	let html = "";
-	if ( blank !== null ) option("", blank);
+	if (blank !== null) option("", blank);
 	children(choices);
 	return new Handlebars.SafeString(html);
 }
 
-	/* -------------------------------------------- */
+/* -------------------------------------------- */
 	
-	/**
+/**
 	 * Register custom Handlebars helpers used by 4e.
 	 */
 export function registerHandlebarsHelpers() {
 	Handlebars.registerHelper({
 		getProperty: foundry.utils.getProperty,
-		"DND4E-concealSection": concealSection,
-		"DND4E-dataset": dataset,
 		"DND4E-groupedSelectOptions": groupedSelectOptions,
-		"DND4E-linkForUuid": (uuid, options) => linkForUuid(uuid, options.hash),
-		"DND4E-itemContext": itemContext,
 		"DND4E-numberFormat": (context, options) => formatNumber(context, options.hash),
-		"DND4E-textFormat": formatText
+		"DND4E-textFormat": formatText,
 	});
 }
 	
-	/* -------------------------------------------- */
-	/*	Config Pre-Localization										 */
-	/* -------------------------------------------- */
+/* -------------------------------------------- */
+/*	Config Pre-Localization										 */
+/* -------------------------------------------- */
 	
 /**
  * Storage for pre-localization configuration.
@@ -1877,8 +1884,8 @@ const _preLocalizationRegistrations = {};
 	*																				if multiple are provided.
 	* @param {boolean} [options.sort=false]	Sort this config enum, using the key if set.
 	*/
-export function preLocalize(configKeyPath, { key, keys=[], sort=false }={}) {
-	if ( key ) keys.unshift(key);
+export function preLocalize(configKeyPath, { key, keys = [], sort = false } = {}) {
+	if (key) keys.unshift(key);
 	_preLocalizationRegistrations[configKeyPath] = { keys, sort };
 }
 	
@@ -1889,11 +1896,11 @@ export function preLocalize(configKeyPath, { key, keys=[], sort=false }={}) {
  * @param {object} config	The `CONFIG.DND4E` object to localize and sort. *Will be mutated.*
  */
 export function performPreLocalization(config) {
-	for ( const [keyPath, settings] of Object.entries(_preLocalizationRegistrations) ) {
+	for (const [keyPath, settings] of Object.entries(_preLocalizationRegistrations)) {
 		const target = foundry.utils.getProperty(config, keyPath);
-		if ( !target ) continue;
+		if (!target) continue;
 		_localizeObject(target, settings.keys);
-		if ( settings.sort ) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
+		if (settings.sort) foundry.utils.setProperty(config, keyPath, sortObjectEntries(target, settings.keys[0]));
 	}
 
 	// Localize & sort status effects
@@ -1912,12 +1919,12 @@ export function performPreLocalization(config) {
  * @returns {object}                   A copy of the original object that has been sorted.
  */
 export function sortObjectEntries(obj, sortKey) {
-  let sorted = Object.entries(obj);
-  const sort = (lhs, rhs) => foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs, game.i18n.lang) : lhs - rhs;
-  if ( foundry.utils.getType(sortKey) === "function" ) sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1]));
-  else if ( sortKey ) sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey]));
-  else sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1]));
-  return Object.fromEntries(sorted);
+	let sorted = Object.entries(obj);
+	const sort = (lhs, rhs) => foundry.utils.getType(lhs) === "string" ? lhs.localeCompare(rhs, game.i18n.lang) : lhs - rhs;
+	if (foundry.utils.getType(sortKey) === "function") sorted = sorted.sort((lhs, rhs) => sortKey(lhs[1], rhs[1]));
+	else if (sortKey) sorted = sorted.sort((lhs, rhs) => sort(lhs[1][sortKey], rhs[1][sortKey]));
+	else sorted = sorted.sort((lhs, rhs) => sort(lhs[1], rhs[1]));
+	return Object.fromEntries(sorted);
 }
 	
 /* -------------------------------------------- */
@@ -1929,37 +1936,37 @@ export function sortObjectEntries(obj, sortKey) {
  * @private
  */
 function _localizeObject(obj, keys) {
-	for ( const [k, v] of Object.entries(obj) ) {
+	for (const [k, v] of Object.entries(obj)) {
 		const type = typeof v;
-		if ( type === "string" ) {
+		if (type === "string") {
 			obj[k] = game.i18n.localize(v);
 			continue;
 		}
 
-		if ( type !== "object" ) {
+		if (type !== "object") {
 			console.error(new Error(
-				`Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`
+				`Pre-localized configuration values must be a string or object, ${type} found for "${k}" instead.`,
 			));
 			continue;
 		}
-		if ( !keys?.length ) {
+		if (!keys?.length) {
 			console.error(new Error(
-				"Localization keys must be provided for pre-localizing when target is an object."
+				"Localization keys must be provided for pre-localizing when target is an object.",
 			));
 			continue;
 		}
 
-		for ( const key of keys ) {
+		for (const key of keys) {
 			const value = foundry.utils.getProperty(v, key);
-			if ( !value ) continue;
+			if (!value) continue;
 			foundry.utils.setProperty(v, key, game.i18n.localize(value));
 		}
 	}
 }
 	
-	/* -------------------------------------------- */
-	/*	Localization																*/
-	/* -------------------------------------------- */
+/* -------------------------------------------- */
+/*	Localization																*/
+/* -------------------------------------------- */
 	
 /**
  * A cache of already-fetched labels for faster lookup.
@@ -1974,58 +1981,58 @@ const _attributeLabelCache = new Map();
  * @param {Actor5e} [options.actor]	An optional reference actor.
  * @returns {string|void}
  */
-export function getHumanReadableAttributeLabel(attr, { actor }={}) {
+export function getHumanReadableAttributeLabel(attr, { actor } = {}) {
 	// Check any actor-specific names first.
-	if ( attr.startsWith("resources.") && actor ) {
+	if (attr.startsWith("resources.") && actor) {
 		const resource = foundry.utils.getProperty(actor, `system.${attr}`);
-		if ( resource.label ) return resource.label;
+		if (resource.label) return resource.label;
 	}
 
-	if ( (attr === "details.xp.value") && (actor?.type === "NPC") ) {
+	if ((attr === "details.xp.value") && (actor?.type === "NPC")) {
 		return game.i18n.localize("DND4E.ExperiencePointsValue");
 	}
 
-	if ( attr.startsWith(".") && actor ) {
+	if (attr.startsWith(".") && actor) {
 		const item = fromUuidSync(attr, { relative: actor });
 		return item?.name ?? attr;
 	}
 
 	// Check if the attribute is already in cache.
 	let label = _attributeLabelCache.get(attr);
-	if ( label ) return label;
+	if (label) return label;
 
 	// Derived fields.
-	if ( attr === "attributes.init.total" ) label = "DND4E.InitiativeScore";
-	else if ( attr === "defences.ac.value" ) label = "DND4E.DefenceACShort";
-	else if ( attr === "defences.fort.value" ) label = "DND4E.DefenceFortShort";
-	else if ( attr === "defences.ref.value" ) label = "DND4E.DefenceRefShort";
-	else if ( attr === "defences.wil.value" ) label = "DND4E.DefenceWillShort";
+	if (attr === "attributes.init.total") label = "DND4E.InitiativeScore";
+	else if (attr === "defences.ac.value") label = "DND4E.DefenceACShort";
+	else if (attr === "defences.fort.value") label = "DND4E.DefenceFortShort";
+	else if (attr === "defences.ref.value") label = "DND4E.DefenceRefShort";
+	else if (attr === "defences.wil.value") label = "DND4E.DefenceWillShort";
 
 	// Abilities.
-	else if ( attr.startsWith("abilities.") ) {
+	else if (attr.startsWith("abilities.")) {
 		const [, key] = attr.split(".");
 		label = CONFIG.DND4E.abilityScores[key].label;
 	}
 
 	// Skills.
-	else if ( attr.startsWith("skills.") ) {
+	else if (attr.startsWith("skills.")) {
 		const [, key] = attr.split(".");
 		label = game.i18n.format("DND4E.PasCheck", { skill: CONFIG.DND4E.skills[key].label });
 	}
 
 	// Attempt to find the attribute in a data model.
-	if ( !label ) {
+	if (!label) {
 		const { CharacterData, NPCData, VehicleData, GroupData } = DND4E.dataModels.actor;
-		for ( const model of [CharacterData, NPCData, VehicleData, GroupData] ) {
+		for (const model of [CharacterData, NPCData, VehicleData, GroupData]) {
 			const field = model.schema.getField(attr);
-			if ( field ) {
+			if (field) {
 				label = field.label;
 				break;
 			}
 		}
 	}
 
-	if ( label ) {
+	if (label) {
 		label = game.i18n.localize(label);
 		_attributeLabelCache.set(attr, label);
 	}

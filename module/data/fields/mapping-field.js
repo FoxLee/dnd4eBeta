@@ -27,78 +27,78 @@
  *                                              by `options.initialKeys`?
  */
 export default class MappingField extends foundry.data.fields.TypedObjectField {
-  constructor(model, options, context) {
-    if ( !(model instanceof foundry.data.fields.DataField) ) {
-      throw new Error("MappingField must have a DataField as its contained element");
-    }
-    super(model, options, context);
+	constructor(model, options, context) {
+		if (!(model instanceof foundry.data.fields.DataField)) {
+			throw new Error("MappingField must have a DataField as its contained element");
+		}
+		super(model, options, context);
 
-    /**
+		/**
      * The embedded DataField definition which is contained in this field.
      * @type {DataField}
      */
-    this.model = this.element;
-  }
+		this.model = this.element;
+	}
 
-  /* -------------------------------------------- */
+	/* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get _defaults() {
-    return foundry.utils.mergeObject(super._defaults, {
-      initialKeys: null,
-      initialValue: null,
-      initialKeysOnly: false,
-      expandKeys: false
-    });
-  }
+	/** @inheritDoc */
+	static get _defaults() {
+		return foundry.utils.mergeObject(super._defaults, {
+			initialKeys: null,
+			initialValue: null,
+			initialKeysOnly: false,
+			expandKeys: false,
+		});
+	}
 
-  /* -------------------------------------------- */
+	/* -------------------------------------------- */
 
-  /** @inheritDoc */
-  getInitialValue(data) {
-    let keys = this.initialKeys;
-    const initial = super.getInitialValue(data);
-    if ( !keys || !foundry.utils.isEmpty(initial) ) return initial;
-    if ( !(keys instanceof Array) ) keys = Object.keys(keys);
-    for ( const key of keys ) initial[key] = this._getInitialValueForKey(key);
-    return initial;
-  }
+	/** @inheritDoc */
+	getInitialValue(data) {
+		let keys = this.initialKeys;
+		const initial = super.getInitialValue(data);
+		if (!keys || !foundry.utils.isEmpty(initial)) return initial;
+		if (!(keys instanceof Array)) keys = Object.keys(keys);
+		for (const key of keys) initial[key] = this._getInitialValueForKey(key);
+		return initial;
+	}
 
-  /* -------------------------------------------- */
+	/* -------------------------------------------- */
 
-  /**
+	/**
    * Get the initial value for the provided key.
    * @param {string} key       Key within the object being built.
    * @param {object} [object]  Any existing mapping data.
    * @returns {*}              Initial value based on provided field type.
    */
-  _getInitialValueForKey(key, object) {
-    const initial = this.model.getInitialValue();
-    return this.initialValue?.(key, initial, object) ?? initial;
-  }
+	_getInitialValueForKey(key, object) {
+		const initial = this.model.getInitialValue();
+		return this.initialValue?.(key, initial, object) ?? initial;
+	}
 
-  /* -------------------------------------------- */
+	/* -------------------------------------------- */
 
-  /** @override */
-  initialize(value, model, options={}) {
-    if ( !value ) return value;
-    const obj = {};
-    const initialKeys = (this.initialKeys instanceof Array) ? this.initialKeys : Object.keys(this.initialKeys ?? {});
-    const keys = this.initialKeysOnly ? initialKeys : Object.keys(value);
-    for ( const key of keys ) {
-      const data = value[key] ?? this._getInitialValueForKey(key, value);
-      obj[key] = this.model.initialize(data, model, options);
-    }
-    return obj;
-  }
+	/** @override */
+	initialize(value, model, options = {}) {
+		if (!value) return value;
+		const obj = {};
+		const initialKeys = (this.initialKeys instanceof Array) ? this.initialKeys : Object.keys(this.initialKeys ?? {});
+		const keys = this.initialKeysOnly ? initialKeys : Object.keys(value);
+		for (const key of keys) {
+			const data = value[key] ?? this._getInitialValueForKey(key, value);
+			obj[key] = this.model.initialize(data, model, options);
+		}
+		return obj;
+	}
 
-  /* -------------------------------------------- */
+	/* -------------------------------------------- */
 
-  /** @inheritDoc */
-  _getField(path, options={}) {
-    if ( path.length === 0 ) return this;
-    if ( game.release.generation < 14 ) path.shift();
-    else path.pop();
-    return this.model._getField(path, options);
-  }
+	/** @inheritDoc */
+	_getField(path, options = {}) {
+		if (path.length === 0) return this;
+		if (game.release.generation < 14) path.shift();
+		else path.pop();
+		return this.model._getField(path, options);
+	}
 }
