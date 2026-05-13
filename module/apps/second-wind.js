@@ -21,7 +21,7 @@ export class SecondWindDialog extends DocumentSheet4e {
 	};
 	
 	get title() {
-		return `${this.document.name} - ${game.i18n.localize("DND4E.SecondWind")}`;
+		return `${this.document.name} - ${_loc("DND4E.SecondWind")}`;
 	}
 
 	static PARTS = {
@@ -53,11 +53,11 @@ export class SecondWindDialog extends DocumentSheet4e {
 
 	_setButtonEnabledState() {
 		let swButtonEnabled = true;
-		let swButtonText = game.i18n.localize("DND4E.SecondWind");
+		let swButtonText = _loc("DND4E.SecondWind");
 
 		if (Number(document.getElementById("surges").value) <= 0) {
 			swButtonEnabled = false;
-			swButtonText = game.i18n.localize("DND4E.HealingMenuOutOfSurges");
+			swButtonText = _loc("DND4E.HealingMenuOutOfSurges");
 		}
 
 		function setButtonEnabled(buttonId, enabled, text) {

@@ -388,8 +388,8 @@ export const registerSystemSettings = function() {
 	
 	// Show player keybind
 	game.keybindings.register("dnd4e", "permShowPlayer", {
-		name: game.i18n.localize("SETTINGS.4epermShowPlayerN"),
-		hint: game.i18n.localize("SETTINGS.4epermShowPlayerL"),
+		name: _loc("SETTINGS.4epermShowPlayerN"),
+		hint: _loc("SETTINGS.4epermShowPlayerL"),
 		editable: [
 			{
 				key: "AltLeft",
@@ -399,8 +399,8 @@ export const registerSystemSettings = function() {
 	});
 
 	// game.keybindings.register("dnd4e", "fastFowardKeyBind", {
-	// 	name: game.i18n.localize("SETTINGS.4eFastFowardKeyBindN"),
-	// 	hint: game.i18n.localize("SETTINGS.4eFastFowardKeyBindL"),
+	// 	name: _loc("SETTINGS.4eFastFowardKeyBindN"),
+	// 	hint: _loc("SETTINGS.4eFastFowardKeyBindL"),
 	// 	editable: [
 	// 		{
 	// 			key: "Alt"

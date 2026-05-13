@@ -63,14 +63,14 @@ export function rollItemMacro(itemName, type = "DOCUMENT.Item") {
 	let actor;
 	if (speaker.token) actor = game.actors.tokens[speaker.token];
 	if (!actor) actor = game.actors.get(speaker.actor);
-	if (!actor) return ui.notifications.warn(game.i18n.localize("DND4E.ControlledNoActor"));
+	if (!actor) return ui.notifications.warn(_loc("DND4E.ControlledNoActor"));
 
 	// Get matching items
 	const items = actor ? actor.items.filter(i => i.name === itemName) : [];
 	if (items.length > 1) {
-		ui.notifications.warn(game.i18n.format("MACRO.4eMultipleTargetsWarn", { actor: actor.name, type: game.i18n.localize(type), name: itemName }));
+		ui.notifications.warn(_loc("MACRO.4eMultipleTargetsWarn", { actor: actor.name, type: _loc(type), name: itemName }));
 	} else if (items.length === 0) {
-		return ui.notifications.warn(game.i18n.format("MACRO.4eMissingTargetWarn", { actor: actor.name, type: game.i18n.localize(type), name: itemName }));
+		return ui.notifications.warn(_loc("MACRO.4eMissingTargetWarn", { actor: actor.name, type: _loc(type), name: itemName }));
 	}
 	const item = items[0];
 
@@ -92,7 +92,7 @@ export function toggleEffect(effectName, type = "DOCUMENT.ActiveEffect") {
 	let actor;
 	if (speaker.token) actor = game.actors.tokens[speaker.token];
 	if (!actor) actor = game.actors.get(speaker.actor);
-	if (!actor) return ui.notifications.warn(game.i18n.localize("DND4E.ControlledNoActor"));
+	if (!actor) return ui.notifications.warn(_loc("DND4E.ControlledNoActor"));
 
 	const collection = Array.from(actor.allApplicableEffects());
 
@@ -103,9 +103,9 @@ export function toggleEffect(effectName, type = "DOCUMENT.ActiveEffect") {
 		return effect?.update({ disabled: !effect.disabled });
 	}
 	else if (documents.length > 1) {
-		ui.notifications.warn(game.i18n.format("MACRO.4eMultipleTargetsWarn", { actor: actor.name, type: game.i18n.localize(type), name: effectName }));
+		ui.notifications.warn(_loc("MACRO.4eMultipleTargetsWarn", { actor: actor.name, type: _loc(type), name: effectName }));
 	} else {
-		return ui.notifications.warn(game.i18n.format("MACRO.4eMissingTargetWarn", { actor: actor.name, type: game.i18n.localize(type), name: effectName }));
+		return ui.notifications.warn(_loc("MACRO.4eMissingTargetWarn", { actor: actor.name, type: _loc(type), name: effectName }));
 	}
 
 }

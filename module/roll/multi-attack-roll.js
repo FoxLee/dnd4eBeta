@@ -77,23 +77,23 @@ export class MultiAttackRoll extends Roll {
 
 			if (game.settings.get("dnd4e", "automationCombat") && (targDefVal !== undefined)) {
 				if (critState === "immune") {
-					hitText = game.i18n.localize("DND4E.Immune");
+					hitText = _loc("DND4E.Immune");
 					targDataArray.targetMissed.push(targDataArray.targets[i]);
 					hitState = "immune";
 				} else if (critState === "critical") {
-					hitText = game.i18n.localize("DND4E.AttackRollHitCrit");
+					hitText = _loc("DND4E.AttackRollHitCrit");
 					targDataArray.targetHit.push(targDataArray.targets[i]);
 					hitState = "critical";
 				} else if (critState === "fumble") {
-					hitText = game.i18n.localize("DND4E.AttackRollMissCrit");
+					hitText = _loc("DND4E.AttackRollMissCrit");
 					targDataArray.targetMissed.push(targDataArray.targets[i]);
 					hitState = "fumble";
 				} else if (r._total >= targDefVal) {
-					hitText = game.i18n.localize("DND4E.AttackRollHit");
+					hitText = _loc("DND4E.AttackRollHit");
 					targDataArray.targetHit.push(targDataArray.targets[i]);
 					hitState = "hit";
 				} else {
-					hitText = game.i18n.localize("DND4E.AttackRollMiss");
+					hitText = _loc("DND4E.AttackRollMiss");
 					targDataArray.targetMissed.push(targDataArray.targets[i]);
 					hitState = "miss";
 				}

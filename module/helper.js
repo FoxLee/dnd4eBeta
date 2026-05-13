@@ -639,7 +639,7 @@ export class Helper {
 			const roll = new Roll(`${rollString}`);
 			// return roll.roll({async : true}).catch(err => {
 			return roll.roll().catch(err => {
-				let msg = context ? `${game.i18n.localize(errorMessageKey)} (in ${context}) : ${rollString}` : `${game.i18n.localize(errorMessageKey)} : ${rollString}`;
+				let msg = context ? `${_loc(errorMessageKey)} (in ${context}) : ${rollString}` : `${_loc(errorMessageKey)} : ${rollString}`;
 				ui.notifications.error(msg);
 				Helper.debugLog(msg);
 				Helper.debugLog(err);
@@ -720,20 +720,20 @@ export class Helper {
 			if (chatData.rangePower) powerDetail += ` <span class="range-value">${chatData.rangePower}</span>`;
 		}
 		else if (chatData.rangeType === "melee") {
-			powerDetail += ` <span class="range-type melee">${game.i18n.localize("DND4E.Melee")}</span> <span class="range-size">${chatData.rangePower}</span>`;
+			powerDetail += ` <span class="range-type melee">${_loc("DND4E.Melee")}</span> <span class="range-size">${chatData.rangePower}</span>`;
 		}
 		else if (chatData.rangeType === "reach") {
-			powerDetail += ` <span class="range-type reach">${game.i18n.localize("DND4E.rangeReach")}</span> <span class="range-size">${chatData.rangePower}</span>`;
+			powerDetail += ` <span class="range-type reach">${_loc("DND4E.rangeReach")}</span> <span class="range-size">${chatData.rangePower}</span>`;
 		}
 		else if (chatData.rangeType === "range") {
-			powerDetail += ` <span class="range-type ranged">${game.i18n.localize("DND4E.rangeRanged")}</span> <span class="range-size">${chatData.rangePower}</span>`;
+			powerDetail += ` <span class="range-type ranged">${_loc("DND4E.rangeRanged")}</span> <span class="range-size">${chatData.rangePower}</span>`;
 			if (chatData.range?.long) powerDetail += `/<span class="range-long">${chatData.range.long}</span>`;
 		}
 		else if (["closeBurst", "closeBlast"].includes(chatData.rangeType)) {
 			powerDetail += ` <span class="range-type close">${CONFIG.DND4E.rangeType[chatData.rangeType].label}</span> <span class="range-size">${this._areaValue(chatData, actorData)}</span>`;
 		}
 		else if (["rangeBurst", "rangeBlast", "wall"].includes(chatData.rangeType)) {
-			powerDetail += ` <span class="range-type area">${CONFIG.DND4E.rangeType[chatData.rangeType].label}</span> <span class="range-size">${this._areaValue(chatData, actorData)}</span> <span class="label-within">${game.i18n.localize("DND4E.RangeWithin")}</span> <span class="range-within">${chatData.rangePower}</span>`;
+			powerDetail += ` <span class="range-type area">${CONFIG.DND4E.rangeType[chatData.rangeType].label}</span> <span class="range-size">${this._areaValue(chatData, actorData)}</span> <span class="label-within">${_loc("DND4E.RangeWithin")}</span> <span class="range-within">${chatData.rangePower}</span>`;
 		}
 		else if (chatData.rangeType === "personal") {
 			powerDetail += ` <span class="range-type personal">${CONFIG.DND4E.rangeType[chatData.rangeType].label}</span>`;
@@ -742,7 +742,7 @@ export class Helper {
 			powerDetail += ` <span class="range-type special">${CONFIG.DND4E.rangeType[chatData.rangeType].label}</span>`;
 		}
 		else if (chatData.rangeType === "touch") {
-			powerDetail += ` <span class="range-type melee">${game.i18n.localize("DND4E.Melee")}</span> <span class="range-size touch">${game.i18n.localize("DND4E.DistTouch")}</span>`;
+			powerDetail += ` <span class="range-type melee">${_loc("DND4E.Melee")}</span> <span class="range-size touch">${_loc("DND4E.DistTouch")}</span>`;
 		}
 		else {
 			powerDetail += "</span>";
@@ -751,23 +751,23 @@ export class Helper {
 		powerDetail += "</div>"; //Close basics
 
 		if (chatData.requirement) {
-			powerDetail += `<p class="requirement"><strong>${game.i18n.localize("DND4E.Requirement")}:</strong> ${chatData.requirement}</p>`;
+			powerDetail += `<p class="requirement"><strong>${_loc("DND4E.Requirement")}:</strong> ${chatData.requirement}</p>`;
 		}
 
 		if (chatData.trigger) {
-			powerDetail += `<p class="trigger"><strong>${game.i18n.localize("DND4E.Trigger")}:</strong> ${chatData.trigger}</p>`;
+			powerDetail += `<p class="trigger"><strong>${_loc("DND4E.Trigger")}:</strong> ${chatData.trigger}</p>`;
 		}
 
 		if (chatData.target && (typeof chatData.target === "string")) { //target can sometimes be an object for things that did not have a dropdown
-			powerDetail += `<p class="target"><strong>${game.i18n.localize("DND4E.Target")}:</strong> ${chatData.target}</p>`;
+			powerDetail += `<p class="target"><strong>${_loc("DND4E.Target")}:</strong> ${chatData.target}</p>`;
 		}
 
 		if (!chatData.postEffect && chatData.effect.detail) {
-			powerDetail += `<p class="effect alt"><strong>${game.i18n.localize("DND4E.Effect")}:</strong> ${chatData.effect.detail}</p>`;
+			powerDetail += `<p class="effect alt"><strong>${_loc("DND4E.Effect")}:</strong> ${chatData.effect.detail}</p>`;
 		}
 		
 		if (!chatData.postSpecial && chatData.special) {
-			powerDetail += `<p class="special"><strong>${game.i18n.localize("DND4E.Special")}:</strong> ${chatData.special}</p>`;
+			powerDetail += `<p class="special"><strong>${_loc("DND4E.Special")}:</strong> ${chatData.special}</p>`;
 			for (let [i, entry] of Object.entries(chatData.specialAdd.parts)) {
 				powerDetail += `<p class="special multi">${entry}</p>`;
 			}
@@ -786,20 +786,20 @@ export class Helper {
 			} else if (chatData.attack.ability) {
 				attackTotal = CONFIG.DND4E.abilities[chatData.attack.ability];
 			} else {
-				attackTotal = game.i18n.localize("DND4E.Attack");
+				attackTotal = _loc("DND4E.Attack");
 			}
 			
 			if (chatData.attack.detail) {
 				let attackDetail = chatData.attack.detail.replaceAll("@attackValues", `${attackValues}`);
 				attackDetail = attackDetail.replaceAll("@attackTotal", `${attackTotal}`);
-				powerDetail += `<p class="attack"><strong>${game.i18n.localize("DND4E.Attack")}:</strong> ${attackDetail}</p>`;
+				powerDetail += `<p class="attack"><strong>${_loc("DND4E.Attack")}:</strong> ${attackDetail}</p>`;
 			}
 			else {
 				if (chatData.attack.ability === "form") {				
-					powerDetail += `<p class="attack"><strong>${game.i18n.localize("DND4E.Attack")}:</strong> <a class="attack-bonus" data-tooltip="${attackValues}">${attackTotal}</a>`;
+					powerDetail += `<p class="attack"><strong>${_loc("DND4E.Attack")}:</strong> <a class="attack-bonus" data-tooltip="${attackValues}">${attackTotal}</a>`;
 				}
 				else if (chatData.attack.ability) {
-					powerDetail += `<p class="attack"><strong>${game.i18n.localize("DND4E.Attack")}</strong>: <a class="attack-bonus" data-tooltip="`;		
+					powerDetail += `<p class="attack"><strong>${_loc("DND4E.Attack")}</strong>: <a class="attack-bonus" data-tooltip="`;		
 					if (game.settings.get("dnd4e", "cardAtkDisplay") == "bonus") {
 						powerDetail += `${CONFIG.DND4E.abilities[chatData.attack.ability]} (${attackValues})">${attackTotal}</a>`;
 					} else if (game.settings.get("dnd4e", "cardAtkDisplay") == "both") {
@@ -808,32 +808,32 @@ export class Helper {
 						powerDetail += `${attackTotal} (${attackValues})">${CONFIG.DND4E.abilities[chatData.attack.ability]}</a>`;
 					}
 				} else {
-					powerDetail += `<p class="attack"><strong>${game.i18n.localize("DND4E.Attack")}</strong>: ${game.i18n.localize("DND4E.Attack")}`;
+					powerDetail += `<p class="attack"><strong>${_loc("DND4E.Attack")}</strong>: ${_loc("DND4E.Attack")}`;
 				}
-				powerDetail += ` ${game.i18n.localize("DND4E.VS")} ${CONFIG.DND4E.defensives[chatData.attack.def].abbreviation}</p>`;
+				powerDetail += ` ${_loc("DND4E.VS")} ${CONFIG.DND4E.defensives[chatData.attack.def].abbreviation}</p>`;
 			}
 		}
 
 		if (chatData.hit.detail) {
-			powerDetail += `<p class="hit alt-highlight"><strong>${game.i18n.localize("DND4E.Hit")}:</strong> ${chatData.hit.detail}</p>`;
+			powerDetail += `<p class="hit alt-highlight"><strong>${_loc("DND4E.Hit")}:</strong> ${chatData.hit.detail}</p>`;
 		}
 
 		if (chatData.miss.detail) {
-			powerDetail += `<p class="miss alt-highlight"><strong>${game.i18n.localize("DND4E.Miss")}:</strong> ${chatData.miss.detail}</p>`;
+			powerDetail += `<p class="miss alt-highlight"><strong>${_loc("DND4E.Miss")}:</strong> ${chatData.miss.detail}</p>`;
 		}
 
 		if (chatData.postEffect && chatData.effect.detail) {
-			powerDetail += `<p class="effect alt-highlight"><strong>${game.i18n.localize("DND4E.Effect")}:</strong> ${this.paragraphTrim(chatData.effect.detail)}</p>`;
+			powerDetail += `<p class="effect alt-highlight"><strong>${_loc("DND4E.Effect")}:</strong> ${this.paragraphTrim(chatData.effect.detail)}</p>`;
 		}
 		if (chatData.postSpecial && chatData.special) {
-			powerDetail += `<p class="special alt-highlight"><strong>${game.i18n.localize("DND4E.Special")}:</strong> ${chatData.special}</p>`;
+			powerDetail += `<p class="special alt-highlight"><strong>${_loc("DND4E.Special")}:</strong> ${chatData.special}</p>`;
 			for (let [i, entry] of Object.entries(chatData.specialAdd.parts)) {
 				powerDetail += `<p>${entry}</p>`;
 			}
 		}
 
 		if ((chatData.sustain?.actionType !== "none") && chatData.sustain?.actionType) {
-			powerDetail += `<p class="sustain alt-highlight"><strong>${game.i18n.localize("DND4E.Sustain")} ${CONFIG.DND4E.abilityActivationTypes[chatData.sustain.actionType].label}:</strong> ${chatData.sustain.detail}</p>`;
+			powerDetail += `<p class="sustain alt-highlight"><strong>${_loc("DND4E.Sustain")} ${CONFIG.DND4E.abilityActivationTypes[chatData.sustain.actionType].label}:</strong> ${chatData.sustain.detail}</p>`;
 		}
 
 		if (actorData) {
@@ -1250,14 +1250,14 @@ export class Helper {
 			rollparts[2] = rollparts[1].substr(2, 2);
 			rollparts[1] = rollparts[1].substr(0, 2);
 			const tiebreaker = game.settings.get("dnd4e", "initiativeDexTiebreaker");
-			let html = `<span class="init-tiebroken" data-tooltip="${game.i18n.localize("DND4EUI.Tiebreaker")}: `;
+			let html = `<span class="init-tiebroken" data-tooltip="${_loc("DND4EUI.Tiebreaker")}: `;
 			
 			if (tiebreaker === "system") {
-				html += `[${game.i18n.localize("DND4E.InitiativeScore")}] ${rollparts[1]}, `;
+				html += `[${_loc("DND4E.InitiativeScore")}] ${rollparts[1]}, `;
 			} else if (tiebreaker === "dex") {
-				html += `[${game.i18n.localize("DND4E.AbilityDex")}] ${rollparts[1]}, `;
+				html += `[${_loc("DND4E.AbilityDex")}] ${rollparts[1]}, `;
 			}
-			html += `[${game.i18n.localize("SETTINGS.4eInitTBRand")}] ${rollparts[2]}">${rollparts[0]}</span>`;
+			html += `[${_loc("SETTINGS.4eInitTBRand")}] ${rollparts[2]}">${rollparts[0]}</span>`;
 			
 			return html;
 		} catch(e) {
@@ -1821,14 +1821,14 @@ function groupedSelectOptions(choices, options) {
 
 	// Create an option
 	const option = (name, label, chosen) => {
-		if (localize) label = game.i18n.localize(label);
+		if (localize) label = _loc(label);
 		html += `<option value="${name}" ${chosen ? "selected" : ""}>${label}</option>`;
 	};
 
 	// Create a group
 	const group = category => {
 		let label = category[labelAttr];
-		if (localize) game.i18n.localize(label);
+		if (localize) _loc(label);
 		html += `<optgroup label="${label}">`;
 		children(category[childrenAttr]);
 		html += "</optgroup>";
@@ -1904,7 +1904,7 @@ export function performPreLocalization(config) {
 	}
 
 	// Localize & sort status effects
-	CONFIG.statusEffects.forEach(s => s.name = game.i18n.localize(s.name));
+	CONFIG.statusEffects.forEach(s => s.name = _loc(s.name));
 	// CONFIG.statusEffects.sort((lhs, rhs) =>
 	//	 lhs.id === "dead" ? -1 : rhs.id === "dead" ? 1 : lhs.name.localeCompare(rhs.name, game.i18n.lang)
 	// );
@@ -1939,7 +1939,7 @@ function _localizeObject(obj, keys) {
 	for (const [k, v] of Object.entries(obj)) {
 		const type = typeof v;
 		if (type === "string") {
-			obj[k] = game.i18n.localize(v);
+			obj[k] = _loc(v);
 			continue;
 		}
 
@@ -1959,7 +1959,7 @@ function _localizeObject(obj, keys) {
 		for (const key of keys) {
 			const value = foundry.utils.getProperty(v, key);
 			if (!value) continue;
-			foundry.utils.setProperty(v, key, game.i18n.localize(value));
+			foundry.utils.setProperty(v, key, _loc(value));
 		}
 	}
 }
@@ -1989,7 +1989,7 @@ export function getHumanReadableAttributeLabel(attr, { actor } = {}) {
 	}
 
 	if ((attr === "details.xp.value") && (actor?.type === "NPC")) {
-		return game.i18n.localize("DND4E.ExperiencePointsValue");
+		return _loc("DND4E.ExperiencePointsValue");
 	}
 
 	if (attr.startsWith(".") && actor) {
@@ -2017,7 +2017,7 @@ export function getHumanReadableAttributeLabel(attr, { actor } = {}) {
 	// Skills.
 	else if (attr.startsWith("skills.")) {
 		const [, key] = attr.split(".");
-		label = game.i18n.format("DND4E.PasCheck", { skill: CONFIG.DND4E.skills[key].label });
+		label = _loc("DND4E.PasCheck", { skill: CONFIG.DND4E.skills[key].label });
 	}
 
 	// Attempt to find the attribute in a data model.
@@ -2033,7 +2033,7 @@ export function getHumanReadableAttributeLabel(attr, { actor } = {}) {
 	}
 
 	if (label) {
-		label = game.i18n.localize(label);
+		label = _loc(label);
 		_attributeLabelCache.set(attr, label);
 	}
 

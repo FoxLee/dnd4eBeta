@@ -41,7 +41,7 @@ export default class AbilityUseDialog extends foundry.applications.api.Dialog {
 		// Prepare dialog form data
 		const system = {
 			item: item.system,
-			title: game.i18n.format("DND4E.AbilityUseHint", item),
+			title: _loc("DND4E.AbilityUseHint", item),
 			note: this._getAbilityUseNote(item, uses, recharge),
 			hasLimitedUses: itemData.preparedMaxUses || recharges,
 			canUse: recharges ? recharge.charged : (quantity && !uses.value) || uses.value,
@@ -54,7 +54,7 @@ export default class AbilityUseDialog extends foundry.applications.api.Dialog {
 
 		// Create the Dialog and return as a Promise
 		const icon = "fa-fist-raised";
-		const label = game.i18n.localize("DND4E.AbilityUseItem");
+		const label = _loc("DND4E.AbilityUseItem");
 		return new Promise((resolve) => {
 			const dlg = new this({
 				item,
@@ -90,11 +90,11 @@ export default class AbilityUseDialog extends foundry.applications.api.Dialog {
 
 		// Zero quantity
 		const quantity = item.system.quantity;
-		if (quantity <= 0) return game.i18n.localize("DND4E.AbilityUseUnavailableHint");
+		if (quantity <= 0) return _loc("DND4E.AbilityUseUnavailableHint");
 
 		// Abilities which use Recharge
 		if (recharge.value) {
-			return game.i18n.format(recharge.charged ? "DND4E.AbilityUseChargedHint" : "DND4E.AbilityUseRechargeHint", {
+			return _loc(recharge.charged ? "DND4E.AbilityUseChargedHint" : "DND4E.AbilityUseRechargeHint", {
 				type: item.type,
 			});
 		}
@@ -108,7 +108,7 @@ export default class AbilityUseDialog extends foundry.applications.api.Dialog {
 			if (uses.value >= 1) str = "DND4E.AbilityUseConsumableChargeHint";
 			else if ((item.system.quantity === 1) && uses.autoDestroy) str = "DND4E.AbilityUseConsumableDestroyHint";
 			else if (item.system.quantity > 1) str = "DND4E.AbilityUseConsumableQuantityHint";
-			return game.i18n.format(str, {
+			return _loc(str, {
 				type: item.system.consumableType,
 				value: uses.value,
 				quantity: item.system.quantity,
@@ -119,7 +119,7 @@ export default class AbilityUseDialog extends foundry.applications.api.Dialog {
 
 		// Other Items
 		else {
-			return game.i18n.format("DND4E.AbilityUseNormalHint", {
+			return _loc("DND4E.AbilityUseNormalHint", {
 				type: item.type,
 				value: uses.value,
 				max: item.system.preparedMaxUses,

@@ -107,7 +107,7 @@ export default class DamagingRegionRegionBehaviorType extends foundry.data.regio
 			user: Helper.firstOwner(actor),
 			speaker: { actor: actor, alias: token.name },
 			content: html,
-			flavor: `${["healing", "temphp"].includes(damageTypes) ? game.i18n.localize ("DND4E.Healing") : game.i18n.localize ("DND4E.Damage")}: ${this.parent.name}`,
+			flavor: `${["healing", "temphp"].includes(damageTypes) ? _loc ("DND4E.Healing") : _loc ("DND4E.Damage")}: ${this.parent.name}`,
 			rolls: [damageRoll],
 		});
 

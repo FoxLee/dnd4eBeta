@@ -21,8 +21,8 @@ export default class ItemGranter extends foundry.abstract.DataModel {
 
 	_validateItemType(item, { strict = true } = {}) {
 		if (this.constructor.VALID_TYPES.has(item.type)) return true;
-		const type = game.i18n.localize(CONFIG.Item.typeLabels[item.type]);
-		if (strict) throw new Error(game.i18n.format("DND4E.AdvancementItemTypeInvalidWarning", { type }));
+		const type = _loc(CONFIG.Item.typeLabels[item.type]);
+		if (strict) throw new Error(_loc("DND4E.AdvancementItemTypeInvalidWarning", { type }));
 		return false;
 	}
 }

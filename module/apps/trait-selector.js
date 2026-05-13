@@ -70,7 +70,7 @@ export default class TraitSelector extends foundry.applications.api.HandlebarsAp
 				}
 
 				choices[k] = {
-					label: game.i18n.localize(`DND4E.Weapon${v}`),
+					label: _loc(`DND4E.Weapon${v}`),
 					chosen: attr ? attr.value.has(k) : false,
 					children: children,
 				};

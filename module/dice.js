@@ -129,7 +129,7 @@ export async function d20Roll({ parts = [], partsExpressionReplacements = [], it
 	let buttons = [{
 		action: "normal",
 		icon: "fa-solid fa-dice-d20",
-		label: game.i18n.localize("DND4E.Roll"),
+		label: _loc("DND4E.Roll"),
 		type: "submit",
 	}];
 	return RollDialog.asPromise({ dialogData, rollConfig, buttons, window: { title }, callbackFn: performD20RollAndCreateMessage });
@@ -526,7 +526,7 @@ export async function damageRoll({ parts, partsCrit, partsMiss, partsExpressionR
 		buttons.push({
 			action: "heal",
 			// icon: "fa-solid fa-dice-d20",
-			label: game.i18n.localize("DND4E.Healing"),
+			label: _loc("DND4E.Healing"),
 			type: "submit",
 		});
 	}
@@ -535,21 +535,21 @@ export async function damageRoll({ parts, partsCrit, partsMiss, partsExpressionR
 			buttons.push({
 				action: "crit",
 				// icon: "fa-solid fa-dice-d20",
-				label: game.i18n.localize("DND4E.CriticalHit"),
+				label: _loc("DND4E.CriticalHit"),
 				type: "submit",
 			});
 		}
 		buttons.push({
 			action: "normal",
 			// icon: "fa-solid fa-dice-d20",
-			label: game.i18n.localize(allowCritical ? "DND4E.Normal" : "DND4E.Roll"),
+			label: _loc(allowCritical ? "DND4E.Normal" : "DND4E.Roll"),
 			type: "submit",
 		});
 		if (data.item.miss.halfDamage || data.item.miss.formula) {
 			buttons.push({
 				action: "miss",
 				// icon: "fa-solid fa-dice-d20",
-				label: game.i18n.localize(allowCritical ? "DND4E.Miss" : "DND4E.Roll"),
+				label: _loc(allowCritical ? "DND4E.Miss" : "DND4E.Roll"),
 				type: "submit",
 			});
 		}
@@ -580,7 +580,7 @@ async function performDamageRollAndCreateChatMessage(form, { parts, partsCrit, p
 	if (hitType === "immune") {
 		options.hitTypeDamage = false;
 		roll = RollWithOriginalExpression.createRoll(parts, partsExpressionReplacement, data, options);
-		flavor = `${flavor} (${game.i18n.localize("DND4E.Immune")})`;
+		flavor = `${flavor} (${_loc("DND4E.Immune")})`;
 	}
 	else if (hitType === "normal") {
 		options.hitTypeDamage = true;
@@ -591,18 +591,18 @@ async function performDamageRollAndCreateChatMessage(form, { parts, partsCrit, p
 		options.hitTypeDamage = true;
 		options.hitType = hitType;
 		roll = RollWithOriginalExpression.createRoll(partsCrit, partsCritExpressionReplacement, data, options);
-		flavor = `${flavor} (${game.i18n.localize("DND4E.Critical")})`;
+		flavor = `${flavor} (${_loc("DND4E.Critical")})`;
 	}
 	else if (hitType === "miss") {
 		options.hitTypeDamage = true;
 		options.hitType = hitType;
 		roll = RollWithOriginalExpression.createRoll(partsMiss, partsMissExpressionReplacement, data, options);
-		flavor = `${flavor} (${game.i18n.localize("DND4E.Miss")})`;
+		flavor = `${flavor} (${_loc("DND4E.Miss")})`;
 	}
 	else if (hitType === "heal") {
 		options.hitTypeHealing = true;
 		roll = RollWithOriginalExpression.createRoll(parts, partsExpressionReplacement, data, options);
-		flavor = `${flavor} (${game.i18n.localize("DND4E.Healing")})`;
+		flavor = `${flavor} (${_loc("DND4E.Healing")})`;
 	} else {
 		roll = RollWithOriginalExpression.createRoll(parts, partsExpressionReplacement, data, options);
 	}

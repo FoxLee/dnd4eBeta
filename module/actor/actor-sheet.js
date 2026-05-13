@@ -427,7 +427,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 			actorData.resources = ["primary", "secondary", "tertiary"].reduce((obj, r) => {
 				const res = actorData.resources[r] || {};
 				res.name = r;
-				res.placeholder = game.i18n.localize("DND4E.Resource" + r.titleCase());
+				res.placeholder = _loc("DND4E.Resource" + r.titleCase());
 				if ((res.max <= 0) && !res.label) {
 					delete res.max;
 					delete res.value;
@@ -640,43 +640,43 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		return Object.fromEntries(Object.entries(this.actor.system.skills).map(([s, skl]) => ([s, {
 			...skl,
 			icon: this._getTrainingIcon(skl.training),
-			hover: game.i18n.localize(DND4E.trainingLevels[skl.training]),
+			hover: _loc(DND4E.trainingLevels[skl.training]),
 			label: skl.label ?? DND4E.skills[s]?.label,
 		}])));
 	}
 	
 	_prepareMovement(data) {
 		if (!data.hasSpeed) return;
-		data.moveDisplay = `${parseInt(data.system.movement.walk.value)} ${game.i18n.localize("DND4E.Movement.Unit")}`;
+		data.moveDisplay = `${parseInt(data.system.movement.walk.value)} ${_loc("DND4E.Movement.Unit")}`;
 		if (data.system.movement.walk?.traits && (this.actor.type != "Player Character")) data.moveDisplay += ` (${data.system.movement.walk.traits})`;
 		data.moveTip = `<p style="text-align:left">
-		${parseInt(data.system.movement.walk.value)} ${game.i18n.localize("DND4E.Movement.Unit")} ${game.i18n.format("DND4E.Movement.SpeedType", { mode: game.i18n.localize("DND4E.Movement.Walk") })}`;
+		${parseInt(data.system.movement.walk.value)} ${_loc("DND4E.Movement.Unit")} ${_loc("DND4E.Movement.SpeedType", { mode: _loc("DND4E.Movement.Walk") })}`;
 		if (data.system.movement.walk?.traits) data.moveTip += ` (${data.system.movement.walk.traits})`;
-		data.moveTip += `<br />+${parseInt(data.system.movement.run.value)} ${game.i18n.localize("DND4E.Movement.Unit")} ${game.i18n.localize("DND4E.Movement.Run")}`;
+		data.moveTip += `<br />+${parseInt(data.system.movement.run.value)} ${_loc("DND4E.Movement.Unit")} ${_loc("DND4E.Movement.Run")}`;
 		if (data.system.movement.run?.traits) data.moveTip += ` (${data.system.movement.run.traits})`;
-		data.moveTip += `<br />${parseInt(data.system.movement.charge.value)} ${game.i18n.localize("DND4E.Movement.Unit")} ${game.i18n.format("DND4E.Movement.SpeedType", { mode: game.i18n.localize("DND4E.Movement.Charge") })}`;
+		data.moveTip += `<br />${parseInt(data.system.movement.charge.value)} ${_loc("DND4E.Movement.Unit")} ${_loc("DND4E.Movement.SpeedType", { mode: _loc("DND4E.Movement.Charge") })}`;
 		if (data.system.movement.charge?.traits) data.moveTip += ` (${data.system.movement.charge.traits})`;
-		data.moveTip += `<br />${parseInt(data.system.movement.shift.value)} ${game.i18n.localize("DND4E.Movement.Unit")} ${game.i18n.format("DND4E.Movement.SpeedType", { mode: game.i18n.localize("DND4E.Movement.Shift") })}`;
+		data.moveTip += `<br />${parseInt(data.system.movement.shift.value)} ${_loc("DND4E.Movement.Unit")} ${_loc("DND4E.Movement.SpeedType", { mode: _loc("DND4E.Movement.Shift") })}`;
 		if (data.system.movement.shift?.traits) data.moveTip += ` (${data.system.movement.shift.traits})`;
-		/*if(data.system.movement.burrow.value) data.moveTip += `<br>${parseInt(data.system.movement.burrow.value)} ${game.i18n.localize("DND4E.MovementUnit")} ${game.i18n.localize("DND4E.MovementSpeedBurrowing")}`;
-		if(data.system.movement.climb.value) data.moveTip += `<br>${parseInt(data.system.movement.climb.value)} ${game.i18n.localize("DND4E.MovementUnit")} ${game.i18n.localize("DND4E.MovementSpeedClimbing")}`;
-		if(data.system.movement.fly.value) data.moveTip += `<br>${parseInt(data.system.movement.fly.value)} ${game.i18n.localize("DND4E.MovementUnit")} ${game.i18n.localize("DND4E.MovementSpeedFlying")}`;
-		if(data.system.movement.swim.value) data.moveTip += `<br>${parseInt(data.system.movement.swim.value)} ${game.i18n.localize("DND4E.MovementUnit")} ${game.i18n.localize("DND4E.MovementSpeedSwimming")}`
-		if(data.system.movement.teleport.value) data.moveTip += `<br>${parseInt(data.system.movement.teleport.value)} ${game.i18n.localize("DND4E.MovementUnit")} ${game.i18n.localize("DND4E.MovementSpeedTeleporting")}`*/
+		/*if(data.system.movement.burrow.value) data.moveTip += `<br>${parseInt(data.system.movement.burrow.value)} ${_loc("DND4E.MovementUnit")} ${_loc("DND4E.MovementSpeedBurrowing")}`;
+		if(data.system.movement.climb.value) data.moveTip += `<br>${parseInt(data.system.movement.climb.value)} ${_loc("DND4E.MovementUnit")} ${_loc("DND4E.MovementSpeedClimbing")}`;
+		if(data.system.movement.fly.value) data.moveTip += `<br>${parseInt(data.system.movement.fly.value)} ${_loc("DND4E.MovementUnit")} ${_loc("DND4E.MovementSpeedFlying")}`;
+		if(data.system.movement.swim.value) data.moveTip += `<br>${parseInt(data.system.movement.swim.value)} ${_loc("DND4E.MovementUnit")} ${_loc("DND4E.MovementSpeedSwimming")}`
+		if(data.system.movement.teleport.value) data.moveTip += `<br>${parseInt(data.system.movement.teleport.value)} ${_loc("DND4E.MovementUnit")} ${_loc("DND4E.MovementSpeedTeleporting")}`*/
 
 		const moveModes = ["burrow", "climb", "fly", "swim", "teleport"];
 		for (let m of moveModes) {
 			if (data.system.movement[m].value > 0) {
-				data.moveTip += `<br />${parseInt(data.system.movement[m].value)} ${game.i18n.localize("DND4E.Movement.Unit")} ${game.i18n.format("DND4E.Movement.SpeedType", { mode: CONFIG.DND4E.movementTypes[m].label })}`;
+				data.moveTip += `<br />${parseInt(data.system.movement[m].value)} ${_loc("DND4E.Movement.Unit")} ${_loc("DND4E.Movement.SpeedType", { mode: CONFIG.DND4E.movementTypes[m].label })}`;
 				if (data.system.movement[m]?.traits) data.moveTip += ` (${data.system.movement[m].traits})`;
 				if (this.actor.type != "Player Character") {
-					data.moveDisplay += `, <span class="move-mode">${CONFIG.DND4E.movementTypes[m].label} ${parseInt(data.system.movement[m].value)} ${game.i18n.localize("DND4E.Movement.Unit")}`;
+					data.moveDisplay += `, <span class="move-mode">${CONFIG.DND4E.movementTypes[m].label} ${parseInt(data.system.movement[m].value)} ${_loc("DND4E.Movement.Unit")}`;
 					if (data.system.movement[m]?.traits) data.moveDisplay += ` (${data.system.movement[m].traits})`;
 					data.moveDisplay += "</span>";
 				}
 			}
 		}
-		if ((this.actor.type != "Player Character") && (data.system.movement.shift.value > 1)) data.moveDisplay += `, <span class="move-mode">${game.i18n.localize("DND4E.Movement.Shift")} ${parseInt(data.system.movement.shift.value)} ${data.system.movement.shift.traits ? data.system.movement.shift.traits : "" }</span>`;
+		if ((this.actor.type != "Player Character") && (data.system.movement.shift.value > 1)) data.moveDisplay += `, <span class="move-mode">${_loc("DND4E.Movement.Shift")} ${parseInt(data.system.movement.shift.value)} ${data.system.movement.shift.traits ? data.system.movement.shift.traits : "" }</span>`;
 
 		if (data.system.movement.custom) {
 			const moveCustom = [];
@@ -964,13 +964,13 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 			// if ( isAlways ) item.toggleClass = "fixed";
 			// if ( isAlways ) item.toggleTitle = CONFIG.DND4E.spellPreparationModes.always;
 			// else if ( isPrepared ) item.toggleTitle = CONFIG.DND4E.spellPreparationModes.prepared;
-			if (isPrepared) item.toggleTitle = game.i18n.localize("DND4E.PowerPrepared");
-			else item.toggleTitle = game.i18n.localize("DND4E.PowerUnPrepared");
+			if (isPrepared) item.toggleTitle = _loc("DND4E.PowerPrepared");
+			else item.toggleTitle = _loc("DND4E.PowerUnPrepared");
 		}
 		else {
 			const isActive = foundry.utils.getProperty(item.system, "equipped");
 			item.toggleClass = isActive ? "active" : "";
-			item.toggleTitle = game.i18n.localize(isActive ? "DND4E.Equipped" : "DND4E.Unequipped");
+			item.toggleTitle = _loc(isActive ? "DND4E.Equipped" : "DND4E.Unequipped");
 		}
 	}
 	
@@ -1153,7 +1153,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		const type = target.dataset.type;
 		const subtype = target.dataset?.subtype || null;
 		const itemData = {
-			name: game.i18n.format("DND4E.ItemNew", { type: type.capitalize() }),
+			name: _loc("DND4E.ItemNew", { type: type.capitalize() }),
 			type: type,
 			system: foundry.utils.duplicate(target.dataset),
 		};
@@ -1173,7 +1173,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 			window: {
 				title: `${this.actor.name} - JSON Item Importer`,
 			},
-			content: `<p>${game.i18n.localize("DND4EUI.ImportJSONInput")}</p>
+			content: `<p>${_loc("DND4EUI.ImportJSONInput")}</p>
 			<input name=json type="text"/>`,
 			ok: {
 				label: "DND4EUI.ImportJSONUpload",
@@ -1199,7 +1199,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		event.preventDefault();
 		const type = target.dataset.type;
 		const itemData = {
-			name: `${game.i18n.format("DND4E.ItemNew", { type: type.capitalize() })} Power`,
+			name: `${_loc("DND4E.ItemNew", { type: type.capitalize() })} Power`,
 			type: "power",
 			system: foundry.utils.duplicate(target.dataset),
 		};
@@ -1292,9 +1292,9 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 			if (game.settings.get("dnd4e", "itemDeleteConfirmation")) {
 				shouldDelete = await foundry.applications.api.Dialog.confirm({
 					window: {
-						title: game.i18n.format("DND4E.DeleteConfirmTitle", { name: item.name }),
+						title: _loc("DND4E.DeleteConfirmTitle", { name: item.name }),
 					},
-					content: game.i18n.format("DND4E.DeleteConfirmContent", { name: item.name }),
+					content: _loc("DND4E.DeleteConfirmContent", { name: item.name }),
 					yes: { default: true },
 				});
 			}
@@ -1342,7 +1342,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		event.preventDefault();
 		const skillName = target.parentElement.dataset.skill;
 		const targetSkill = `system.skills.${skillName}`;
-		const options = { document: this.actor, target: targetSkill, label: `${game.i18n.format("DND4E.SkillBonusTitle", { skill: this.actor.system.skills[skillName].label }) }`, skill: true };
+		const options = { document: this.actor, target: targetSkill, label: `${_loc("DND4E.SkillBonusTitle", { skill: this.actor.system.skills[skillName].label }) }`, skill: true };
 		new AttributeBonusDialog(options).render(true);
 	}
 	/* -------------------------------------------- */
@@ -1352,35 +1352,35 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		event.preventDefault();
 		const abilityId = target.parentElement.dataset.ability;
 		const targetAbility = `system.abilities.${abilityId}.check`;
-		const options = { document: this.actor, target: targetAbility, label: `${game.i18n.format("DND4E.AbilityCheckBonusTitle", { ability: this.actor.system.abilities[abilityId].label }) }` };
+		const options = { document: this.actor, target: targetAbility, label: `${_loc("DND4E.AbilityCheckBonusTitle", { ability: this.actor.system.abilities[abilityId].label }) }` };
 		new AttributeBonusDialog(options).render(true);
 	}
 
 	static #onDeathSaveBonus(event, target) {
 		if (!this.actor.isOwner) return;
 		event.preventDefault();
-		const options = { document: this.actor, target: "system.details.deathsavebon", label: game.i18n.localize("DND4E.DeathSavingThrowBonus") };
+		const options = { document: this.actor, target: "system.details.deathsavebon", label: _loc("DND4E.DeathSavingThrowBonus") };
 		new AttributeBonusDialog(options).render(true);		
 	}
 	
 	static #onSurgeBonus(event, target) {
 		if (!this.actor.isOwner) return;
 		event.preventDefault();
-		const options = { document: this.actor, target: "system.details.surgeBon", label: game.i18n.localize("DND4E.HealingSurgeBonus") };
+		const options = { document: this.actor, target: "system.details.surgeBon", label: _loc("DND4E.HealingSurgeBonus") };
 		new AttributeBonusDialog(options).render(true);		
 	}
 	
 	static #onSurgeEnv(event, target) {
 		if (!this.actor.isOwner) return;
 		event.preventDefault();
-		const options = { document: this.actor, target: "system.details.surgeEnv", label: `${game.i18n.localize("DND4E.HealingSurges")} ${game.i18n.localize("DND4E.SurgeEnv")}` };
+		const options = { document: this.actor, target: "system.details.surgeEnv", label: `${_loc("DND4E.HealingSurges")} ${_loc("DND4E.SurgeEnv")}` };
 		new AttributeBonusDialog(options).render(true);		
 	}
 
 	static #onSecondWindBonus(event, target) {
 		if (!this.actor.isOwner) return;
 		event.preventDefault();
-		const options = { document: this.actor, target: "system.details.secondwindbon", label: game.i18n.localize("DND4E.SecondWindBonus"), secondWind: true };
+		const options = { document: this.actor, target: "system.details.secondwindbon", label: _loc("DND4E.SecondWindBonus"), secondWind: true };
 		new AttributeBonusDialog(options).render(true);		
 	}
 	
@@ -1389,14 +1389,14 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		event.preventDefault();
 		const defName = target.parentElement.dataset.defence;
 		const targetDef = `system.defences.${defName}`;
-		const options = { document: this.actor, target: targetDef, label: `${game.i18n.format("DND4E.DefenceBonus", { def: this.actor.system.defences[defName].label })}`, ac: (defName === "ac") };
+		const options = { document: this.actor, target: targetDef, label: `${_loc("DND4E.DefenceBonus", { def: this.actor.system.defences[defName].label })}`, ac: (defName === "ac") };
 		new AttributeBonusDialog(options).render(true);		
 	}
 	
 	static #onInitiativeBonus(event, target) {
 		if (!this.actor.isOwner) return;
 		event.preventDefault();
-		const options = { document: this.actor, target: "system.attributes.init", label: game.i18n.localize("DND4E.InitiativeBonus"), init: true };
+		const options = { document: this.actor, target: "system.attributes.init", label: _loc("DND4E.InitiativeBonus"), init: true };
 		new AttributeBonusDialog(options).render(true);		
 	}
 	
@@ -1430,7 +1430,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		const passName = target.parentElement.dataset.passive;
 		const skillName = this.actor.system.passive[passName].skill;
 		const targetPassive = `system.passive.${passName}`;
-		const options = { document: this.actor, target: targetPassive, label: `${game.i18n.format("DND4E.PasBonus", { skill: this.actor.system.skills[skillName].label })}` };
+		const options = { document: this.actor, target: targetPassive, label: `${_loc("DND4E.PasBonus", { skill: this.actor.system.skills[skillName].label })}` };
 		new AttributeBonusDialog(options).render(true);		
 	}	
 
@@ -1448,7 +1448,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		event.preventDefault();
 		const resName = target.parentElement.dataset.res;
 		const targetRes = `system.resistances.${resName}`;
-		const options = { document: this.actor, target: targetRes, label: `${game.i18n.format("DND4E.DamResVulnBonus", { type: this.actor.system.resistances[resName].label })}` };
+		const options = { document: this.actor, target: targetRes, label: `${_loc("DND4E.DamResVulnBonus", { type: this.actor.system.resistances[resName].label })}` };
 		new AttributeBonusDialog(options).render(true);
 	}
 	
@@ -1549,7 +1549,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 	static #onSavingThrowBonus(event, target) {
 		if (!this.actor.isOwner) return;
 		event.preventDefault();
-		const options = { document: this.actor, target: "system.details.saves", label: game.i18n.localize("DND4E.SavingThrowBonus") };
+		const options = { document: this.actor, target: "system.details.saves", label: _loc("DND4E.SavingThrowBonus") };
 		new AttributeBonusDialog(options).render(true);	
 	}
 
@@ -1616,11 +1616,11 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		if (item && (item.type === "power") && item.hasAttack) {
 			const bonus = await item.getAttackBonus();
 
-			const d = { ac: game.i18n.localize("DND4E.DefAC"), ref: game.i18n.localize("DND4E.DefRef"), wil: game.i18n.localize("DND4E.DefWil"), fort: game.i18n.localize("DND4E.DefFort") };
+			const d = { ac: _loc("DND4E.DefAC"), ref: _loc("DND4E.DefRef"), wil: _loc("DND4E.DefWil"), fort: _loc("DND4E.DefFort") };
 			const defence = d[item.system.attack.def];
 
 			if (bonus && defence) {
-				game.tooltip.activate(event.target, { text: `+ ${String(bonus)} ${game.i18n.localize("DND4E.VS")} ${defence}`, direction: "RIGHT" });
+				game.tooltip.activate(event.target, { text: `+ ${String(bonus)} ${_loc("DND4E.VS")} ${defence}`, direction: "RIGHT" });
 			}
 		}
 	}
@@ -1669,10 +1669,10 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 				// r.evaluate({async: false});
 				await r.evaluate();
 	
-				let flav = `${game.i18n.format("DND4E.PowerRechargeFail", { type: item.name })}`;
+				let flav = `${_loc("DND4E.PowerRechargeFail", { type: item.name })}`;
 				if (r.total >= r.dice[0].options.critical) {
 					this.document.updateEmbeddedDocuments("Item", [{ _id: itemId, "system.uses.value": item.system.preparedMaxUses }]);
-					flav = `${game.i18n.format("DND4E.PowerRechargeSuccess", { type: item.name })}`;
+					flav = `${_loc("DND4E.PowerRechargeSuccess", { type: item.name })}`;
 				}
 
 				r.toMessage({
@@ -1693,8 +1693,8 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 				ChatMessage.create({
 					user: game.user.id,
 					speaker: { actor: this.document, alias: this.document.name },
-					flavor: `${item.name}—${game.i18n.localize("DND4E.PowerRecharge")}`,
-					content: `${game.i18n.format("DND4E.PowerRechargeSuccessCondition", { type: item.name, condition: item.system.rechargeCondition })}`,
+					flavor: `${item.name}—${_loc("DND4E.PowerRecharge")}`,
+					content: `${_loc("DND4E.PowerRechargeSuccessCondition", { type: item.name, condition: item.system.rechargeCondition })}`,
 					"flags.dnd4e": {
 						messageType: "recharge",
 					},
@@ -1715,8 +1715,8 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		if (!this.actor.isOwner) return;
 		event.preventDefault();
 		let shouldConvert = await foundry.applications.api.Dialog.confirm({
-			window: { title: `${game.i18n.localize("DND4E.CurrencyConvert")}` },
-			content: `<p>${game.i18n.localize("DND4E.CurrencyConvertHint")}</p>`,
+			window: { title: `${_loc("DND4E.CurrencyConvert")}` },
+			content: `<p>${_loc("DND4E.CurrencyConvertHint")}</p>`,
 		});
 		if (shouldConvert) return this.convertCurrency();
 	}
@@ -1730,7 +1730,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		for (const [type, value] of Object.entries(this.actor.system.currency)) {
 			goldSum += value * CONFIG.DND4E.currencyConversion[type]?.gp;
 		}
-		return game.i18n.localize("DND4E.GoldWealth") + (Math.round(goldSum * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+		return _loc("DND4E.GoldWealth") + (Math.round(goldSum * 100) / 100).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
 	/* -------------------------------------------- */
 
@@ -1802,7 +1802,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 			},
 			content: `
 			<div class="form-group stacked">
-				<label>${game.i18n.localize("DND4EUI.StringEnterValues")}:</label>
+				<label>${_loc("DND4EUI.StringEnterValues")}:</label>
 				<input type="text" name="traits" value="${currValue.join(";")}" data-dtype="String"/>
 			</div>
 			`,
@@ -1858,7 +1858,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		ChatMessage.create({
 			user: game.user.id,
 			speaker: { actor: this.document, alias: this.document.name },
-			content: `${game.i18n.format("DND4E.PasCheck", { skill: this.actor.system.skills[skillName].label })}: <strong>${this.document.system.passive[passName].value}</strong>`,
+			content: `${_loc("DND4E.PasCheck", { skill: this.actor.system.skills[skillName].label })}: <strong>${this.document.system.passive[passName].value}</strong>`,
 		});	
 	}
 
@@ -1909,7 +1909,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 			{
 				name: "DND4E.ContextMenuActionDuplicate",
 				icon: "<i class='fas fa-copy fa-fw'></i>",
-				callback: () => effect.clone({ name: game.i18n.format("DOCUMENT.CopyOf", { name: effect.name }) }, { save: true }),
+				callback: () => effect.clone({ name: _loc("DOCUMENT.CopyOf", { name: effect.name }) }, { save: true }),
 			},
 			{
 				name: "DND4E.ContextMenuActionDelete",
@@ -1947,7 +1947,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 				name: "DND4E.ContextMenuActionDuplicate",
 				icon: "<i class='fas fa-copy fa-fw'></i>",
 				condition: () => !["race", "background", "class", "subclass"].includes(item.type),
-				callback: () => item.clone({ name: game.i18n.format("DOCUMENT.CopyOf", { name: item.name }) }, { save: true }),
+				callback: () => item.clone({ name: _loc("DOCUMENT.CopyOf", { name: item.name }) }, { save: true }),
 			},
 			{
 				name: "DND4E.ContextMenuActionDelete",
@@ -1985,14 +1985,14 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		// Special Roll Options for Basic and Tagged Attacks
 		if ((item.type == "power") && (item.system?.attack?.isBasic || item.system?.attack?.canCharge)) {
 			options.unshift({
-				name: game.i18n.localize("DND4E.AttackModeCharge"),
+				name: _loc("DND4E.AttackModeCharge"),
 				icon: "<i class='fas fa-angles-right'></i>",
 				callback: () => this._onItemRoll(item, { isCharge: true }),
 			});
 		}
 		if ((item.type == "power") && (item.system?.attack?.isBasic || item.system?.attack?.canOpp)) {
 			options.unshift({
-				name: game.i18n.localize("DND4E.AttackModeOpp"),
+				name: _loc("DND4E.AttackModeOpp"),
 				icon: "<i class='fas fa-triangle-exclamation'></i>",
 				callback: () => this._onItemRoll(item, { isOpp: true }),
 			});
@@ -2077,7 +2077,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
 		const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
 		if (multipleAdvancements && !game.settings.get("dnd4e", "disableAdvancements")) {
-			ui.notifications.warn(game.i18n.format("DND4E.WarnCantAddMultipleAdvancements"));
+			ui.notifications.warn(_loc("DND4E.WarnCantAddMultipleAdvancements"));
 			items = itemsWithoutAdvancement;
 		}
 	

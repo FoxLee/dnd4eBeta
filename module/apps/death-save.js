@@ -21,7 +21,7 @@ export class DeathSaveDialog extends DocumentSheet4e {
 	};
 
 	get title() {
-		return `${this.document.name} - ${game.i18n.localize("DND4E.DeathSaveLongform")}`;
+		return `${this.document.name} - ${_loc("DND4E.DeathSaveLongform")}`;
 	}
 
 	static PARTS = {

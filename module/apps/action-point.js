@@ -21,7 +21,7 @@ export class ActionPointDialog extends DocumentSheet4e {
 	};
 	
 	get title() {
-		return `${this.document.name} - ${game.i18n.localize("DND4E.ActionPoint")}`;
+		return `${this.document.name} - ${_loc("DND4E.ActionPoint")}`;
 	}
 
 	static PARTS = {

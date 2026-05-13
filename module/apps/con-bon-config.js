@@ -24,7 +24,7 @@ export default class ConBonConfig extends DocumentSheet4e {
 	};
 
 	get title() {
-		return `${this.document.name} — ${game.i18n.localize("DND4EUI.ConditionalAtkMods")}`;
+		return `${this.document.name} — ${_loc("DND4EUI.ConditionalAtkMods")}`;
 	}
 
 	static PARTS = {
@@ -59,7 +59,7 @@ export default class ConBonConfig extends DocumentSheet4e {
 		event.preventDefault();
 		const conditionId = target.parentElement.dataset.mod;
 		const targetBonus = `system.commonAttackBonuses.${conditionId}`;
-		const options = { document: this.document, target: targetBonus, label: `${game.i18n.format("DND4E.CommonAttackBonusesConfig", { condition: game.i18n.localize(this.document.system.commonAttackBonuses[conditionId].label) })}` };
+		const options = { document: this.document, target: targetBonus, label: `${_loc("DND4E.CommonAttackBonusesConfig", { condition: _loc(this.document.system.commonAttackBonuses[conditionId].label) })}` };
 		new AttributeBonusDialog(options).render(true);
 	}
 

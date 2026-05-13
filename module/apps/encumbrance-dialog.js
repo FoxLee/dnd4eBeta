@@ -21,7 +21,7 @@ export class EncumbranceDialog extends DocumentSheet4e {
 	};
 
 	get title() {
-		return `${this.document.name} - ${game.i18n.localize("DND4E.Encumbrance")}`;
+		return `${this.document.name} - ${_loc("DND4E.Encumbrance")}`;
 	}
 
 	static PARTS = {
