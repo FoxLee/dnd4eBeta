@@ -1631,7 +1631,7 @@ export default class Item4e extends Item {
 		const parts = [];
 		const partsExpressionReplacements = [];
 		if (itemData.attack.formula) {		
-			parts.push(Roll.replaceFormulaData(itemData.attack.formula, this.getRollData()));
+			parts.push(Roll.replaceFormulaData(itemData.attack.formula, rollData));
 			partsExpressionReplacements.push({ value: itemData.attack.formula, target: parts[0] });
 			// add the substitutions that were used in the expression to the data object for later
 			options.formulaInnerData = Helper.getDataObject(itemData.attack.formula, actorData.getRollData());
@@ -2064,7 +2064,7 @@ export default class Item4e extends Item {
 	 *
 	 * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
 	 */
-	async rollDamage({ event, spellLevel = null, versatile = false, fastForward = undefined, variance = {} } = {}) {
+	async rollDamage({ event, spellLevel = null, fastForward = undefined, variance = {} } = {}) {
 		const itemData = this.system;
 		const actorData = this.actor;
 		const actorInnerData = this.actor.system;
@@ -2372,7 +2372,7 @@ export default class Item4e extends Item {
 	 *
 	 * @return {Promise<Roll>}   A Promise which resolves to the created Roll instance
 	 */
-	rollHealing({ event, spellLevel = null, versatile = false, fastForward = undefined } = {}) {
+	rollHealing({ event, spellLevel = null, fastForward = undefined } = {}) {
 		const itemData = this.system;
 		const actorData = this.actor;
 		const actorInnerData = this.actor.system;
@@ -2436,10 +2436,6 @@ export default class Item4e extends Item {
 				partsExpressionReplacement.push({ target: "1", value: "@versatile" });
 			}
 		}
-		// if ( versatile && itemData.damage.versatile ) {
-		// parts[0] = itemData.damage.versatile;
-		// messageData["flags.dnd4e.roll"].versatile = true;
-		// }
 	
 		// Define Roll Data
 		const actorBonus = foundry.utils.getProperty(actorInnerData, `bonuses.${itemData.actionType}`) || {};
@@ -3075,7 +3071,6 @@ export default class Item4e extends Item {
 		if (action === "attack") await item.rollAttack({ event, variance: variance });
 		else if (action === "damage") await item.rollDamage({ event, spellLevel, variance: variance });
 		else if (action === "healing") await item.rollHealing({ event, spellLevel });
-		else if (action === "versatile") await item.rollDamage({ event, spellLevel, versatile: true, variance: variance });
 		else if (action === "formula") await item.rollFormula({ event, spellLevel, variance: variance });
 		
 		// Effects
