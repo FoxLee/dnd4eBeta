@@ -33,6 +33,8 @@ export default class FormulaField extends foundry.data.fields.StringField {
 				value = value.replace(/@scale(\d*)/gm, "(scale(@level, $1))");
 				value = value.replace(/@scale/gm, "(scale(@level))");
 			}
+			const operatorRegex = /\s*([+\-*/])\s*/g;
+			value = value.replace(operatorRegex, " $1 ");
 		}
 		return super.clean(value, options, _state);
 	}
