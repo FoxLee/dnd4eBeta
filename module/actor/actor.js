@@ -1150,7 +1150,7 @@ export class Actor4e extends Actor {
 								val = b.value;
 							}		
 							else {
-								val = Roll.safeEval(Roll.replaceFormulaData(val, system));
+								val = Roll.safeEval(Roll.replaceFormulaData(b.value, system));
 							}
 							vulnManual += Math.min(val, 0);
 							resManual += Math.max(val, 0);
