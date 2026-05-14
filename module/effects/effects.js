@@ -250,13 +250,12 @@ export default class ActiveEffect4e extends ActiveEffect {
 	}
 
 	_prepareDuration() {
+		const duration = super._prepareDuration();
 		const durationType = this.system.durationType;
-		if (durationType) {
-			return {
-				label: this._getDurationLabel(0, 0),
-			};
+		if (durationType && (durationType !== "custom")) {
+			duration.label = this._getDurationLabel(durationType);
 		}
-		return super._prepareDuration();
+		return duration;
 	}
 
 	/* -------------------------------------------- */
@@ -269,16 +268,11 @@ export default class ActiveEffect4e extends ActiveEffect {
 	 * @returns {string}        The formatted label
 	 * @private
 	 */
-	_getDurationLabel(rounds, turns) {
-		const durationType = this.system.durationType;
-		if (durationType) {
-			if (durationType === "endOfTargetTurn") return _loc("DND4E.DurationEndOfTargetTurnSimp");
-			else if (durationType === "startOfTargetTurn") return _loc("DND4E.DurationStartOfTargetTurnSimp");
+	_getDurationLabel(durationType) {
+		if (durationType === "endOfTargetTurn") return _loc("DND4E.DurationEndOfTargetTurnSimp");
+		else if (durationType === "startOfTargetTurn") return _loc("DND4E.DurationStartOfTargetTurnSimp");
 
-			return _loc(CONFIG.DND4E.durationType[durationType].label);
-		}
-
-		return super._getDurationLabel(rounds, turns);
+		return CONFIG.DND4E.durationType[durationType].label;
 	}
 
 	_getIsSave() {
