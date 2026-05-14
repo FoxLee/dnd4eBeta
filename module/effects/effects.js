@@ -272,7 +272,7 @@ export default class ActiveEffect4e extends ActiveEffect {
 		if (durationType === "endOfTargetTurn") return _loc("DND4E.DurationEndOfTargetTurnSimp");
 		else if (durationType === "startOfTargetTurn") return _loc("DND4E.DurationStartOfTargetTurnSimp");
 
-		return _loc(CONFIG.DND4E.durationType[durationType].label);
+		return CONFIG.DND4E.durationType[durationType].label;
 	}
 
 	_getIsSave() {
