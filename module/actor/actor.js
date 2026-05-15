@@ -1945,7 +1945,7 @@ export class Actor4e extends Actor {
 		
 		let message = `(${_loc("DND4E.AbbreviationDC")} ${options.dc || 10})`;
 		if (options.effectSave) {
-			message = `${_loc("DND4E.SaveVs")} <strong>${this.effects.get(options.effectId).name}</strong> ${message}`;
+			message = `${_loc("DND4E.SaveVs",{'effect':`<strong>${this.effects.get(options.effectId).name}</strong>`})} ${message}`;
 		} else {
 			message = `${_loc("DND4E.RollSave")} ${message}`;
 		}
