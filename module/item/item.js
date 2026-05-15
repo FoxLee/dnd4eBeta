@@ -1771,7 +1771,7 @@ export default class Item4e extends Item {
 		const parts = [];
 		const partsExpressionReplacements = [];
 		if (itemData.attack.formula) {		
-			parts.push(Roll.replaceFormulaData(itemData.attack.formula, this.getRollData()));
+			parts.push(Roll.replaceFormulaData(itemData.attack.formula, rollData));
 			partsExpressionReplacements.push({ value: itemData.attack.formula, target: parts[0] });
 			// add the substitutions that were used in the expression to the data object for later
 			options.formulaInnerData = Helper.getDataObject(itemData.attack.formula, actorData.getRollData());

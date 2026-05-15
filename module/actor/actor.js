@@ -388,7 +388,7 @@ export class Actor4e extends Actor {
 						system.details.surgeBon.value += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							system.details.surgeBon.value += parseInt(val);
 						}
@@ -415,7 +415,7 @@ export class Actor4e extends Actor {
 							system.details.secondwindbon.value += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								system.details.secondwindbon.value += parseInt(val);
 							}
@@ -452,7 +452,7 @@ export class Actor4e extends Actor {
 							system.details.surgeEnv.value += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								system.details.surgeEnv.value += parseInt(val);
 							}
@@ -504,7 +504,7 @@ export class Actor4e extends Actor {
 						bonusValue += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							bonusValue += parseInt(val);
 						}
@@ -535,7 +535,7 @@ export class Actor4e extends Actor {
 						system.details.deathsavebon.value += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							system.details.deathsavebon.value += parseInt(val);
 						}
@@ -566,7 +566,7 @@ export class Actor4e extends Actor {
 						modifierBonusValue += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							modifierBonusValue += parseInt(val);
 						}
@@ -631,7 +631,7 @@ export class Actor4e extends Actor {
 							initBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								initBonusValue += parseInt(val);
 							}
@@ -671,7 +671,7 @@ export class Actor4e extends Actor {
 					baseMoveBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						baseMoveBonusValue += parseInt(val);
 					}
@@ -686,7 +686,7 @@ export class Actor4e extends Actor {
 					walkBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						walkBonusValue += parseInt(val);
 					}
@@ -701,7 +701,7 @@ export class Actor4e extends Actor {
 					runBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						runBonusValue += parseInt(val);
 					}
@@ -716,7 +716,7 @@ export class Actor4e extends Actor {
 					chargeBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						chargeBonusValue += parseInt(val);
 					}
@@ -731,7 +731,7 @@ export class Actor4e extends Actor {
 					shiftBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						shiftBonusValue += parseInt(val);
 					}
@@ -746,7 +746,7 @@ export class Actor4e extends Actor {
 					burrowBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						burrowBonusValue += parseInt(val);
 					}
@@ -761,7 +761,7 @@ export class Actor4e extends Actor {
 					climbBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						climbBonusValue += parseInt(val);
 					}
@@ -776,7 +776,7 @@ export class Actor4e extends Actor {
 					flyBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						flyBonusValue += parseInt(val);
 					}
@@ -791,7 +791,7 @@ export class Actor4e extends Actor {
 					swimBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						swimBonusValue += parseInt(val);
 					}
@@ -806,7 +806,7 @@ export class Actor4e extends Actor {
 					teleportBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						teleportBonusValue += parseInt(val);
 					}
@@ -1055,7 +1055,7 @@ export class Actor4e extends Actor {
 							ablBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								ablBonusValue += parseInt(val);
 							}
@@ -1112,7 +1112,7 @@ export class Actor4e extends Actor {
 						passiveBonusValue += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							passiveBonusValue += parseInt(val);
 						}
@@ -1259,7 +1259,7 @@ export class Actor4e extends Actor {
 							defBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, data);
+							let val = Roll.replaceFormulaData(b.value, data);
 							if (Helper._isNumber(val)) {
 								defBonusValue += parseInt(val);
 							}
@@ -1378,7 +1378,7 @@ export class Actor4e extends Actor {
 								defBonusValue += parseInt(b.value);
 							}
 							else if (b.active) {
-								let val = Helper.replaceData(b.value, data);
+								let val = Roll.replaceFormulaData(b.value, data);
 								if (Helper._isNumber(val)) {
 									defBonusValue += parseInt(val);
 								}
@@ -1454,7 +1454,7 @@ export class Actor4e extends Actor {
 							sklBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								sklBonusValue += parseInt(val);
 							}
@@ -1566,7 +1566,7 @@ export class Actor4e extends Actor {
 							sklBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								sklBonusValue += parseInt(val);
 							}
@@ -1705,7 +1705,7 @@ export class Actor4e extends Actor {
 								bonusValue += parseInt(b.value);
 							}
 							else if (b.active) {
-								let val = Helper.replaceData(b.value, system);
+								let val = Roll.replaceFormulaData(b.value, system);
 								if (Helper._isNumber(val)) {
 									bonusValue += parseInt(val);
 								}
@@ -2385,9 +2385,9 @@ export class Actor4e extends Actor {
 		//round to nearest 100th.
 		weight = Math.round(weight * 1000) / 1000;
 
-		const max = eval(Helper.replaceData(actorData.encumbrance.formulaNorm, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
-		const maxHeavy = eval(Helper.replaceData(actorData.encumbrance.formulaHeavy, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
-		const maxMax = eval(Helper.replaceData(actorData.encumbrance.formulaMax, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
+		const max = eval(Roll.replaceFormulaData(actorData.encumbrance.formulaNorm, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
+		const maxHeavy = eval(Roll.replaceFormulaData(actorData.encumbrance.formulaHeavy, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
+		const maxMax = eval(Roll.replaceFormulaData(actorData.encumbrance.formulaMax, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
 
 		//set ppc Percentage Base Carry-Capasity
 		const pbc = Math.clamp(weight / max * 100, 0, 99.7);
