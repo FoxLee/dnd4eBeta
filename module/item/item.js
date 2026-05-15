@@ -261,7 +261,11 @@ export default class Item4e extends Item {
 	 */
 	/** @inheritdoc */
 	static getDefaultArtwork(itemData) {
-		return { img: CONFIG.DND4E.defaultArtwork.Item[itemData.type] ?? super.getDefaultArtwork(itemData) };
+		const defaultArtwork = CONFIG.DND4E.defaultArtwork.Item[itemData.type];
+		if (defaultArtwork) {
+			return { img: defaultArtwork };
+		}
+		return super.getDefaultArtwork(itemData);
 	}
 
 	/* -------------------------------------------- */
