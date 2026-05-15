@@ -148,7 +148,7 @@
         </div>
 					
         <div class="senses-perception" data-skill="prc">
-          <label class="skill-name rollable">{{system.skills.prc.label}}</label>
+          <label class="skill-name rollable" data-action="rollSkillCheck">{{system.skills.prc.label}}</label>
           <strong class="skill-mod {{#if system.advancedCals}}skill-bonus 
 						rollable{{/if}}" {{#if system.advancedCals}}data-action="skillBonus"{{/if}}>{{numberFormat system.skills.prc.total decimals=0 sign=true }}</strong>
         </div>
