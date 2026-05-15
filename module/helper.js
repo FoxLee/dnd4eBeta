@@ -580,47 +580,6 @@ export class Helper {
 	}
 
 	/**
-	 * Replace referenced data attributes in the roll formula with the syntax `@attr` with the corresponding key from
-	 * the provided `data` object. This is a temporary helper function that will be replaced with Roll.replaceFormulaData()
-	 * in Foundry 0.7.1.
-	 *
-	 * @param {String} formula		The original formula within which to replace.
-	 * @param {Object} data			 Data object to use for value replacements.
-	 * @param {Object} missing		Value to use as missing replacements, such as {missing: "0"}.
-	 * @return {String} The formula with attributes replaced with values.
-	 */
-	static replaceData(formula, data, { missing = null, depth = 1 } = {}) {
-		// Exit early if the formula is invalid.
-		if ((typeof formula != "string") || (depth < 1)) {
-			return 0;
-		}
-		// Replace attributes with their numeric equivalents.
-		let dataRgx = this.variableRegex;
-		let rollFormula = formula.replace(dataRgx, (match, term) => {
-			let value = foundry.utils.getProperty(data, term);
-			// If there was a value returned, trim and return it.
-			if (value || (value == 0)) {
-				return String(value).trim();
-			}
-			// Otherwise, return either the missing replacement value, or the original @attr string for later replacement.
-			else {
-				return missing != null ? missing : `@${term}`;
-			}
-		});
-		return rollFormula;
-	}
-
-	static evaluate(s) {
-		let total = 0;
-		s = s.match(/[+-]*(\.\d+|\d+(\.\d+)?)/g) || [];
-
-		while (s.length) {
-			total += parseFloat(s.shift());
-		}
-		return total;
-	}
-
-	/**
 	 * Create and evaluate a roll based on the given roll expression string.	If no expression has been provided, evaluate a roll of 0.
 	 * In the event that the string fails to evaluate, display an error and return a roll of 0.
 	 *

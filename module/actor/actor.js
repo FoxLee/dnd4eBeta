@@ -388,7 +388,7 @@ export class Actor4e extends Actor {
 						system.details.surgeBon.value += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							system.details.surgeBon.value += parseInt(val);
 						}
@@ -415,7 +415,7 @@ export class Actor4e extends Actor {
 							system.details.secondwindbon.value += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								system.details.secondwindbon.value += parseInt(val);
 							}
@@ -452,7 +452,7 @@ export class Actor4e extends Actor {
 							system.details.surgeEnv.value += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								system.details.surgeEnv.value += parseInt(val);
 							}
@@ -504,7 +504,7 @@ export class Actor4e extends Actor {
 						bonusValue += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							bonusValue += parseInt(val);
 						}
@@ -535,7 +535,7 @@ export class Actor4e extends Actor {
 						system.details.deathsavebon.value += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							system.details.deathsavebon.value += parseInt(val);
 						}
@@ -566,7 +566,7 @@ export class Actor4e extends Actor {
 						modifierBonusValue += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							modifierBonusValue += parseInt(val);
 						}
@@ -631,7 +631,7 @@ export class Actor4e extends Actor {
 							initBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								initBonusValue += parseInt(val);
 							}
@@ -671,7 +671,7 @@ export class Actor4e extends Actor {
 					baseMoveBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						baseMoveBonusValue += parseInt(val);
 					}
@@ -686,7 +686,7 @@ export class Actor4e extends Actor {
 					walkBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						walkBonusValue += parseInt(val);
 					}
@@ -701,7 +701,7 @@ export class Actor4e extends Actor {
 					runBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						runBonusValue += parseInt(val);
 					}
@@ -716,7 +716,7 @@ export class Actor4e extends Actor {
 					chargeBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						chargeBonusValue += parseInt(val);
 					}
@@ -731,7 +731,7 @@ export class Actor4e extends Actor {
 					shiftBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						shiftBonusValue += parseInt(val);
 					}
@@ -746,7 +746,7 @@ export class Actor4e extends Actor {
 					burrowBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						burrowBonusValue += parseInt(val);
 					}
@@ -761,7 +761,7 @@ export class Actor4e extends Actor {
 					climbBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						climbBonusValue += parseInt(val);
 					}
@@ -776,7 +776,7 @@ export class Actor4e extends Actor {
 					flyBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						flyBonusValue += parseInt(val);
 					}
@@ -791,7 +791,7 @@ export class Actor4e extends Actor {
 					swimBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						swimBonusValue += parseInt(val);
 					}
@@ -806,7 +806,7 @@ export class Actor4e extends Actor {
 					teleportBonusValue += parseInt(b.value);
 				}
 				else if (b.active) {
-					let val = Helper.replaceData(b.value, system);
+					let val = Roll.replaceFormulaData(b.value, system);
 					if (Helper._isNumber(val)) {
 						teleportBonusValue += parseInt(val);
 					}
@@ -844,7 +844,7 @@ export class Actor4e extends Actor {
 		
 			system.movement.walk.bonusValue = walkBonusValue;
 			
-			let walkForm = eval(Helper.replaceData(system.movement.walk.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let walkForm = eval(Roll.replaceFormulaData(system.movement.walk.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.walk.value += walkForm + walkBonusValue + system.movement.base?.temp || 0;
 			system.movement.walk.value += system.movement.walk.feat || 0;
 			system.movement.walk.value += system.movement.walk.item || 0;
@@ -863,7 +863,7 @@ export class Actor4e extends Actor {
 		//Run Speed
 		if (isNaN(parseInt(system.movement.run?.absolute))) { //All logic only required if there is no usable absolute value
 			system.movement.run.bonusValue = runBonusValue;
-			let runForm = eval(Helper.replaceData(system.movement.run.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let runForm = eval(Roll.replaceFormulaData(system.movement.run.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.run.value = runForm + runBonusValue + system.movement.run?.temp || 0;
 			system.movement.run.value += system.movement.run.feat || 0;
 			system.movement.run.value += system.movement.run.item || 0;
@@ -882,7 +882,7 @@ export class Actor4e extends Actor {
 		//Charge Speed
 		if (isNaN(parseInt(system.movement.charge?.absolute))) { //All logic only required if there is no usable absolute value
 			system.movement.charge.bonusValue = chargeBonusValue;
-			let chargeForm = eval(Helper.replaceData(system.movement.charge.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let chargeForm = eval(Roll.replaceFormulaData(system.movement.charge.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.charge.value = chargeForm + chargeBonusValue + system.movement.charge?.temp || 0;
 			system.movement.charge.value += system.movement.charge.feat || 0;
 			system.movement.charge.value += system.movement.charge.item || 0;
@@ -901,7 +901,7 @@ export class Actor4e extends Actor {
 		//Shift Speed
 		if (isNaN(parseInt(system.movement.shift?.absolute))) { //All logic only required if there is no usable absolute value
 			system.movement.shift.bonusValue = shiftBonusValue;		
-			let shiftForm = eval(Helper.replaceData(system.movement.shift.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let shiftForm = eval(Roll.replaceFormulaData(system.movement.shift.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.shift.value = shiftForm + shiftBonusValue + system.movement.shift?.temp || 0;
 			system.movement.shift.value += system.movement.shift.feat || 0;
 			system.movement.shift.value += system.movement.shift.item || 0;
@@ -920,7 +920,7 @@ export class Actor4e extends Actor {
 		//Burrow Speed
 		if (isNaN(parseInt(system.movement.burrow?.absolute))) { //All logic only required if there is no usable absolute value
 			system.movement.burrow.bonusValue = burrowBonusValue;
-			let burrowForm = eval(Helper.replaceData(system.movement.burrow.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let burrowForm = eval(Roll.replaceFormulaData(system.movement.burrow.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.burrow.value = burrowForm + burrowBonusValue + system.movement.burrow?.temp || 0;
 			system.movement.burrow.value += system.movement.burrow.feat || 0;
 			system.movement.burrow.value += system.movement.burrow.item || 0;
@@ -939,7 +939,7 @@ export class Actor4e extends Actor {
 		//Climb Speed
 		if (isNaN(parseInt(system.movement.climb?.absolute))) { //All logic only required if there is no usable absolute value
 			system.movement.climb.bonusValue = climbBonusValue;
-			let climbForm = eval(Helper.replaceData(system.movement.climb.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let climbForm = eval(Roll.replaceFormulaData(system.movement.climb.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.climb.value = climbForm + climbBonusValue + system.movement.climb?.temp || 0;
 			system.movement.climb.value += system.movement.climb.feat || 0;
 			system.movement.climb.value += system.movement.climb.item || 0;
@@ -958,7 +958,7 @@ export class Actor4e extends Actor {
 		//Burrow Speed
 		if (isNaN(parseInt(system.movement.burrow?.absolute))) { //All logic only required if there is no usable absolute value
 			system.movement.burrow.bonusValue = burrowBonusValue;
-			let burrowForm = eval(Helper.replaceData(system.movement.burrow.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let burrowForm = eval(Roll.replaceFormulaData(system.movement.burrow.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.burrow.value = burrowForm + burrowBonusValue + system.movement.burrow?.temp || 0;
 			system.movement.burrow.value += system.movement.burrow.feat || 0;
 			system.movement.burrow.value += system.movement.burrow.item || 0;
@@ -977,7 +977,7 @@ export class Actor4e extends Actor {
 		//Fly Speed
 		if (isNaN(parseInt(system.movement.fly?.absolute))) { //All logic only required if there is no usable absolute value
 			system.movement.fly.bonusValue = flyBonusValue;
-			let flyForm = eval(Helper.replaceData(system.movement.fly.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let flyForm = eval(Roll.replaceFormulaData(system.movement.fly.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.fly.value = flyForm + flyBonusValue + system.movement.fly?.temp || 0;
 			system.movement.fly.value += system.movement.fly.feat || 0;
 			system.movement.fly.value += system.movement.fly.item || 0;
@@ -996,7 +996,7 @@ export class Actor4e extends Actor {
 		//Swim Speed
 		if (isNaN(parseInt(system.movement.swim?.absolute))) { //All logic only required if there is no usable absolute value
 			system.movement.swim.bonusValue = swimBonusValue;		
-			let swimForm = eval(Helper.replaceData(system.movement.swim.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let swimForm = eval(Roll.replaceFormulaData(system.movement.swim.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.swim.value = swimForm + swimBonusValue + system.movement.swim?.temp || 0;
 			system.movement.swim.value += system.movement.swim.feat || 0;
 			system.movement.swim.value += system.movement.swim.item || 0;
@@ -1015,7 +1015,7 @@ export class Actor4e extends Actor {
 		//Teleport Speed
 		if (isNaN(parseInt(system.movement.teleport?.absolute))) { //All logic only required if there is no usable absolute value
 			system.movement.teleport.bonusValue = teleportBonusValue;		
-			let teleportForm = eval(Helper.replaceData(system.movement.teleport.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
+			let teleportForm = eval(Roll.replaceFormulaData(system.movement.teleport.formula.replace(/@base/g, system.movement.base.value).replace(/@armour/g, system.movement.base.armour), system).replace(/[^-()\d/*+. ]/g, ""));
 			system.movement.teleport.value = teleportForm + teleportBonusValue + system.movement.teleport?.temp || 0;
 			system.movement.teleport.value += system.movement.teleport.feat || 0;
 			system.movement.teleport.value += system.movement.teleport.item || 0;
@@ -1055,7 +1055,7 @@ export class Actor4e extends Actor {
 							ablBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								ablBonusValue += parseInt(val);
 							}
@@ -1112,7 +1112,7 @@ export class Actor4e extends Actor {
 						passiveBonusValue += parseInt(b.value);
 					}
 					else if (b.active) {
-						let val = Helper.replaceData(b.value, system);
+						let val = Roll.replaceFormulaData(b.value, system);
 						if (Helper._isNumber(val)) {
 							passiveBonusValue += parseInt(val);
 						}
@@ -1259,7 +1259,7 @@ export class Actor4e extends Actor {
 							defBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, data);
+							let val = Roll.replaceFormulaData(b.value, data);
 							if (Helper._isNumber(val)) {
 								defBonusValue += parseInt(val);
 							}
@@ -1378,7 +1378,7 @@ export class Actor4e extends Actor {
 								defBonusValue += parseInt(b.value);
 							}
 							else if (b.active) {
-								let val = Helper.replaceData(b.value, data);
+								let val = Roll.replaceFormulaData(b.value, data);
 								if (Helper._isNumber(val)) {
 									defBonusValue += parseInt(val);
 								}
@@ -1454,7 +1454,7 @@ export class Actor4e extends Actor {
 							sklBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								sklBonusValue += parseInt(val);
 							}
@@ -1566,7 +1566,7 @@ export class Actor4e extends Actor {
 							sklBonusValue += parseInt(b.value);
 						}
 						else if (b.active) {
-							let val = Helper.replaceData(b.value, system);
+							let val = Roll.replaceFormulaData(b.value, system);
 							if (Helper._isNumber(val)) {
 								sklBonusValue += parseInt(val);
 							}
@@ -1705,7 +1705,7 @@ export class Actor4e extends Actor {
 								bonusValue += parseInt(b.value);
 							}
 							else if (b.active) {
-								let val = Helper.replaceData(b.value, system);
+								let val = Roll.replaceFormulaData(b.value, system);
 								if (Helper._isNumber(val)) {
 									bonusValue += parseInt(val);
 								}
@@ -2385,9 +2385,9 @@ export class Actor4e extends Actor {
 		//round to nearest 100th.
 		weight = Math.round(weight * 1000) / 1000;
 
-		const max = eval(Helper.replaceData(actorData.encumbrance.formulaNorm, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
-		const maxHeavy = eval(Helper.replaceData(actorData.encumbrance.formulaHeavy, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
-		const maxMax = eval(Helper.replaceData(actorData.encumbrance.formulaMax, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
+		const max = eval(Roll.replaceFormulaData(actorData.encumbrance.formulaNorm, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
+		const maxHeavy = eval(Roll.replaceFormulaData(actorData.encumbrance.formulaHeavy, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
+		const maxMax = eval(Roll.replaceFormulaData(actorData.encumbrance.formulaMax, actorData).toString().replace(/[^-()\d/*+. ]/g, ""));
 
 		//set ppc Percentage Base Carry-Capasity
 		const pbc = Math.clamp(weight / max * 100, 0, 99.7);

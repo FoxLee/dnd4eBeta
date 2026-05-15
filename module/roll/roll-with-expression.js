@@ -345,7 +345,7 @@ export class RollWithOriginalExpression extends Roll {
 						let replacementStr = this.options.formulaInnerData[variable.substring(1)];
 						if (!replacementStr) {
 							// may be a complex replacement: e.g. details.level
-							replacementStr = Helper.replaceData(variable, this.options.formulaInnerData);
+							replacementStr = Roll.replaceFormulaData(variable, this.options.formulaInnerData);
 							if (!replacementStr) {
 								throw `D&D4e | Unable to find a value for variable '${variable}' that was part of the formula expression.  It was not added to the rolls data object`;
 							}
