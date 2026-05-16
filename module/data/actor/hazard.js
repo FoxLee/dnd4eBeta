@@ -28,6 +28,7 @@ export default class HazardData extends foundry.abstract.TypeDataModel {
 					secondary: new StringField({ initial: "standard" }),
 					tertiary: new StringField({ initial: "lurker" }),
 				}),
+				source: new StringField({ initial: "" }),
 				size: new StringField({ initial: "med" }),
 				bloodied: new NumberField({ initial: 0 }),
 				notes: new StringField({ initial: "" }),
