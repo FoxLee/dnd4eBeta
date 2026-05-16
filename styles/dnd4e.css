@@ -364,7 +364,7 @@ body.theme-light .dnd4e:is(.application,.app):is(.default,.standard-form):not(.t
 	.languages{
 		text-align:left;
 	}
-	.tabs{
+	nav.tabs{
 		height:40px;
 		border-bottom:var(--border-engraved);
 		border-top:unset;
@@ -372,6 +372,10 @@ body.theme-light .dnd4e:is(.application,.app):is(.default,.standard-form):not(.t
 		font-size:80%;
 		text-transform:uppercase;
 		
+		&.sheet-tabs.top-tabs{
+			margin-top:0;
+			margin-inline:0;
+		}		
 		.tab{
 			font-family:var(--font-h4);
 		}
