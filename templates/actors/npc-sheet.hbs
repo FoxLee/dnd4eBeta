@@ -117,9 +117,9 @@
       <div class="flexcol defences{{#if system.advancedCals}} advanced{{/if}}">
         {{#each system.defences as |def d|}}
         <div class="defence" data-defence="{{d}}">
-          <label class="number attribute-display def-name rollable" data-action="rollDefenceCheck" data-tooltip="{{localize 'DND4E.Roll'}} {{def.title}} {{localize 'DND4E.Save'}}">{{def.label}}</label>
+          <label class="number attribute-display def-name rollable" data-action="rollDefenceCheck" data-tooltip="{{localize 'DND4E.SavePromptTitle' defence=def.title}}">{{def.label}}</label>
           {{#if system.advancedCals}}
-          <strong class="attribute-name defence-bonus rollable" data-action="defencesBonus" data-tooltip="{{localize 'DND4E.BonusesTo'}} {{def.title}}">{{def.value}}</strong>
+          <strong class="attribute-name defence-bonus rollable" data-action="defencesBonus" data-tooltip="{{localize 'DND4E.BonusesTo' thing=def.title}}">{{def.value}}</strong>
           <label class="def-base">{{localize 'DND4E.Base'}}:</label>
           <input class="number" name="system.defences.{{d}}.base" value="{{def.base}}" data-dtype="Number" onfocus="this.select()">
           {{else}}
@@ -148,7 +148,7 @@
         </div>
 					
         <div class="senses-perception" data-skill="prc">
-          <label class="skill-name rollable">{{system.skills.prc.label}}</label>
+          <label class="skill-name rollable" data-action="rollSkillCheck">{{system.skills.prc.label}}</label>
           <strong class="skill-mod {{#if system.advancedCals}}skill-bonus 
 						rollable{{/if}}" {{#if system.advancedCals}}data-action="skillBonus"{{/if}}>{{numberFormat system.skills.prc.total decimals=0 sign=true }}</strong>
         </div>
