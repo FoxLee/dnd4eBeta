@@ -2388,9 +2388,12 @@ body.theme-light .dnd4e:is(.application,.app):is(.default,.standard-form):not(.t
 			padding-left:1em;
 			max-width:8em;
 		}
-		.tab.biography{
+		.tab.biography,.tab.description{
 			& prose-mirror[name='system.biography']{
 				height:calc(100% - 2em);
+			}
+			& .desc-main{
+				height:calc(100% - 2.3em);
 			}
 			& .npc-details{
 				height:2em;
