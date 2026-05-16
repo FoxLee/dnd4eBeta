@@ -104,6 +104,7 @@
         {{#if (isActor ../../this)}}
         <div class="effect-detail effect-source">{{getSourceName effect}}</div>
 		
+        <!-- eslint-disable-next-line @html-eslint/no-duplicate-attrs -->
         <a class="effect-detail effect-duration {{#if effect._getIsSave}}effect-save rollable{{/if}}"{{#if effect._getIsSave}} data-action="rollEffectSave" data-tooltip="{{localize 'DND4E.SaveVsPrompt' effect=effect.name}}"{{else}} data-tooltip="{{effect.duration.label}}"{{/if}}>{{effect.duration.label}}
         </a>
         {{/if}}
