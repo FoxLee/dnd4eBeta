@@ -295,7 +295,7 @@ export class Actor4e extends Actor {
 		const isCombatant = ["Player Character", "NPC", "Hazard"].includes(actorData.type);
 		const hasWealth = ["Player Character", "NPC"].includes(actorData.type);
 		const hasSpeed = ["Player Character", "NPC", "Hazard"].includes(actorData.type);
-		//console.debug(`${actorData.name} is ${actorData.type} (creature: ${isCreature}, combatant:${isCombatant})`);
+		//console.debug(`${actorData.name} is ${actorData.type} (creature: ${isCreature}, combatant:${isCombatant}, wealth:${hasWealth}, speed:${hasSpeed}`);
 		
 		if (actorData.type === "Player Character") {
 			//console.debug('PC');

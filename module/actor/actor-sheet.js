@@ -335,7 +335,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 			isCreature: ["NPC", "Player Character"].includes(actor.type),
 			isCombatant: ["NPC", "Player Character", "Hazard"].includes(actor.type),
 			hasWealth: ["NPC", "Player Character"].includes(actor.type),
-			hasSpeed: ["NPC", "Player Character"].includes(actor.type),
+			hasSpeed: ["NPC", "Player Character", "Hazard"].includes(actor.type),
 			config: CONFIG.DND4E,
 			// rollData: this.actor.getRollData(),
 			actor,
