@@ -24,6 +24,7 @@ export default class ActorSheet4eHazard extends ActorSheet4e {
 				".tab.active",
 			],
 			templates: [
+				"systems/dnd4e/templates/actors/tabs/description.hbs",
 				"systems/dnd4e/templates/actors/tabs/powers.hbs",
 				"systems/dnd4e/templates/actors/tabs/effects.hbs",
 				"templates/generic/tab-navigation.hbs",
