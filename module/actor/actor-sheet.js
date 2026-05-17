@@ -1791,7 +1791,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 		const currValue = foundry.utils.getProperty(this.actor, target.dataset.target) ?? [];
 		const { traits = "" } = await foundry.applications.api.Dialog.input({
 			id: "trait-selector",
-			classes: ["dnd4e"],
+			classes: ["dnd4e", "list-string-input", "standard-form", "default"],
 			window: {
 				title: `${this.actor.name} - ${label}`,
 				resizable: true,
@@ -1802,7 +1802,7 @@ export default class ActorSheet4e extends foundry.applications.api.HandlebarsApp
 			},
 			content: `
 			<div class="form-group stacked">
-				<label>${_loc("DND4EUI.StringEnterValues")}:</label>
+				<label class="long">${_loc("DND4EUI.StringEnterValues")}:</label>
 				<input type="text" name="traits" value="${currValue.join(";")}" data-dtype="String"/>
 			</div>
 			`,
