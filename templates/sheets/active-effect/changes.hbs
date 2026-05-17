@@ -1,4 +1,4 @@
-<section class="tab changes{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+<section class="tab scrollable changes{{#if tab.active}} active{{/if}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
   <fieldset>
     <legend>{{localize 'DND4E.ModifierPlural'}}</legend>
     <header>
@@ -10,7 +10,7 @@
         <button type="button" class="inline-control icon fa-regular fa-square-plus" data-action="addChange"></button>
       </div>
     </header>
-    <ol class="scrollable" data-changes>
+    <ol class="change-list" data-changes>
       {{#each changes as |change|}}
       {{{change}}}
       {{/each}}
