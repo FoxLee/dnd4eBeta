@@ -1438,10 +1438,11 @@ export class Actor4e extends Actor {
 			console.warn(`PC global skill calc failed, probably due to an unmigrated actor. Skills will function but this bonus will not be correctly applied. (Error message: "${e}")`);
 			globalBonus = { class: 0, feat: 0, item: 0, power: 0, race: 0, enhance: 0, untyped: 0, bonusValue: 0 };
 		}
-		
+
 		for (const [id, skl] of Object.entries(system.skills)) {
 			skl.label = skl.label ? skl.label : DND4E.skills[id]?.label;
 			skl.value = parseFloat(skl.value || 0);
+			skl.ability = skl.ability ? skl.ability : DND4E.skills[id]?.ability;
 			
 			if (isNaN(parseInt(skl?.absolute))) { //All logic only required if there is no usable absolute value
 
@@ -1516,7 +1517,7 @@ export class Actor4e extends Actor {
 				}
 
 				// Compute modifier
-				skl.mod = system.abilities[skl.ability].mod;
+				skl.mod = system.abilities[skl.ability]?.mod;
 
 				skl.total = skl.value + skl.base + skl.mod + sklBonusValue + skl.effectBonus - sklArmourPenalty;
 				skl.total += Math.max(featBonus || 0, globalBonus.feat || 0);
@@ -1605,7 +1606,7 @@ export class Actor4e extends Actor {
 				let enhBonus = skl.enhBonus || 0;
 				
 				if (system.advancedCals) {
-					skl.mod = system.abilities[skl.ability].mod;
+					skl.mod = system.abilities[skl.ability]?.mod;
 					// Compute modifier
 						
 					switch (skl.training) {
@@ -1945,7 +1946,7 @@ export class Actor4e extends Actor {
 		
 		let message = `(${_loc("DND4E.AbbreviationDC")} ${options.dc || 10})`;
 		if (options.effectSave) {
-			message = `${_loc("DND4E.SaveVs",{'effect':`<strong>${this.effects.get(options.effectId).name}</strong>`})} ${message}`;
+			message = `${_loc("DND4E.SaveVs", { effect: `<strong>${this.effects.get(options.effectId).name}</strong>` })} ${message}`;
 		} else {
 			message = `${_loc("DND4E.RollSave")} ${message}`;
 		}
