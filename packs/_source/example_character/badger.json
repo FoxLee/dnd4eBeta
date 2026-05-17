@@ -635,7 +635,7 @@
     }
   },
   "system": {
-    "biography": "<p>The badger is a furry animal with a squat, powerful body.  It's fur is mostly black with a while stripe running down its nose and face. Its strong forelimbs are armed with long claws for digging.</p>\n<p>An adult badger is 2 to 3 feet long (0.75 - 1m) and weighs 25 to 35 pounds. (10 - 15Kg)</p>",
+    "biography": "<p>The badger is a furry animal with a squat, powerful body. Its fur is mostly black with a while stripe running down its nose and face. Its strong forelimbs are armed with long claws for digging.</p>\n<p>An adult badger is 2 to 3 feet long (0.75 - 1m) and weighs 25 to 35 pounds. (10 - 15Kg)</p>",
     "details": {
       "size": "tiny",
       "origin": "natural",
