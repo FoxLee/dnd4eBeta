@@ -8,7 +8,7 @@ export default class ActiveEffectConfig4e extends foundry.applications.sheets.Ac
 		classes: ["sheet", "dnd4e", "default"],
 		position: {
 			width: 580,
-			height: 514,
+			height: 565,
 		},
 		window: {
 			resizable: true,
