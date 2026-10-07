@@ -109,6 +109,7 @@ export default class PowerData extends SystemModel4e {
 		}
 		ItemDescriptionTemplate.migrateSource(source);
 		ItemMacroTemplate.migrateMacro(source);
+		ActivatedEffectTemplate.migrateData(source);
 		return super.migrateData(source);
 	}
 }
