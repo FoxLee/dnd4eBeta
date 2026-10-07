@@ -1514,6 +1514,47 @@
 	}
 },
 
+"DND4E.RANGE":{
+  "Area": "Area",
+  "Automatic": "Automatic",
+  "Beast": "Beast",
+  "Blast": "Blast",
+  "Burst": "Burst",
+  "Close": "Close",
+  "Inherit": "Inherit",
+  "Melee": "Melee",
+  "Of": "Range of",
+  "Personal": "Personal",
+  "PowersRange": "Power's Range",
+  "Range": "Range",
+  "Ranged": "Ranged",
+  "Reach": "Reach",
+  "Special": "Special",
+  "Spirit": "Spirit",
+  "Touch": "Melee Touch",
+  "Wall": "Area Wall",
+  "Weapon": "Weapon",
+  "WithinOf": "Within Range of",
+  "Within": "within",
+  "Variable": "Variable",
+  "ABBR":{
+    "Area": "A",
+    "Beast": "[B]",
+    "Blast": "BL",
+    "Burst": "BU",
+    "Close": "C",
+    "Melee": "M",
+    "Personal": "P",
+    "Ranged": "R",
+    "Special": "S",
+    "Spirit": "[S]",
+    "Touch": "T",
+    "Weapon": "[W]",
+    "Wall": "W",
+    "Variable": "V"
+  }
+},
+
 "DND4E.RegionBehaviors": {
 	"ApplyActiveEffect": {
 		"FIELDS": {
