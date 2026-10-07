@@ -1569,6 +1569,85 @@ DND4E.rangeType = {
 };
 preLocalize("rangeType", { keys: ["label", "abbr"] });
 
+// Power Range - Origin Component
+DND4E.rangeOrigin = {
+	melee: {
+		label: "DND4E.RANGE.Melee",
+		abbr: "DND4E.RANGE.ABBR.Melee",
+	},
+	ranged: {
+		label: "DND4E.RANGE.Ranged",
+		abbr: "DND4E.RANGE.ABBR.RangedAbbr",
+	},
+	close: {
+		label: "DND4E.RANGE.Close",
+		abbr: "DND4E.RANGE.ABBR.Close",
+	},
+	area: {
+		label: "DND4E.RANGE.Area",
+		abbr: "DND4E.RANGE.ABBR.Area",
+	},
+	personal: {
+		label: "DND4E.RANGE.Personal",
+		abbr: "DND4E.RANGE.ABBR.Personal",
+	},
+	variable: {
+    label: "DND4E.RANGE.Variable",
+		abbr: "DND4E.RANGE.ABBR.Variable",
+  },
+	special: {
+		label: "DND4E.RANGE.Special",
+		abbr: "DND4E.RANGE.ABBR.Special",
+	},
+};
+preLocalize("rangeOrigin", { keys: ["label", "abbr"] });
+
+// Power Range - Form Component
+DND4E.rangeForm = {
+	weapon: {
+		label: "DND4E.RANGE.Weapon",
+		abbr: "DND4E.RANGE.ABBR.Weapon",
+	},
+	touch: {
+		label: "DND4E.RANGE.Touch",
+		abbr: "DND4E.RANGE.ABBR.Touch",
+	},
+	burst: {
+		label: "DND4E.RANGE.Burst",
+		abbr: "DND4E.RANGE.ABBR.Burst",
+		area: {
+			type: "emanation",
+			radius: "area",
+		},
+	},
+	blast: {
+		label: "DND4E.RANGE.Blast",
+		abbr: "DND4E.RANGE.ABBR.Blast",
+		area: {
+			type: "rectangle",
+			width: "area",
+			height: "area",
+		},
+	},
+	wall: {
+		label: "DND4E.RANGE.Wall",
+		abbr: "DND4E.RANGE.ABBR.Wall",
+		area: {
+			type: "rectangle",
+			count: "area",
+		},
+	},
+	beast: {
+		label: "DND4E.RANGE.Beast",
+		abbr: "DND4E.RANGE.ABBR.Beast",
+	},
+	spirit: {
+		label: "DND4E.RANGE.Spirit",
+		abbr: "DND4E.RANGE.ABBR.Spirit",
+	},
+};
+preLocalize("rangeForm", { keys: ["label", "abbr"] });
+
 DND4E.rangeTypeNoWeapon = Object.fromEntries(Object.entries(DND4E.rangeType).filter(function ([key]) {
 	return key !== "weapon";
 }));
